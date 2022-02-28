@@ -1,1 +1,230 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+$gradient-name-mi: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+$gradient-cesta-text: linear-gradient(to right, #FF8008 0%, #FFC837 51%, #FF8008 100%);
+$gradient-for-text-total: linear-gradient(to right, #FF512F 0%, #DD2476 51%, #FF512F 100%);
+$gradient-for-btn-finalizar: linear-gradient(to right, #FF512F 0%, #DD2476 51%, #FF512F 100%);
+$gradient-link-cesta-grad: linear-gradient(to right, #F09819 0%, #EDDE5D 51%, #F09819 100%);
+$gradient-for-servicios: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
+$gradient-for-search: linear-gradient(to right, #1FA2FF 0%, #12D8FA 51%, #1FA2FF 100%);
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+.main-admin {
+    height: 100vh;
+}
+
+%prepare-text-for-gradient {
+    text-transform: uppercase;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@mixin width-height($width:0px, $height:0px) {
+    width: $width;
+    height: $height;
+}
+
+@mixin top-left($top:0px, $left:0px) {
+    width: $top;
+    height: $left;
+}
+
+@mixin bottom-left($bottom:0px, $left:0px) {
+    bottom: $bottom;
+    height: $left;
+}
+
+@mixin gradient-text-generator($color-background-image:#fff) {
+    @extend %prepare-text-for-gradient;
+    background-image: $color-background-image;
+}
+
+.gradient {
+    @include gradient-text-generator($gradient-name-mi);
+}
+
+.gradient-cesta-text,
+.grad-text-6 {
+    @include gradient-text-generator($gradient-cesta-text);
+}
+
+.gradient-total-text,
+.grad-text-5 {
+    @include gradient-text-generator($gradient-for-text-total);
+}
+
+.btn-finalizar,
+.grad-text-4 {
+    @include gradient-text-generator($gradient-for-btn-finalizar);
+}
+
+.link-cesta-grad,
+.grad-text-3 {
+    @include gradient-text-generator($gradient-link-cesta-grad);
+}
+
+.btn-buscar,
+.grad-text-2 {
+    @include gradient-text-generator($gradient-for-search);
+}
+
+.card-serv-bg-color,
+.grad-text-1 {
+    @include gradient-text-generator($gradient-for-servicios);
+}
+
+.card-descubre-bg-color {
+    background-color: #2575fc;
+    max-height: 40rem;
+}
+
+%prepare-text-for-btns {
+    text-transform: uppercase;
+    transition: 0.8s;
+    background-size: 250% auto;
+}
+
+.btn-finalizar,
+.link-cesta-grad,
+.btn-buscar {
+    @extend %prepare-text-for-btns;
+    &:hover {
+        background-position: right center;
+    }
+}
+
+.card-product-offside {
+    @include width-height(90%, auto);
+}
+
+.card-product {
+    @include width-height(26rem, 30rem);
+}
+
+.image-finalizar {
+    @include width-height(100%, 30vh);
+}
+
+#map-donde-estamos {
+    height: 30rem;
+}
+
+.marker {
+    @include width-height(25px, 25px);
+    background-image: $gradient-for-servicios;
+    background-size: cover;
+    border-radius: 70%;
+    cursor: pointer;
+}
+
+.itemed-1 {
+    @include top-left(47%, 13%);
+}
+
+.itemed-2 {
+    @include top-left(12%, 13%);
+}
+
+.itemed-3 {
+    @include top-left(50%, 38%);
+}
+
+.itemed-4 {
+    @include top-left(24%, 40%);
+}
+
+.itemed-5 {
+    @include top-left(75%, 40%);
+}
+
+.itemed-6 {
+    @include bottom-left( 20%, 10%);
+}
+
+.itemed-7 {
+    @include bottom-left( 8%, 70%);
+}
+
+.itemed-8 {
+    @include top-left(29%, 16%);
+}
+
+.itemed-9 {
+    @include bottom-left( 30%, 37%);
+}
+
+.itemed-10 {
+    @include bottom-left( 20%, 37%);
+}
+
+.chart-resp {
+    @include width-height(40vh, 80vw);
+}
+
+.card-img-descubre {
+    @include width-height(100%, 30vh);
+    max-height: 70%;
+    object-fit: cover;
+}
+
+@media only screen and (min-width: 700px) {
+    .itemed-1 {
+        @include top-left(40%, 12%);
+    }
+    .itemed-2 {
+        @include top-left(8%, 10%);
+    }
+    .itemed-4 {
+        @include top-left(20%, 38%);
+    }
+    .itemed-5 {
+        @include top-left(70%, 38%);
+    }
+    .itemed-8 {
+        @include top-left(25%, 18%);
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .card-img-descubre {
+        height: 20vw;
+    }
+    .itemed-1 {
+        @include top-left(50%, 10%);
+    }
+    .itemed-2 {
+        @include top-left( 15%, 17%);
+    }
+    .itemed-3 {
+        @include top-left(50%, 40%);
+    }
+    .itemed-4 {
+        @include top-left(20%, 38%);
+    }
+    .itemed-5 {
+        @include top-left(75%, 38%);
+    }
+    .itemed-8 {
+        @include top-left(27%, 18%);
+    }
+    .itemed-9 {
+        @include top-left(10%, 20%);
+    }
+}
+
+@media only screen and (min-width: 1300px) {
+    .card-img-descubre {
+        height: 19vw;
+    }
+}
+
+@media only screen and (min-width: 2000px) {
+    .card-img-descubre {
+        height: 17vw;
+    }
+}
