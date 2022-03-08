@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './forms/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,17 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend-mi';
+
+  status!:boolean;
+
+  constructor(private authService: AuthService){}
+
+  logout(){
+    let token = localStorage.getItem('token');
+    this.authService.logout(token).subscribe({
+      next: () =>  {
+        localStorage.removeItem('token');
+    },
+    });
+  }
 }

@@ -1,1 +1,27 @@
-<p>login works and its cool</p>
+<div class="container">
+    <form id="form-si" class="container w-100 w-lg-75 needs-validation" novalidate>
+        <div class="row">
+            <div class="col-12 col-lg-7 col-xl-5 m-auto">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-floating mt-2 ">
+                            <input type="email" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="email" placeholder="cool-login" name="email" [(ngModel)]="email" required="required">
+                            <label for="email" class="form-label ">Correo electronico:</label>
+                        </div>
+                    </div>
+                    <div class="col-12 ">
+                        <div class="form-floating mt-2 ">
+                            <input type="password" class="form-control rounded-0 border-top-0 border-start-0 border-end-0 " id="password " placeholder="1111 " name="password " [(ngModel)]="password" required="required ">
+                            <label for="password" class="form-label ">Contraseña:</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5 ">
+                    <div class="d-grid col-12 mb-5 mx-auto ">
+                        <button class="button" type="submit" (click)="onSignup()">Enter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
