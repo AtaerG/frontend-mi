@@ -22,12 +22,5 @@ import { BaseUrlInterceptor } from '../interceptors/base-url.interceptor';
     FormsModule,
     UserFormsRoutingModule
   ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: BaseUrlInterceptor ,
-      multi:true
-    }
-  ],
 })
 export class UserFormModule { }
