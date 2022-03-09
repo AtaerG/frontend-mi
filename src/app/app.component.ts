@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthService } from './forms/services/auth.service';
+import { Router } from '@angular/router';
+import { AuthService } from './services/auth.service';
+
 
 @Component({
   selector: 'app-root',
@@ -9,15 +11,17 @@ import { AuthService } from './forms/services/auth.service';
 export class AppComponent {
   title = 'frontend-mi';
 
-  status!:boolean;
+  status:string|null = localStorage.getItem('token');
 
-  constructor(private authService: AuthService){}
+  constructor(private authService: AuthService, private router: Router){}
 
   logout(){
     let token = localStorage.getItem('token');
     this.authService.logout(token).subscribe({
       next: () =>  {
         localStorage.removeItem('token');
+        window.location.reload();
+        this.router.navigate(['/']);
     },
     });
   }

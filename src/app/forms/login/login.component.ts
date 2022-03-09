@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
         next: token => {
           console.log(token);
           localStorage.setItem('token',JSON.stringify(token));
-          console.log(token)
+          window.location.reload();
+          this.router.createUrlTree(['/products']);
         },
         error: error => console.log(error),
       })

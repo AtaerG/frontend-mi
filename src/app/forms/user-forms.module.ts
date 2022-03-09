@@ -7,7 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { ShippingDetailsComponent } from './shipping-details/shipping-details.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BaseUrlInterceptor } from '../interceptors/base-url.interceptor';
 
 @NgModule({
@@ -20,6 +20,7 @@ import { BaseUrlInterceptor } from '../interceptors/base-url.interceptor';
     CommonModule,
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     UserFormsRoutingModule
   ],
 })

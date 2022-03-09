@@ -14,7 +14,7 @@
                     <li class="nav-item">
                         <a class="nav-link text-primary fs-4" [routerLink]="['/products']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Productos</a>
                     </li>
-                    <li class="nav-item ">
+                    <li class="nav-item " *ngIf="status === null">
                         <div class="dropdown show">
                             <a class="nav-link text-primary fs-4 dropdown-toggle" href="#" role="button" id="dropdownReg" data-bs-toggle="dropdown" aria-expanded="false">
                                 <span class="d-sm-none d-lg-inline"></span>Identifícate
@@ -30,7 +30,7 @@
                             <i class="bi bi-bag"></i><span class="d-sm-none d-lg-inline">Cesta</span>
                         </a>
                     </li>
-                    <li class="nav-item" *ngIf="!status">
+                    <li class="nav-item" *ngIf="status != null">
                         <button class="nav-link text-primary border-0 like_nav fs-4" (click)="logout()">
                             <i class="bi bi-box-arrow-right"></i><span class="d-sm-none d-lg-inline">Logout</span>
                         </button>
