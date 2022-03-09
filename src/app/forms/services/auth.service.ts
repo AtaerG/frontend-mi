@@ -26,9 +26,9 @@ export class AuthService {
   }
 
   logout(token:any){
-    console.log(JSON.parse(token)[0].accessToken);
+    console.log(JSON.parse(token)['token'].accessToken);
     let headers = new HttpHeaders({
-      Authorization: `Bearer ${JSON.parse(token)[0].accessToken}`
+      Authorization: `Bearer ${JSON.parse(token)['token'].accessToken}`
     });
     console.log(headers.get('Authorization'));
     return this.http.get('logout',{

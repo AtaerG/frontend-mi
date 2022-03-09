@@ -13,6 +13,8 @@ export class BaseUrlInterceptor implements HttpInterceptor {
 
   constructor() { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    console.log(environment.baseUrl);
+    console.log(req.url);
     const reqClone = req.clone({
       headers: req.headers.set('Content-Type','application/json'),
       url: `${environment.baseUrl}/${req.url}`

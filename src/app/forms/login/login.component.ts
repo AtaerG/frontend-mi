@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
         next: token => {
           console.log(token);
           localStorage.setItem('token',JSON.stringify(token));
+          console.log(token)
         },
         error: error => console.log(error),
       })

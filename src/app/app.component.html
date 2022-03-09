@@ -9,16 +9,24 @@
             <div class="navbar-collapse collapse" id="mainNavbarCollapse">
                 <ul class="navbar-nav justify-content-around w-100">
                     <li class="nav-item fw-bold">
-                        <a class="nav-link gradient fs-4 active" href="../html/inicio.html">Inicio</a>
+                        <a class="nav-link gradient fs-4 active" [routerLink]="['/inicio']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-primary fs-4" href="../html/productos.html">Productos</a>
+                        <a class="nav-link text-primary fs-4" [routerLink]="['/products']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Productos</a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link text-primary fs-4" href="../html/identificate.html "><i class="bi bi-person"></i><span class="d-sm-none d-lg-inline">Identifícate</span></a>
+                        <div class="dropdown show">
+                            <a class="nav-link text-primary fs-4 dropdown-toggle" href="#" role="button" id="dropdownReg" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="d-sm-none d-lg-inline"></span>Identifícate
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownReg">
+                                <a class="dropdown-item fs-4" [routerLink]="['/register']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><i class="bi bi-person"></i><span class="d-sm-none d-lg-inline">Registrarse</span></a>
+                                <a class="dropdown-item fs-4" [routerLink]="['/login']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><i class="bi bi-person"></i><span class="d-sm-none d-lg-inline">Login</span></a>
+                            </div>
+                        </div>
                     </li>
                     <li class="nav-item ">
-                        <a class="position-relative nav-link text-primary fs-4" href="#" data-bs-toggle="offcanvas" data-bs-target="#demo">
+                        <a class="position-relative nav-link text-primary fs-4" [routerLink]="['/orders/create']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" data-bs-toggle="offcanvas" data-bs-target="#demo">
                             <i class="bi bi-bag"></i><span class="d-sm-none d-lg-inline">Cesta</span>
                         </a>
                     </li>
@@ -55,59 +63,6 @@
                     <a class="nav-link" href="#">Devoluciones</a>
                 </li>
             </ul>
-        </div>
-    </div>
-    <div class="offcanvas color offcanvas-end" id="demo">
-        <div class="offcanvas-header">
-            <h1 class="gradient-cesta-text">Cesta</h1>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
-        </div>
-        <div class="offcanvas-body">
-            <section class="row row-col-1">
-                <div class="col-12 mb-2 mb-md-3 mb-xl-4">
-                    <article class="card card-shadowed card-product-offside border-0 h-100 mb-3 mx-auto">
-                        <img src="../images/cool-mesa.jpeg" class="card-img-top" alt="... ">
-                        <div class="card-body ">
-                            <h5 class="card-title ">MESA MI-1</h5>
-                            <p class="card-text ">Mesa con diseño unico y tecnologia de domotica.</p>
-                            <p class="card-text ">300€</p>
-                            <div class="d-flex justify-content-center ">
-                                <a href="# " class="btn btn-lg px-4 link-cesta-grad text-light ">mas info</a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-12 mb-2 mb-md-3 mb-xl-4 ">
-                    <article class="card card-shadowed card-product-offside border-0 h-100 mb-3 mx-auto">
-                        <img src="../images/cool-mesa.jpeg" class="card-img-top" alt="... ">
-                        <div class="card-body ">
-                            <h5 class="card-title ">MESA MI-1</h5>
-                            <p class="card-text ">Mesa con diseño unico y tecnologia de domotica.</p>
-                            <p class="card-text ">300€</p>
-                            <div class="d-flex justify-content-center ">
-                                <a href="# " class="btn btn-lg px-4 link-cesta-grad text-light ">mas info</a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-12 mb-2 mb-md-3 mb-xl-4 ">
-                    <article class="card card-shadowed card-product-offside border-0 h-100 mb-3 mx-auto">
-                        <img src="../images/cool-mesa.jpeg" class="card-img-top" alt="... ">
-                        <div class="card-body ">
-                            <h5 class="card-title ">MESA MI-1</h5>
-                            <p class="card-text ">Mesa con diseño unico y tecnologia de domotica.</p>
-                            <p class="card-text ">300€</p>
-                            <div class="d-flex justify-content-center ">
-                                <a href="# " class="btn btn-lg px-4 link-cesta-grad text-light ">mas info</a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </section>
-            <h1 class="text-center gradient-total-text ">TOTAL: 900€</h1>
-            <div class="d-flex justify-content-center ">
-                <a href="../html/cesta.html " class="btn btn-lg btn-finalizar text-light ">Finalizar la compra &#128521;</a>
-            </div>
         </div>
     </div>
 </header>
