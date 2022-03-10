@@ -19,7 +19,9 @@ export class UserTypeAuthCheckerGuard implements CanActivate {
         checker = true;
       }
       if(!checker){
-        return this.router.createUrlTree(['/access_denied']);
+        this.router.navigate(['/access_denied']).then(() => {
+          window.location.reload();
+        });
       }
       return checker;
     }

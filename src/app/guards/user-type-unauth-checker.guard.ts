@@ -10,17 +10,14 @@ export class UserTypeUnauthCheckerGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      let checker = false;
-      const token = localStorage.getItem('token');
-      console.log(token);
-      if(token === null) {
-        checker = true;
-      } else {
+      let checker = true;
+      let token = localStorage.getItem('token');
+      console.log(token)
+      checker = true;
+      if(token != null) {
         checker = false;
-      }
-      if(!checker){
         return this.router.createUrlTree(['/access_denied']);
       }
-      return checker;
+      return true;
     }
 }

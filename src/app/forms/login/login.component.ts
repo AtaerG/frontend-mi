@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { User } from 'src/app/interfaces/user';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -9,25 +11,40 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+
+  loginForm!: FormGroup;
+  login_complete = false;
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    this.loginForm = new FormGroup({
+      'email': new FormControl(null, [Validators.required, Validators.email]),
+      'password': new FormControl(null, Validators.minLength(8))
+    });
   }
 
-  email:any;
-  password:any;
-
   onSignup(){
-    this.authService.login(this.email,this.password)
+    let form_values = this.loginForm.value;
+    this.authService.login(form_values['email'],form_values['password'])
       .subscribe({
         next: token => {
           console.log(token);
           localStorage.setItem('token',JSON.stringify(token));
-          window.location.reload();
-          this.router.createUrlTree(['/products']);
+          this.login_complete = true;
+          //window.location.reload();
+          this.router.navigate(['/products']).then(() => {
+            window.location.reload();
+          });;
         },
         error: error => console.log(error),
       })
+  }
+  canDeactivate() {
+    if(!this.login_complete){
+      return confirm("Quiere abandonar la pagina?");
+    } else {
+      return true;
+    }
   }
 
 }

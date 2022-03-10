@@ -11,12 +11,6 @@ import { AuthService } from '../../services/auth.service';
 })
 export class RegisterComponent implements OnInit {
 
-  user: User = {
-    name:"",
-    surname:"",
-    email:"",
-    password:""
-  }
   registerForm!: FormGroup;
 
   password_controller:string ="";
@@ -45,7 +39,11 @@ export class RegisterComponent implements OnInit {
             next: token => {
               console.log(token);
               localStorage.setItem('token',JSON.stringify(token));
-              console.log(token)
+              console.log(token);
+              this.regitser_complete = true;
+              this.router.navigate(['/products']).then(() => {
+                window.location.reload();
+              });
             },
             error: error => console.log(error),
           });

@@ -9,7 +9,7 @@ import { UserTypeAdminCheckerGuard } from '../guards/user-type-admin-checker.gua
 
 const routes: Routes = [
   { path: 'products', component: ListProductsComponent },
-  { path: 'products/create', component: AddProductComponent, canActivate: [UserTypeAdminCheckerGuard],  },
+  { path: 'products/create', component: AddProductComponent, canActivate: [UserTypeAdminCheckerGuard]  },
   { path: 'products/:id', component: ShowProductComponent }
 ];
 
