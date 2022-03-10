@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 $dropdown-link-active-color:white;
+@import "~animate.css/animate.min.css";
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 $gradient-name-mi: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
@@ -14,15 +15,16 @@ $gradient-for-search: linear-gradient(to right, #1FA2FF 0%, #12D8FA 51%, #1FA2FF
     font-family: 'Roboto', sans-serif;
 }
 
-.main-admin {
-    height: 100vh;
-}
-
 %prepare-text-for-gradient {
     text-transform: uppercase;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+%prepare-text-for-gradient-btns {
+    text-transform: uppercase;
+    background-clip: text;
 }
 
 @mixin width-height($width:0px, $height:0px) {
@@ -38,6 +40,11 @@ $gradient-for-search: linear-gradient(to right, #1FA2FF 0%, #12D8FA 51%, #1FA2FF
 @mixin bottom-left($bottom:0px, $left:0px) {
     bottom: $bottom;
     height: $left;
+}
+
+@mixin gradient-btn-generator($color-background-image:#fff) {
+    @extend %prepare-text-for-gradient-btns;
+    background: $color-background-image;
 }
 
 @mixin gradient-text-generator($color-background-image:#fff) {
@@ -69,12 +76,18 @@ $gradient-for-search: linear-gradient(to right, #1FA2FF 0%, #12D8FA 51%, #1FA2FF
     @include gradient-text-generator($gradient-link-cesta-grad);
 }
 
-.btn-buscar,
 .grad-text-2 {
     @include gradient-text-generator($gradient-for-search);
 }
 
-.card-serv-bg-color,
+.card-serv-bg-color {
+    @include gradient-btn-generator($gradient-for-servicios);
+}
+
+.btn-buscar {
+    @include gradient-btn-generator($gradient-for-search);
+}
+
 .grad-text-1 {
     @include gradient-text-generator($gradient-for-servicios);
 }
