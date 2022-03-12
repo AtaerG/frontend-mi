@@ -24,20 +24,22 @@ export class LoginComponent implements OnInit {
   }
 
   onSignup(){
-    let form_values = this.loginForm.value;
-    this.authService.login(form_values['email'],form_values['password'])
-      .subscribe({
-        next: token => {
-          console.log(token);
-          localStorage.setItem('token',JSON.stringify(token));
-          this.login_complete = true;
-          //window.location.reload();
-          this.router.navigate(['/products']).then(() => {
-            window.location.reload();
-          });;
-        },
-        error: error => console.log(error),
+    if(this.loginForm.valid){
+      let form_values = this.loginForm.value;
+      this.authService.login(form_values['email'],form_values['password'])
+        .subscribe({
+          next: token => {
+            console.log(token);
+            sessionStorage.setItem('token',JSON.stringify(token));
+            this.login_complete = true;
+            //window.location.reload();
+            this.router.navigate(['/products']).then(() => {
+              window.location.reload();
+            });;
+         },
+          error: error => console.log(error),
       })
+    }
   }
   canDeactivate() {
     if(!this.login_complete){

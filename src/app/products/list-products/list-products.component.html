@@ -1,8 +1,41 @@
-<div class="row mt-3 g-2 ">
-    <div class="col-12 col-lg-11 ">
-        <input class="col-md-6 form-control text-center text-primary rounded-0 border-top-0 border-start-0 border-end-0 border-primary me-3 " type="text " placeholder="Buscar producto ">
+<main class="container  mt-3">
+    <div class="row">
+        <div class="col-12 col-md-9">
+            <input class="form-control text-center text-primary rounded-0 border-top-0 border-start-0 border-end-0 border-primary" type="text " placeholder="Buscar producto" [(ngModel)]="filterSearchProduct">
+        </div>
+        <div class="col-12 col-md-3">
+            <form [formGroup]="filterForm" (ngSubmit)="aplicarFiltro()">
+                <label for="filter">Mostrar los muebles solo para:</label>
+                <div class="d-flex flex-row gap-2">
+                    <select id="filter" name="filter" [formControlName]="'filter'" class="form-select" aria-label="select filter">
+                          <option value="todo" selected="true">Mostrar todo</option>
+                          <option value="dormitorio">Dormitorio</option>
+                          <option value="salon">Salon</option>
+                          <option value="cocina">Cocina</option>
+                          <option value="gardin">Gardin</option>
+                        </select>
+                    <button class="btn btn-sm btn-primary" value="">Aplicar</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="d-grid d-md-grid d-lg-block col-md-12 col-lg-1 ">
-        <button class="btn btn-md btn-buscar text-light " type="button ">Search</button>
-    </div>
-</div>
+    <section class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mt-4" *ngIf="products.length && products; else not">
+        <article *ngFor="let product of products | productFind:filterSearchProduct:filterFormString">
+            <div class="col">
+                <div class="card card-shadowed border-0 h-100 card-descubre-bg-color mb-2 mb-md-3 ">
+                    <img src="{{product.image_url}}" class="card-img-top card-img-descubre " alt="mesa ">
+                    <div class="card-body text-light text-center ">
+                        <h1 class="card-title ">{{product.name}}</h1>
+                        <p class="card-text ">{{product.price |currency:'EUR':'symbol-narrow'}}</p>
+                    </div>
+                    <div class="card-footer text-center ">
+                        <a class="nav-link text-light fs-4 " [routerLink]="[ '/products', product.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Mas Info</a>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    <ng-template #not>
+        <h3>No hay productos.</h3>
+    </ng-template>
+</main>

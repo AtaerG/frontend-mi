@@ -13,6 +13,7 @@ import { UsersModule } from './users/users.module';
 import { BaseUrlInterceptor } from './interceptors/base-url.interceptor';
 import { DefaultPagesModule } from './default-pages/default-pages.module';
 import { HomepageComponent } from './default-pages/homepage/homepage.component';
+import { ProductFindPipe } from './pipes/product-find.pipe';
 
 
 @NgModule({

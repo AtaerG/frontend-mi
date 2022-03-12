@@ -1,33 +1,37 @@
-<div class="col-12 mt-5">
+<form class="mx-auto col-10 mt-5" [formGroup]="shippingForm" (ngSubmit)="sentOrder()">
     <h2 class="text-center text-primary mb-0">Domicilio</h2>
-    <div class="form-floating">
-        <input type="text" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="dir" placeholder="Calle, numero, piso, puerta" name="dir" required="required">
-        <label for="dir" class="form-label ">Direccion:</label>
-        <div class="valid-feedback ">Valido</div>
-        <div class="invalid-feedback ">Rellena este campo!</div>
-    </div>
-    <div class="row">
-        <div class="col-12 col-md-6">
-            <div class="form-floating mt-2">
-                <input type="text " class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="cod_post " placeholder="Introduzca codigo postal " name="cod_post " required="required ">
-                <label for="cod_post " class="form-label ">Cod. Postal:</label>
-                <div class="valid-feedback ">Valido</div>
-                <div class="invalid-feedback ">Rellena este campo!</div>
+    <div [formGroupName]="'address'">
+        <div class="form-floating">
+            <input type="text" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="direction" placeholder="Calle, numero, piso, puerta" name="direction" [formControlName]="'direction'" required="required">
+            <label for="direction" class="form-label ">Direccion:</label>
+            <span class="text-danger" *ngIf="!shippingForm.get('address.direction')?.valid && shippingForm.get('address.direction')?.touched">
+              La direccion es obligatoria!
+            </span>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="form-floating mt-2">
+                    <input type="text" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="post_code" placeholder="Introduzca codigo postal " [formControlName]="'post_code'" name="post_code" required="required ">
+                    <label for="post_code" class="form-label ">Cod. Postal:</label>
+                    <span class="text-danger" *ngIf="!shippingForm.get('address.post_code')?.valid && shippingForm.get('address.post_code')?.touched">
+                      El codigo postal es obligatorio!
+                    </span>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="form-floating mt-2 ">
+                    <input type="text" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="muni " placeholder="Introduzca municipio" [formControlName]="'city'" name="city" required="required">
+                    <label for="city" class="form-label ">Municipio:</label>
+                    <span class="text-danger" *ngIf="!shippingForm.get('address.city')?.valid && shippingForm.get('address.city')?.touched">
+                      El municipio es obligatorio!
+                    </span>
+                </div>
             </div>
         </div>
-        <div class="col-12 col-md-6">
-            <div class="form-floating mt-2 ">
-                <input type="text " class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="muni " placeholder="Introduzca municipio " name="muni " required="required ">
-                <label for="muni " class="form-label ">Municipio:</label>
-                <div class="valid-feedback ">Valido</div>
-                <div class="invalid-feedback ">Rellena este campo!</div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12 col-md-6">
-            <div class="form-floating mt-2 ">
-                <select class="form-select rounded-0 border-top-0 border-start-0 border-end-0" id="sel_prov " name="sel_prov ">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="form-floating mt-2 ">
+                    <select class="form-select rounded-0 border-top-0 border-start-0 border-end-0" id="state" [formControlName]="'state'" name="state">
     <option value="Álava/Araba ">Álava/Araba</option>
     <option value="Albacete ">Albacete</option>
     <option value="Alicante " selected="selected ">Alicante</option>
@@ -80,13 +84,16 @@
     <option value="Vizcaya/Bizkaia ">Vizcaya/Bizkaia</option>
     <option value="Zamora ">Zamora</option>
     <option value="Zaragoza ">Zaragoza</option>
-</select>
-                <label for="sel_prov " class="form-label ">Provincia:</label>
+                </select>
+                    <label for="state" class="form-label ">Provincia:</label>
+                    <span class="text-danger" *ngIf="!shippingForm.get('address.state')?.valid && shippingForm.get('address.state')?.touched">
+                     La Provincia es obligatoria!
+                    </span>
+                </div>
             </div>
-        </div>
-        <div class="col-12 col-md-6">
-            <div class="form-floating mt-2 ">
-                <select class="form-select rounded-0 border-top-0 border-start-0 border-end-0" id="sel_pais " name="sel_pais ">
+            <div class="col-12 col-md-6">
+                <div class="form-floating mt-2 ">
+                    <select class="form-select rounded-0 border-top-0 border-start-0 border-end-0" [formControlName]="'country'" id="country" name="country">
         <option value="Afghanistan ">Afghanistan</option>
         <option value="Albania ">Albania</option>
         <option value="Algeria ">Algeria</option>
@@ -326,17 +333,18 @@
     <option value="Serbia">Serbia</option>
     <option value="Zambia">Zambia</option>
     <option value="Zimbabwe">Zimbabwe</option>
-    </select>
-                <label for="sel_pais" class="form-label">Pais:</label>
+                </select>
+                    <label for="country" class="form-label">Pais:</label>
+                    <span class="text-danger" *ngIf="!shippingForm.get('address.country')?.valid && shippingForm.get('address.country')?.touched">
+                      El pais es obligatorio!
+                     </span>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="row mt-5">
-    <div class="col-12">
-        <div class="form-check m-3">
-            <input class="form-check-input fs-4" type="checkbox" id="check1" name="option1" value="something" checked="checked">
-            <label class="form-check-label text-primary fs-4">Deseo recibir la publicidad a mi correo electronico</label>
+    <div class="row mt-5 ">
+        <div class="d-grid col-7 mb-5 mx-auto ">
+            <button class="btn btn-primary" type="submit">Enviar</button>
         </div>
     </div>
-</div>
+</form>
