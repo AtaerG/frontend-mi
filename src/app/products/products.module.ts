@@ -31,6 +31,7 @@ import { ProductFindPipe } from '../pipes/product-find.pipe';
     FormsModule,
     ProductsRoutingModule
   ],
+  /*
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
@@ -38,5 +39,6 @@ import { ProductFindPipe } from '../pipes/product-find.pipe';
       multi:true
     }
   ],
+  */
 })
 export class ProductsModule { }

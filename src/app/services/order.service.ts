@@ -25,12 +25,11 @@ export class OrderService {
   constructor(private http: HttpClient, private productService:ProductService) { }
 
   productAddedToOrder(product: Product): Observable<any>{
-    /*
-    let options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
-    };
-    */
-    return this.http.put('products/tocart/',product).pipe(
+    let new_amount = product.amount - 1;
+    console.log(product.amount);
+    return this.http.patch(`products/${product.id}`,{
+      amount : new_amount
+    }).pipe(
       tap(() => {
         this.order.products_id.push(product.id);
         sessionStorage.removeItem('products');
@@ -40,8 +39,9 @@ export class OrderService {
     );
   }
 
-  productRemovedFromOrder(product: Product){
-    this.http.put('/products/fromcart/',product).pipe(
+  productRemovedFromOrder(product: Product): Observable<any> {
+    product.amount += 1;
+    return this.http.patch('products/',product).pipe(
       tap(() => {
         this.order.products_id = this.order.products_id.filter((el) => {
           return el != product.id;
