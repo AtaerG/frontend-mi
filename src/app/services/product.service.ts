@@ -10,13 +10,14 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  addProduct(name:string, price:number, description: string, amount:number, image_url:string){
+  addProduct(name:string, price:number, description: string, amount:number, image_url:string, tag:string){
     return this.http.post('products',{
       name: name,
       price: price,
       description: description,
       amount: amount,
-      image_url: image_url
+      image_url: image_url,
+      tag:tag
     }).pipe(
       catchError((resp: HttpErrorResponse) =>
       throwError(()=> new Error(`Error a la hora de crear producto. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))

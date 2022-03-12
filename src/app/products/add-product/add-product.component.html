@@ -42,6 +42,15 @@
                         </span>
                     </div>
                 </div>
+                <div class="col-12 mt-2">
+                    <label for="tag">Agregar tag:</label>
+                    <select id="tag" name="tag" [formControlName]="'tag'" class="form-select mt-2" aria-label="select tag">
+                    <option value="dormitorio">Dormitorio</option>
+                    <option value="salon">Salon</option>
+                    <option value="cocina">Cocina</option>
+                    <option value="gardin">Gardin</option>
+                  </select>
+                </div>
                 <div class="col-12">
                     <div class="mt-2 ">
                         <label class="form-label" for="image">Imagen</label><br>

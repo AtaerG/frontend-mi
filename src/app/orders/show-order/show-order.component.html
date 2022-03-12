@@ -1,1 +1,6 @@
-<p>show-order works!</p>
+<h1>Your order:</h1>
+<p>{{order.total_price}}</p>
+<section class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mt-4">
+    <article *ngFor="let product of order.products">
+        <p>{{product.name}}</p>
+    </article>

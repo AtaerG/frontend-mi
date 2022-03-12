@@ -6,6 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HoverDirective } from '../directives/hover.directive';
 import { HomepageComponent } from './homepage/homepage.component';
+import { ThanksComponent } from './thanks/thanks.component';
 
 
 
@@ -14,6 +15,7 @@ import { HomepageComponent } from './homepage/homepage.component';
     AccessDeniedComponent,
     HomepageComponent,
     HoverDirective,
+    ThanksComponent
   ],
   imports: [
     CommonModule,

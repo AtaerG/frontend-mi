@@ -21,6 +21,7 @@ export class AddProductComponent implements OnInit {
       'price': new FormControl(null, [Validators.required, Validators.min(0)]),
       'description': new FormControl(null, [Validators.required]),
       'amount': new FormControl(null, [Validators.required, Validators.min(0)]),
+      'tag': new FormControl('salon'),
       'image_url': new FormControl(null, Validators.required),
     });
   }
@@ -28,7 +29,7 @@ export class AddProductComponent implements OnInit {
   createProduct(){
     let form_values = this.addProdForm.value;
     if(this.addProdForm.valid){
-      this.productService.addProduct(form_values['name'],form_values['price'],form_values['description'],form_values['amount'],form_values['image_url']).subscribe({
+      this.productService.addProduct(form_values['name'],form_values['price'],form_values['description'],form_values['amount'],form_values['image_url'],form_values['tag']).subscribe({
         next: ()=> {
           this.router.navigate(['/products']);
         },
