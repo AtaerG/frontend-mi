@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, tap, throwError } from 'rxjs';
+import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { Order } from '../interfaces/order';
 import { Product } from '../interfaces/product';
 import { ProductService } from './product.service';
@@ -10,17 +10,7 @@ import { ProductService } from './product.service';
 })
 export class OrderService {
 
-  order: Order ={
-    products_id: [],
-    total_prcie: 0,
-    address: {
-      direction: '',
-      post_code: 0,
-      city: '',
-      state: '',
-      country: '',
-    }
-  };
+  order!: Order;
 
   constructor(private http: HttpClient, private productService:ProductService) { }
 
@@ -31,9 +21,9 @@ export class OrderService {
       amount : new_amount
     }).pipe(
       tap(() => {
-        this.order.products_id.push(product.id);
+        this.order.products.push(product);
         sessionStorage.removeItem('products');
-        sessionStorage.setItem('products', JSON.stringify(this.order.products_id));
+        sessionStorage.setItem('products', JSON.stringify(this.order.products));
       }),
       catchError((resp: HttpErrorResponse) => throwError(() => new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
@@ -43,24 +33,43 @@ export class OrderService {
     product.amount += 1;
     return this.http.patch('products/',product).pipe(
       tap(() => {
-        this.order.products_id = this.order.products_id.filter((el) => {
-          return el != product.id;
+        this.order.products = this.order.products.filter((el) => {
+          return el != product;
         });
         sessionStorage.removeItem('products');
-        sessionStorage.setItem('products', JSON.stringify(this.order.products_id));
+        sessionStorage.setItem('products', JSON.stringify(this.order.products));
       }),
       catchError((resp: HttpErrorResponse) =>
       throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
   }
 
-  createOrder(token:any){
-    let headers = new HttpHeaders({
-      Authorization: `Bearer ${JSON.parse(token)['token'].accessToken}`
-    });
-    console.log(headers.get('Authorization'));
-    return this.http.post('order',{
-      headers:headers
-    })
+  createOrder(products:string,total_price:number,status:string, direction:string,post_code:number,city:string,state:string,country:string  ){
+    return this.http.post('orders', {
+      products: products,
+      total_price: total_price,
+      status: status,
+      direction: direction,
+      post_code: post_code,
+      city: city,
+      state: state,
+      country: country
+    }).pipe(
+      map(product => console.log(product)),
+      catchError((resp: HttpErrorResponse) =>
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+    );
+  }
+
+
+  getOrder(id:number): Observable<Order> {
+    return this.http.get<Order>('orders/'+id).pipe(
+      map((response) => {
+        console.log(response);
+        return response;
+      }),
+      catchError((resp: HttpErrorResponse) =>
+      throwError(()=> new Error(`Error a la hora de mostrar el pedido. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+    );
   }
 }

@@ -1,8 +1,12 @@
-import { Address } from "./address";
 import { Product } from "./product";
 
 export interface Order {
-  products_id: number[];
-  total_prcie:number
-  address:  Address;
+  products: Product[];
+  total_price:number,
+  status:string,
+  direction: string,
+  post_code: number,
+  city: string,
+  state: string,
+  country: string
 }
