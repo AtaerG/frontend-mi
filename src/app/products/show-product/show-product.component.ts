@@ -20,7 +20,7 @@ export class ShowProductComponent implements OnInit {
   addProdToOrder(){
     console.log(this.product);
     this.orderService.productAddedToOrder(this.product).subscribe({
-      error:error=>console.log(error),
+      error: error=>console.log(error),
     })
   }
 
