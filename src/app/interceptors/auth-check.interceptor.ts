@@ -14,21 +14,17 @@ export class AuthCheckInterceptor implements HttpInterceptor {
 
   constructor() {}
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
-      request = request.clone({ headers: headers });
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    let token = sessionStorage.getItem('token');
+    if(token != null ){
+      token = JSON.parse(token)['token']['accessToken'];
     }
-    return next.handle(request).pipe(
-      catchError((err) => {
-        if (err instanceof HttpErrorResponse) {
-            if (err.status === 401) {
-            // redirect user to the logout page
-         }
+    request = request.clone({
+      setHeaders: {
+        Authorization: `Bearer ${token}`
       }
-      return throwError(err);
-    })
-     )
-    }
+    });
+    console.log(request);
+    return next.handle(request);
   }
+}

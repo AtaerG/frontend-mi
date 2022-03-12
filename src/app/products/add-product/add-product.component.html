@@ -1,1 +1,64 @@
-<p>add-product works!</p>
+<h1 class="text-center text-primary mt-3">Añadir un producto nuevo</h1>
+
+<div class="row">
+    <div class="col-6 my-auto">
+        <img id="image" class="d-block img-fluid mx-auto" [src]="image" width="400">
+    </div>
+    <div class="col-6">
+        <form class="container w-100 w-lg-75" [formGroup]="addProdForm" (ngSubmit)="createProduct()">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-floating mt-2">
+                        <input type="text" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="name" [formControlName]="'name'" placeholder="Elon" name="name" required="required">
+                        <label for="name" class="form-label ">Nombre:</label>
+                        <span class="text-danger" *ngIf="!addProdForm.get('name')?.valid && addProdForm.get('name')?.touched">
+                         El nombre no es valido. Nombre es obligatorio y debe tener y maximo 20 carcacteres!
+                </span>
+                    </div>
+                    <div class="form-floating mt-2 ">
+                        <input type="number" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="surname" [formControlName]="'price'" placeholder="Musk" name="price" required="required">
+                        <label for="price" class="form-label ">Precio:</label>
+                        <span class="text-danger" *ngIf="!addProdForm.get('price')?.valid && addProdForm.get('price')?.touched">
+                          Precio es obligatorio y debe ser mayor o igual que 0
+                        </span>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-floating mt-2 ">
+                        <textarea type="text" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="description" placeholder="description" [formControlName]="'description'" name="description" required="required">
+                </textarea>
+                        <label for="email" class="form-label ">Descripcion del producto:</label>
+                        <span class="text-danger" *ngIf="!addProdForm.get('email')?.valid && addProdForm.get('email')?.touched">
+                          Descripcion del producto es obligatrio!
+                   </span>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-floating mt-2 ">
+                        <input type="number" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="amount" [formControlName]="'amount'" placeholder="Elon" name="amount" required="required">
+                        <label for="amount" class="form-label ">Cantidad:</label>
+                        <span class="text-danger" *ngIf="!addProdForm.get('amount')?.valid && addProdForm.get('amount')?.touched">
+                          La del producto es obligatorio y debe ser mayor o igual que 0
+                        </span>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mt-2 ">
+                        <label class="form-label" for="image">Imagen</label><br>
+                        <input class="form-control" type="file" accept="image/*" name="image_url" #fileImage (change)="changeImage(fileImage)" [(ngModel)]="image">
+                        <span class="text-danger" *ngIf="!addProdForm.get('image_url')?.valid && addProdForm.get('image_url')?.touched">
+                         El producto debe tener un imagen
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-5">
+                <div class="d-grid col-12 mb-5 mx-auto">
+                    <button id="submit" class="btn btn-buscar" href="#">
+                <i class="bi bi-check2 text-light fs-3"></i>
+            </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

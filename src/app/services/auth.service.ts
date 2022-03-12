@@ -1,21 +1,26 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  signed:boolean = false;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router:Router) { }
 
 
-  register(email: string, password:  string){
+  register(name:string, surname:string, email: string, password:  string){
     return this.http.post('register',{
+      name: name,
+      surname: surname,
       email: email,
       password: password
-    })
+    }).pipe(
+      catchError((resp: HttpErrorResponse) =>
+      throwError(()=> new Error(`Error a la hora registrar usuario. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+    );
   }
 
   login(email: string, password:  string) {
@@ -33,7 +38,6 @@ export class AuthService {
     console.log(headers.get('Authorization'));
     return this.http.get('logout',{
       headers:headers
-    });
+    })
   }
-
 }

@@ -9,19 +9,19 @@
             <div class="navbar-collapse collapse" id="mainNavbarCollapse">
                 <ul class="navbar-nav justify-content-around w-100">
                     <li class="nav-item fw-bold">
-                        <a class="nav-link gradient fs-4 active" [routerLink]="['/inicio']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Inicio</a>
+                        <a class="nav-link gradient fs-4 active" [routerLink]="['/home']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Inicio</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-primary fs-4" [routerLink]="['/products']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Productos</a>
                     </li>
-                    <li class="nav-item ">
+                    <li class="nav-item " *ngIf="status === null">
                         <div class="dropdown show">
                             <a class="nav-link text-primary fs-4 dropdown-toggle" href="#" role="button" id="dropdownReg" data-bs-toggle="dropdown" aria-expanded="false">
                                 <span class="d-sm-none d-lg-inline"></span>Identifícate
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownReg">
-                                <a class="dropdown-item fs-4" [routerLink]="['/register']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><i class="bi bi-person"></i><span class="d-sm-none d-lg-inline">Registrarse</span></a>
-                                <a class="dropdown-item fs-4" [routerLink]="['/login']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><i class="bi bi-person"></i><span class="d-sm-none d-lg-inline">Login</span></a>
+                                <a class="dropdown-item fs-4" [routerLink]="['/register']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><span>Registrarse</span></a>
+                                <a class="dropdown-item fs-4" [routerLink]="['/login']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><span>Login</span></a>
                             </div>
                         </div>
                     </li>
@@ -30,7 +30,7 @@
                             <i class="bi bi-bag"></i><span class="d-sm-none d-lg-inline">Cesta</span>
                         </a>
                     </li>
-                    <li class="nav-item" *ngIf="!status">
+                    <li class="nav-item" *ngIf="status != null">
                         <button class="nav-link text-primary border-0 like_nav fs-4" (click)="logout()">
                             <i class="bi bi-box-arrow-right"></i><span class="d-sm-none d-lg-inline">Logout</span>
                         </button>

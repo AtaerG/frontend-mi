@@ -19,6 +19,7 @@ export class BaseUrlInterceptor implements HttpInterceptor {
       headers: req.headers.set('Content-Type','application/json'),
       url: `${environment.baseUrl}/${req.url}`
     });
+    console.log(reqClone);
     return next.handle(reqClone);
   }
 }
