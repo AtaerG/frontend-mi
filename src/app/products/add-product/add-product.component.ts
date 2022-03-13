@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, createNgModuleRef, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
@@ -29,6 +29,7 @@ export class AddProductComponent implements OnInit {
   createProduct(){
     let form_values = this.addProdForm.value;
     if(this.addProdForm.valid){
+      console.log(form_values['image_url'])
       this.productService.addProduct(form_values['name'],form_values['price'],form_values['description'],form_values['amount'],form_values['image_url'],form_values['tag']).subscribe({
         next: ()=> {
           this.router.navigate(['/products']);

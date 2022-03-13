@@ -44,4 +44,19 @@ export class ProductService {
       throwError(()=> new Error(`Error a la hora de crear producto. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
   }
+
+  editProduct(id:number,name:string, price:number, description: string, amount:number, image_url:string, tag:string){
+    return this.http.put('products/'+id,{
+      name: name,
+      price: price,
+      description: description,
+      amount: amount,
+      image_url: image_url,
+      tag:tag
+    }).pipe(
+      map((re)=> console.log(re)),
+      catchError((resp: HttpErrorResponse) =>
+      throwError(()=> new Error(`Error a la hora de crear producto. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+    );
+  }
 }

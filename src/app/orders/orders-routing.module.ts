@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ListOrderComponent } from './list-order/list-order.component';
 import { AddOrderComponent } from './add-order/add-order.component';
-import { FindOrderComponent } from './find-order/find-order.component';
 import { ShowOrderComponent } from './show-order/show-order.component';
 import { OrderGetResolver } from '../resolvers/order-get.resolver';
 
