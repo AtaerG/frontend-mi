@@ -1,6 +1,19 @@
-<h1>Your order:</h1>
-<p>{{order.total_price}}</p>
-<section class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mt-4">
-    <article *ngFor="let product of order.products">
-        <p>{{product.name}}</p>
-    </article>
+<main class="container">
+    <h1>Numero de pedido: {{order.id}}</h1>
+    <p>Precio total: {{order.total_price |currency:'EUR':'symbol-narrow'}}</p>
+    <section class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mt-4">
+        <article *ngFor="let product of order.products">
+            <div class="col">
+                <div class="card card-shadowed border-0 h-100 card-descubre-bg-color mb-2 mb-md-3 ">
+                    <img src="{{product.image_url}}" class="card-img-top card-img-descubre " alt="mesa ">
+                    <div class="card-body text-light text-center ">
+                        <h1 class="card-title ">{{product.name}}</h1>
+                    </div>
+                    <div class="card-footer text-center ">
+                        <a class="nav-link text-light fs-4 " [routerLink]="[ '/products', product.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Mas Info</a>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+</main>

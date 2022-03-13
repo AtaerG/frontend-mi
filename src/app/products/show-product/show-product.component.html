@@ -4,7 +4,7 @@
         <div class="card-body text-center mx-auto">
             <h5 class="card-title">{{product.name}}</h5>
             <p class="card-text">{{product.description}}</p>
-            <p class="card-text">{{product.price}}</p>
+            <p class="card-text">{{product.price |currency:'EUR':'symbol-narrow'}}</p>
             <button class="btn btn-primary" (click)="addProdToOrder()">
               Agregar Al Carrito
             </button>

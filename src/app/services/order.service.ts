@@ -72,4 +72,14 @@ export class OrderService {
       throwError(()=> new Error(`Error a la hora de mostrar el pedido. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
   }
+
+  getAllOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>('orders').pipe(
+      map((response) => {
+        return response;
+      }),
+      catchError((resp: HttpErrorResponse) =>
+      throwError(()=> new Error(`Error a la hora de obtener pedidos. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+    );
+  }
 }
