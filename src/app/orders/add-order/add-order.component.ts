@@ -36,7 +36,8 @@ export class AddOrderComponent implements OnInit {
   }
 
   sentOrder(){
-    if(this.shippingForm.valid){
+    let prods = sessionStorage.getItem('products');
+    if(this.shippingForm.valid && prods != null){
       let form_values = this.shippingForm.value;
       this.products.forEach((el)=>{
         this.products_id.push(el.id);
