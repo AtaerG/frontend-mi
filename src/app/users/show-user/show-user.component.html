@@ -1,1 +1,10 @@
-<p>show-user works!</p>
+<div class="card card-shadowed border-0 h-100 card-descubre-bg-color mb-2 mb-md-3 ">
+    <div class="card-body text-light text-center">
+        <h1 class="card-title ">Nombre: {{user.name}}</h1>
+        <p class="card-text ">Apellidos: {{user.surname}}</p>
+        <p class="card-text ">Correo electronico: {{user.email}}</p>
+    </div>
+    <div class="card-footer text-center ">
+        <a class="nav-link text-light fs-4 " [routerLink]="[ '/users', user.id,'/edit'] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Modificar datos</a>
+    </div>
+</div>

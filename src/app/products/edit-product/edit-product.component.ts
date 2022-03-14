@@ -33,7 +33,6 @@ export class EditProductComponent implements OnInit {
   editProduct(){
     let form_values = this.editProdForm.value;
     if(this.editProdForm.valid){
-      console.log(form_values['image_url']);
       this.productService.editProduct(this.product.id,form_values['name'],form_values['price'],form_values['description'],form_values['amount'],form_values['image_url'],form_values['tag']).subscribe({
         next: (re)=> {
           console.log(re);

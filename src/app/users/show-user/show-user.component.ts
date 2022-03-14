@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { User } from 'src/app/interfaces/user';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-show-user',
@@ -7,9 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShowUserComponent implements OnInit {
 
-  constructor() { }
+  user!:User;
+  constructor(private route: ActivatedRoute, private userService: UserService) { }
 
   ngOnInit(): void {
+    this.user = this.route.snapshot.data['user'];
   }
 
 }
