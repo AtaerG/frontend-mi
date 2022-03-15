@@ -3,5 +3,6 @@ export interface Comment {
   content: string,
   stars:number,
   user_id:number,
+  user_name:string,
   product_id:number
 }

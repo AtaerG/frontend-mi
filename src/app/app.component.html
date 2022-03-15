@@ -4,11 +4,11 @@
             <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbarCollapse" aria-controls="mainNavbarCollapse" aria-expanded="false">
               <span class="navbar-toggler-icon"></span>
           </button>
-            <a class="navbar-brand gradient fs-1 d-none d-md-block" aria-current="page" href="#" data-bs-toggle="offcanvas" data-bs-target="#mi">Muebles Inteligentes</a>
-            <a class="navbar-brand mx-xxl-auto gradient fs-1 d-block d-md-none" aria-current="page" href="#" data-bs-toggle="offcanvas" data-bs-target="#mi">MI</a>
+            <a class="navbar-brand gradient fs-1 d-none d-lg-block" aria-current="page" href="#" data-bs-toggle="offcanvas" data-bs-target="#mi">Muebles Inteligentes</a>
+            <a class="navbar-brand mx-xxl-auto gradient fs-1 d-block d-lg-none" aria-current="page" href="#" data-bs-toggle="offcanvas" data-bs-target="#mi">MI</a>
             <div class="navbar-collapse collapse" id="mainNavbarCollapse">
                 <ul class="navbar-nav justify-content-around w-100">
-                    <li class="nav-item fw-bold">
+                    <li class="nav-item fw-bold" *ngIf="role === 'normal_user'">
                         <a class="nav-link gradient fs-4 active" [routerLink]="['/home']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Inicio</a>
                     </li>
                     <li class="nav-item">
@@ -20,19 +20,34 @@
                                 <span class="d-sm-none d-lg-inline"></span>Identifícate
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownReg">
-                                <a class="dropdown-item text-primary fs-4" [routerLink]="['/register']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Registrarse</a>
-                                <a class="dropdown-item text-primary fs-4" [routerLink]="['/login']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Login</a>
+                                <a class="dropdown-item fs-4" [routerLink]="['/register']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Registrarse</a>
+                                <a class="dropdown-item fs-4" [routerLink]="['/login']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Login</a>
                             </div>
                         </div>
                     </li>
-                    <li class="nav-item ">
-                        <a class="position-relative nav-link text-primary fs-4" [routerLink]="['/orders/create']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" data-bs-toggle="offcanvas" data-bs-target="#demo">
-                            <i class="bi bi-bag"></i><span class="d-sm-none d-lg-inline">Cesta</span>
+                    <li class="nav-item " *ngIf="role != 'admin'">
+                        <a class="position-relative nav-link text-primary fs-4" [routerLink]="['/orders/create']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                            <i class="bi bi-bag"></i><span class="d-lg-inline">Cesta</span>
+                        </a>
+                    </li>
+                    <li class="nav-item " *ngIf="status != null">
+                        <a class="position-relative nav-link text-primary fs-4" [routerLink]="['/users', user_id]" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                            <i class="bi bi-person"></i><span class="d-lg-inline">Cuenta</span>
+                        </a>
+                    </li>
+                    <li class="nav-item " *ngIf="role != 'normal_user'">
+                        <a class="position-relative nav-link text-primary fs-4" [routerLink]="['/users']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                            <i class="bi bi-person-lines-fill"></i><span class="d-none d-lg-inline"> Usuarios</span>
+                        </a>
+                    </li>
+                    <li class="nav-item " *ngIf="role != 'normal_user'">
+                        <a class="position-relative nav-link text-primary fs-4" [routerLink]="['/orders']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                            <i class="bi bi-archive"></i><span class="d-none d-lg-inline"> Pedidos</span>
                         </a>
                     </li>
                     <li class="nav-item" *ngIf="status != null">
                         <button class="nav-link text-primary border-0 like_nav fs-4" (click)="logout()">
-                            <i class="bi bi-box-arrow-right"></i><span class="d-sm-none d-lg-inline">Logout</span>
+                            <i class="bi bi-box-arrow-right"></i><span class="d-none d-lg-inline">Logout</span>
                         </button>
                     </li>
                 </ul>

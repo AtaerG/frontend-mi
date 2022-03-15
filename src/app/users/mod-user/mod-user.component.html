@@ -1,5 +1,5 @@
 <div class="container">
-    <h1 class="text-center gradient mt-4  mb-4">Hi!</h1>
+    <h1 class="text-center gradient mt-4  mb-4">Editar la cuenta de usuario!</h1>
     <form id="form-no" class="container w-100 w-lg-75" [formGroup]="modUserForm" (ngSubmit)="modificarUser()">
         <div class="row">
             <div class="d-none d-lg-block col-lg-5 col-xl-7 my-auto">
@@ -39,28 +39,31 @@
                 </div>
                 <div class="col-12">
                     <div class="form-floating mt-2 ">
-                        <input type="password" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="password" placeholder="1111" name="password" [formControlName]="'password'" required="required">
-                        <label for="password" class="form-label ">Contraseña:</label>
-                        <span class="text-danger" *ngIf="!modUserForm.get('password')?.valid && modUserForm.get('password')?.touched">
-                        La contraseña debe tener como minimo 8 caracteres.
-                      </span>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="form-floating mt-2 ">
-                        <select id="role" name="role" [formControlName]="'role'" class="form-select" aria-label="select filter">
-                          <option value="admin">Administrdor</option>
-                          <option value="normal_user">Usuario commun</option>
-                        </select>
+                        <input type="password" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="password" placeholder="1111" name="password" [(ngModel)]="password">
+                        <label for="password" class="form-label ">Contraseña(en blanco la contraseña anterior se permanecera)</label>
+                        <span *ngIf="!modUserForm.get('password')?.valid && modUserForm.get('password')?.touched" class="text-danger">
+                                    La contraseña debe tener como minimo 8 caracteres.
+                        </span>
                     </div>
                 </div>
             </div>
-            <div class="row mt-5">
-                <div class="d-grid col-12 mb-5 mx-auto">
-                    <button id="submit" class="btn btn-buscar" href="#">
+            <div class="col-12">
+                <div class="form-floating mt-2 " *ngIf="role === 'admin'">
+                    <select id="role" name="role" [formControlName]="'role'" class="form-select" aria-label="select filter">
+                          <option value="admin">Administrdor</option>
+                          <option value="normal_user">Usuario commun</option>
+                        </select>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="d-grid col-12 mb-5 mx-auto">
+                <button id="submit" class="btn btn-buscar" href="#">
                         <i class="bi bi-check2 text-light fs-3"></i>
                     </button>
-                </div>
+                <button id="submit" class="btn btn-danger mt-2" href="#" (click)="deleteUser()">
+                    Eliminar la cuenta
+                </button>
             </div>
         </div>
     </form>

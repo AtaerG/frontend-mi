@@ -11,7 +11,7 @@ export class UserTypeAdminCheckerGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       let checker = false;
-      const token = localStorage.getItem('token');
+      const token = sessionStorage.getItem('token');
       console.log(token);
       if(token === null) {
         checker = false;

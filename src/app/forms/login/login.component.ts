@@ -32,12 +32,11 @@ export class LoginComponent implements OnInit {
             console.log(token);
             sessionStorage.setItem('token',JSON.stringify(token));
             this.login_complete = true;
-            //window.location.reload();
             this.router.navigate(['/products']).then(() => {
               window.location.reload();
             });;
          },
-          error: error => console.log(error),
+          error: error => alert('La contraseña o email son incorrectos!'),
       })
     }
   }

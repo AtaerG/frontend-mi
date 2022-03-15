@@ -11,17 +11,24 @@ import { AuthService } from './services/auth.service';
 export class AppComponent {
   title = 'frontend-mi';
 
-  status:string|null = localStorage.getItem('token');
-
-  constructor(private authService: AuthService, private router: Router){}
+  status:string|null = sessionStorage.getItem('token');
+  role: string = "normal_user";
+  user_id!: number;
+  constructor(private authService: AuthService, private router: Router){
+    if(this.status != null){
+      this.role = JSON.parse(this.status).user_role;
+      this.user_id = JSON.parse(this.status).user_id;
+    }
+  }
 
   logout(){
-    let token = localStorage.getItem('token');
+    let token = sessionStorage.getItem('token');
     this.authService.logout(token).subscribe({
       next: () =>  {
-        localStorage.removeItem('token');
-        window.location.reload();
-        this.router.navigate(['/']);
+        sessionStorage.clear();
+        this.router.navigate(['/home']).then(() => {
+          window.location.reload();
+        });;
     },
     });
   }

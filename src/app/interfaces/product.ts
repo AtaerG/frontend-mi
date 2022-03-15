@@ -1,3 +1,4 @@
+import { Comment } from 'src/app/interfaces/comment';
 export interface Product {
   id:number,
   name:string,
@@ -5,6 +6,7 @@ export interface Product {
   description:string,
   amount:number,
   image_url:string,
-  tag:string
+  tag:string,
+  comments:Comment[]
 }
 

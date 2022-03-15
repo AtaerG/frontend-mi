@@ -13,7 +13,7 @@ const routes: Routes = [
     users: AllUsersResolver
   }
   },
-  { path: 'users/:id/edit', component: ModUserComponent,
+  { path: 'users/edit/:id', component: ModUserComponent,
   resolve: {
     user: UserGetResolver
   }  },

@@ -31,7 +31,7 @@ export class UserService {
     );
   }
 
-  editUser(id:number,name:string, surname:number, email: string, password:number, role:string = 'normal_user'){
+  editUser(id:number,name:string, surname:number, email: string, password:string, role:string){
     return this.http.put('users/'+id,{
       name: name,
       surname: surname,
@@ -43,6 +43,13 @@ export class UserService {
       catchError((resp: HttpErrorResponse) =>
       throwError(()=> new Error(`Error a la hora de crear producto. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
+  }
+
+  deleteUserAccount(id: number){
+    return this.http.delete('users/'+id).pipe(
+      catchError((resp: HttpErrorResponse) =>
+      throwError(()=> new Error(`Error a la hora de eliminar la cuenta de usuario. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+    )
   }
 
 
