@@ -1,16 +1,26 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { DelUserComponent } from './del-user/del-user.component';
 import { ShowUserComponent } from './show-user/show-user.component';
 import { ModUserComponent } from './mod-user/mod-user.component';
 import { ListUsersComponent } from './list-users/list-users.component';
+import { AllUsersResolver } from '../resolvers/all-users.resolver';
+import { UserGetResolver } from '../resolvers/user-get.resolver';
 
 const routes: Routes = [
-  { path: 'users', component: ListUsersComponent },
-  { path: 'users/:id', component: ShowUserComponent },
-  { path: 'users/:id/modificate', component: ModUserComponent  },
-  { path: 'users/:id/delete', component: DelUserComponent  }
+  { path: 'users', component: ListUsersComponent,
+  resolve: {
+    users: AllUsersResolver
+  }
+  },
+  { path: 'users/edit/:id', component: ModUserComponent,
+  resolve: {
+    user: UserGetResolver
+  }  },
+  { path: 'users/:id', component: ShowUserComponent,
+  resolve: {
+    user: UserGetResolver
+  } },
 ];
 
 @NgModule({

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Order } from 'src/app/interfaces/order';
 import { Product } from 'src/app/interfaces/product';
 import { OrderService } from 'src/app/services/order.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-add-order',
@@ -16,7 +17,7 @@ export class AddOrderComponent implements OnInit {
   products:Product[] = [];
   products_id: number[] = [];
   precio_total:number = 0;
-  constructor(private orderService:OrderService, private router: Router) { }
+  constructor(private orderService:OrderService, private router: Router,private productService:ProductService) { }
 
   ngOnInit(): void {
     let prods = sessionStorage.getItem('products');
@@ -56,6 +57,25 @@ export class AddOrderComponent implements OnInit {
       },
       });
     }
+  }
+
+  removeProdFromOrder(product: Product){
+    product.amount += 1;
+    this.productService.editProduct(this.product.id, this.product.name, this.product.price,  this.product.description, this.product.amount, this.product.image_url, this.product.tag)
+    .subscribe({
+      next: ()=> {
+        let prods_session = sessionStorage.getItem('product');
+        if(prods_session != null){
+          this.products = JSON.parse(prods_session);
+          this.products.push(this.product);
+          sessionStorage.setItem('product',JSON.stringify(this.products));
+        } else {
+          this.products.push(this.product);
+          sessionStorage.setItem('products',JSON.stringify(this.products));
+        }
+      },
+      error: error=>console.log(error),
+    })
   }
 
 }

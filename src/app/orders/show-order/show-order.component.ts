@@ -10,12 +10,11 @@ import { OrderService } from 'src/app/services/order.service';
 })
 export class ShowOrderComponent implements OnInit {
 
-  order!: Order;
+  order: any;
   constructor(private route: ActivatedRoute, private orderService: OrderService) { }
 
   ngOnInit(): void {
-    this.order = this.route.snapshot.data['order'];
-    console.log(this.order.products);
+    this.order  = this.route.snapshot.data['order'];
   }
 
 }

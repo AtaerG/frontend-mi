@@ -1,1 +1,20 @@
-<p>list-order works!</p>
+<main class="container">
+    <section class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mt-4" *ngIf="orders.length && orders; else not">
+        <article *ngFor="let order of orders">
+            <div class="col">
+                <div class="card card-shadowed border-0 h-100 card-descubre-bg-color mb-2 mb-md-3 ">
+                    <div class="card-body text-light text-center ">
+                        <h1 class="card-title ">ID: {{order.id}}</h1>
+                        <p class="card-text ">Precio total: {{order.total_price |currency:'EUR':'symbol-narrow'}}</p>
+                    </div>
+                    <div class="card-footer text-center ">
+                        <a class="nav-link text-light fs-4 " [routerLink]="[ '/orders', order.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Mas Info</a>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    <ng-template #not>
+        <h3>No hay pedidos.</h3>
+    </ng-template>
+</main>

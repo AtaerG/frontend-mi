@@ -14,36 +14,6 @@ export class OrderService {
 
   constructor(private http: HttpClient, private productService:ProductService) { }
 
-  productAddedToOrder(product: Product): Observable<any>{
-    let new_amount = product.amount - 1;
-    console.log(product.amount);
-    return this.http.patch(`products/${product.id}`,{
-      amount : new_amount
-    }).pipe(
-      tap(() => {
-        this.order.products.push(product);
-        sessionStorage.removeItem('products');
-        sessionStorage.setItem('products', JSON.stringify(this.order.products));
-      }),
-      catchError((resp: HttpErrorResponse) => throwError(() => new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
-    );
-  }
-
-  productRemovedFromOrder(product: Product): Observable<any> {
-    product.amount += 1;
-    return this.http.patch('products/',product).pipe(
-      tap(() => {
-        this.order.products = this.order.products.filter((el) => {
-          return el != product;
-        });
-        sessionStorage.removeItem('products');
-        sessionStorage.setItem('products', JSON.stringify(this.order.products));
-      }),
-      catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
-    );
-  }
-
   createOrder(products:string,total_price:number,status:string, direction:string,post_code:number,city:string,state:string,country:string  ){
     return this.http.post('orders', {
       products: products,
@@ -70,6 +40,16 @@ export class OrderService {
       }),
       catchError((resp: HttpErrorResponse) =>
       throwError(()=> new Error(`Error a la hora de mostrar el pedido. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+    );
+  }
+
+  getAllOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>('orders').pipe(
+      map((response) => {
+        return response;
+      }),
+      catchError((resp: HttpErrorResponse) =>
+      throwError(()=> new Error(`Error a la hora de obtener pedido. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
   }
 }

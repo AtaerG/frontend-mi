@@ -21,7 +21,6 @@ export class ListProductsComponent implements OnInit {
     this.filterForm = new FormGroup({
       'filter': new FormControl('todo')
     });
-    console.log(this.products);
   }
 
   aplicarFiltro(){

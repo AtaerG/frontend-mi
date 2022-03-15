@@ -19,6 +19,7 @@ export class AuthCheckInterceptor implements HttpInterceptor {
     if(token != null ){
       token = JSON.parse(token)['token']['accessToken'];
     }
+    console.log(token);
     request = request.clone({
       setHeaders: {
         Authorization: `Bearer ${token}`

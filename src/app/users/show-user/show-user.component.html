@@ -1,1 +1,11 @@
-<p>show-user works!</p>
+<h1 *ngIf="user_id == user.id" class="text-warning">Tu cuenta es:</h1>
+<div class="card card-shadowed border-0 h-100 card-descubre-bg-color mb-2 mb-md-3 ">
+    <div class="card-body text-light text-center">
+        <h1 class="card-title ">Nombre: {{user.name}}</h1>
+        <p class="card-text ">Apellidos: {{user.surname}}</p>
+        <p class="card-text ">Correo electronico: {{user.email}}</p>
+    </div>
+    <div class="card-footer text-center " *ngIf="user_id == user.id">
+        <a class="nav-link text-light fs-4 " [routerLink]="[ '/users/edit',user.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Modificar datos</a>
+    </div>
+</div>
