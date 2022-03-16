@@ -11,7 +11,7 @@
                             <p class="card-text ">{{product.price |currency:'EUR':'symbol-narrow'}}</p>
                         </div>
                         <div class="card-footer text-center ">
-                            <button class="btn btn-danger">Eliminar de la cesta</button>
+                            <button class="btn btn-danger" (click)="removeProdFromOrder(product)">Eliminar de la cesta</button>
                         </div>
                     </div>
                 </div>

@@ -53,11 +53,12 @@ export class ShowProductComponent implements OnInit {
     this.productService.editProduct(this.product.id, this.product.name, this.product.price,  this.product.description, this.product.amount, this.product.image_url, this.product.tag)
     .subscribe({
       next: ()=> {
-        let prods_session = sessionStorage.getItem('product');
+        let prods_session = sessionStorage.getItem('products');
         if(prods_session != null){
           this.products = JSON.parse(prods_session);
+          console.log( this.products);
           this.products.push(this.product);
-          sessionStorage.setItem('product',JSON.stringify(this.products));
+          sessionStorage.setItem('products',JSON.stringify(this.products));
         } else {
           this.products.push(this.product);
           sessionStorage.setItem('products',JSON.stringify(this.products));

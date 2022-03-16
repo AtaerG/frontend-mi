@@ -26,11 +26,12 @@ export class ModUserComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.route.snapshot.data['user'];
     this.password = this.user.password;
-
+    console.log(this.user);
     this.modUserForm = new FormGroup({
       'name': new FormControl(this.user.name, [Validators.required, Validators.maxLength(20)]),
       'surname': new FormControl(this.user.surname, [Validators.required, Validators.max(50)]),
       'email': new FormControl(this.user.email, [Validators.required, Validators.email]),
+      'password': new FormControl(this.user.password, [Validators.required, Validators.maxLength(8)]),
       'role': new FormControl(this.user.role)
     });
   }
