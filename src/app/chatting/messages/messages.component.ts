@@ -19,35 +19,33 @@ export class MessagesComponent implements OnInit {
   messages:Message[] = [];
   channel!:any;
 
-  constructor(private http: HttpClient) { }
+  user_role: string = "";
+
+  constructor(private http: HttpClient, private messageService: MessagesService) { }
 
 
   ngOnInit(): void {
     if (this.status != null) {
       this.user_id = JSON.parse(this.status).user_id;
+      this.user_role = JSON.parse(this.status).user_role;
       console.log(this.user_id);
       this.token = this.status;
     }
-    Pusher.logToConsole = true;
-    let token = sessionStorage.getItem('token');
-    if (token != null) {
+    if(this.user_role != "admin"){
+      Pusher.logToConsole = true;
+      let token = sessionStorage.getItem('token');
+      if (token != null) {
+        let channel = this.messageService.connect(this.user_id, token);
+        this.channel.bind('chat-event', (data: Message) => {
+          console.log("kshgasuiqs");
+          this.messages.push(data);
+          console.log(this.messages);
+        });
 
-      const pusher = new Pusher('5f37736952b69994f8c1', {
-        authEndpoint: "/broadcasting/auth",
-        cluster: 'eu',
-        auth: {
-          headers: {
-            Authorization: "Bearer " + JSON.parse(token)['token']['accessToken'],
-          }
-        }
-      });
-      this.channel = pusher.subscribe('chat.1');
-      this.channel.bind('chat-event', (data: Message) => {
-        console.log("kshgasuiqs");
-        this.messages.push(data);
-        console.log(this.messages);
-      });
-
+      }
+    } else {
+      let con_users = this.messageService.connected_users;
+      console.log(con_users)
     }
   }
 

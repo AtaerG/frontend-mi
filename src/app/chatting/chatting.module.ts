@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { MessagesComponent } from './messages/messages.component';
 import { ProductsRoutingModule } from './chatting-routing.module';
 import { FormsModule } from '@angular/forms';
+import { ChatComponent } from './chat/chat.component';
 
 
 
 @NgModule({
   declarations: [
-    MessagesComponent
+    MessagesComponent,
+    ChatComponent
   ],
   imports: [
     CommonModule,
