@@ -4,6 +4,7 @@ import { MessagesService } from 'src/app/services/messages.service';
 import Pusher from 'pusher-js';
 import { Message } from 'src/app/interfaces/message';
 import Echo from 'laravel-echo';
+import { User } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'app-messages',
@@ -15,10 +16,10 @@ export class MessagesComponent implements OnInit {
   status: string | null = sessionStorage.getItem('token');
   token: string = "";
   user_id: number = 0;
-  message!:Message | null;
-  messages:Message[] = [];
-  channel!:any;
-
+  message!: string;
+  messages: Message[] = [];
+  channel!: any;
+  echo!: Echo;
   user_role: string = "";
 
   constructor(private http: HttpClient, private messageService: MessagesService) { }
@@ -28,42 +29,41 @@ export class MessagesComponent implements OnInit {
     if (this.status != null) {
       this.user_id = JSON.parse(this.status).user_id;
       this.user_role = JSON.parse(this.status).user_role;
-      console.log(this.user_id);
       this.token = this.status;
-    }
-    if(this.user_role != "admin"){
       Pusher.logToConsole = true;
       let token = sessionStorage.getItem('token');
+      console.log(token);
       if (token != null) {
-        let channel = this.messageService.connect(this.user_id, token);
+        this.channel = this.messageService.connect(token);
+        this.channel.subscribe("channel-chat");
         this.channel.bind('chat-event', (data: Message) => {
-          console.log("kshgasuiqs");
+          console.log(data);
           this.messages.push(data);
           console.log(this.messages);
         });
-
       }
-    } else {
-      let con_users = this.messageService.connected_users;
-      console.log(con_users)
     }
   }
 
+
   sendMessage() {
+    this.messageService.sendMessage(this.user_id,this.message, this.token).subscribe({
+      next: (el) => {
+        this.message = "";
+      },
+      error: (err) => console.log(err),
+      });
+    /*
     this.http.post('messages', {
       user_id: this.user_id,
       message: this.message
     }).subscribe({
       next: () => {
-        this.message = null;
+        this.message = "";
       },
       error: (err) => console.log(err),
     })
+    */
   }
+
 }
-
-
-
-
-
-
