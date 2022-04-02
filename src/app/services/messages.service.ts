@@ -1,5 +1,5 @@
-import {Component, Injectable, OnInit} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import { Component, Injectable, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import Pusher from 'pusher-js';
 import { Message } from '../interfaces/message';
 import { User } from '../interfaces/user';
@@ -13,12 +13,12 @@ import { of } from 'rxjs';
 })
 export class MessagesService {
 
-  pusher!:Pusher;
-  message!:Message;
-  connected_users!:number[];
-  constructor(private http: HttpClient, private userService: UserService) {}
+  pusher!: Pusher;
+  message!: Message;
+  connected_users!: number[];
+  constructor(private http: HttpClient, private userService: UserService) { }
 
-  connect(token:string){
+  connect(token: string) {
     const pusher = new Pusher('5f37736952b69994f8c1', {
       authEndpoint: `${ environment.baseUrl }/broadcasting/auth`,
       cluster: 'eu',
@@ -37,11 +37,10 @@ export class MessagesService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${ sessionStorage.getItem('token') }`
     });
-    const data = {
-      user_id,
-      message,
-    };
-    return this.http.post(url, data, {headers});
+    return this.http.post(url, {
+      user_id: user_id,
+      message: message,
+    }, {headers});
   }
-
 }
+
