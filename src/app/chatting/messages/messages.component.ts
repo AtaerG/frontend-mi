@@ -15,12 +15,13 @@ import { environment } from 'src/environments/environment';
 export class MessagesComponent implements OnInit {
 
   status: string | null = sessionStorage.getItem('token');
-  pusher!:any;
+  //pusher!:any;
   token: string = "";
   user_id: number = 0;
   message!: string;
   messages: Message[] = [];
-  channel!: any;
+  channel_presence!: any;
+  channel_msg!: any;
   echo!: Echo;
   user_role: string = "";
 
@@ -38,6 +39,7 @@ export class MessagesComponent implements OnInit {
       let token = JSON.parse(this.status)["token"].accessToken
       //console.log(token);
       if (token != null) {
+        /*
         const pusher = new Pusher('5f37736952b69994f8c1', {
           authEndpoint: `${ environment.baseUrl }/broadcasting/auth`,
           cluster: 'eu',
@@ -48,18 +50,30 @@ export class MessagesComponent implements OnInit {
             }
           },
         });
-        const channel = pusher.subscribe('presence-channel.1');//+this.user_id);
-        channel.bind('my-event', (data: any) => {
-          console.log(data);
-          this.messages.push(data);
+        */
+        const pusher_2 = new Pusher('5f37736952b69994f8c1', {
+
+          authEndpoint: `${ environment.baseUrl }/broadcasting/auth`,
+          cluster: 'eu'
         });
-        channel.bind('pusher:subscription_succeeded', () => {
+        console.log(pusher_2);
+        /*
+        const channel_presence = pusher.subscribe('presence-channel.1');//+this.user_id);
+        channel_presence.bind('pusher:subscription_succeeded', () => {
           if(this.user_role == 'admin'){
             alert('El administrador se ha conectado a la sesión');
           }
         });
-        this.channel = channel;
-        this.pusher = pusher;
+        */
+        this.channel_msg = pusher_2.subscribe('chat');
+        this.channel_msg.bind('message', (data: Message) => {
+          console.log("kshgasuiqs");
+          this.messages.push(data);
+          console.log(this.messages);
+        });
+
+        //console.log(this.channel_presence);
+        console.log(this.channel_msg);
       }
     }
   }
@@ -75,25 +89,23 @@ export class MessagesComponent implements OnInit {
       });
       */
     //if count of members is 1 alert that admin dont etered to session
-    console.log(this.channel.members.count);
-    if (this.channel.members.count == 1) {
+    //console.log(this.channel_presence.members.count);
+    /*if (this.channel_presence.members.count == 1) {
       alert('El trabajador no esta conectado para enviar mensajes. Espera por favor!');
     } else {
       const headers = new HttpHeaders({
         Authorization: `Bearer ${ sessionStorage.getItem('token') }`
       });
+      */
     this.http.post('messages', {
-      user_id: this.user_id,
       message: this.message
-    }, {headers}).subscribe({
+    }).subscribe({
       next: () => {
         this.message = "";
       },
       error: (err) => console.log(err),
     })
-    console.log(this.pusher);
-    console.log(this.channel.members.count);
-  }
+  //}
   }
 
   endMessagingSession(){
@@ -101,6 +113,6 @@ export class MessagesComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.pusher.unsubscribe('presence-channel.1');
+    //this.pusher.unsubscribe('presence-channel.1');
   }
 }
