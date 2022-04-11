@@ -6,6 +6,7 @@ import { Message } from 'src/app/interfaces/message';
 import Echo from 'laravel-echo';
 import { User } from 'src/app/interfaces/user';
 import { environment } from 'src/environments/environment';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-messages',
@@ -23,9 +24,10 @@ export class MessagesComponent implements OnInit {
   channel_msg!: any;
   echo!: Echo;
   user_role: string = "";
+  id_chat:any;
 
 
-  constructor(private http: HttpClient, private messageService: MessagesService) {
+  constructor(private http: HttpClient, private messageService: MessagesService, private route: ActivatedRoute) {
   }
 
 
@@ -35,6 +37,7 @@ export class MessagesComponent implements OnInit {
       this.user_role = JSON.parse(this.status).user_role;
       this.token = JSON.parse(this.status).accessToken;
       Pusher.logToConsole = true;
+      this.id_chat = this.route.snapshot.paramMap.get('id');
       let token = JSON.parse(this.status)["token"].accessToken
       if (token != null) {
 
@@ -49,12 +52,7 @@ export class MessagesComponent implements OnInit {
           },
         });
 
-        this.channel_presence = pusher.subscribe('presence-channel.1');//+this.user_id);
-        this.channel_presence.bind('pusher:subscription_succeeded', (data:any) => {
-          if(this.user_role == 'admin'){
-            alert('El administrador se ha conectado a la sesión');
-          }
-        });
+        this.channel_presence = pusher.subscribe('presence-channel.'+this.id_chat);
         this.channel_presence.bind('my-event',(data:any) => {
             this.messages.push(data);
         });
@@ -64,25 +62,29 @@ export class MessagesComponent implements OnInit {
 
 
   sendMessage() {
-    this.http.post('messages', {
-      user_id: 1,
-      message: this.message
-    }).subscribe({
-      next: () => {
-        console.log(this.channel_presence.members.count);
-        this.message = "";
+    if(this.channel_presence.members.count < 2){
+      if(this.user_role == 'admin'){
+        alert('No hay usuario conectado');
+      } else {
+        alert('Admin no esta conectado a la sesion, por favor espere!');
+      }
+    } else {
+      this.http.post('messages', {
+        user_id: this.id_chat,
+        message: this.message
+      }).subscribe({
+        next: () => {
+          console.log(this.channel_presence.members.count);
+          this.message = "";
 
-      },
-      error: (err) => console.log(err),
-    })
-  //}
-  }
-
-  endMessagingSession(){
+        },
+        error: (err) => console.log(err),
+      })
+    }
 
   }
 
   ngOnDestroy(): void {
-    //this.pusher.unsubscribe('presence-channel.1');
+    this.channel_presence.unsubscribe();
   }
 }

@@ -1,12 +1,12 @@
 import { Component, Injectable, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import Pusher from 'pusher-js';
 import { Message } from '../interfaces/message';
 import { User } from '../interfaces/user';
 import { UserService } from './user.service';
 import Echo from 'laravel-echo';
 import { environment } from 'src/environments/environment';
-import { of } from 'rxjs';
+import { catchError, of, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

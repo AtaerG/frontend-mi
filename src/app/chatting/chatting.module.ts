@@ -2,19 +2,22 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MessagesComponent } from './messages/messages.component';
 import { ProductsRoutingModule } from './chatting-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChatComponent } from './chat/chat.component';
+import { ApplyChatComponent } from './apply-chat/apply-chat.component';
 
 
 
 @NgModule({
   declarations: [
     MessagesComponent,
-    ChatComponent
+    ChatComponent,
+    ApplyChatComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     ProductsRoutingModule
   ]
 })

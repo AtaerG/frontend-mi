@@ -1,40 +1,22 @@
-<main class="container main-admin">
-    <h1 class="text-center gradient mt-4">CHATTING</h1>
-    <div class="row mt-4 mt-sm-2 g-2">
-        <div class="col-12 col-md-4 col-lg-3">
-            <div class="list-group" id="list-tab" role="tablist">
-                <a class="list-group-item list-group-item-action active" id="mens-alex" data-bs-toggle="list" href="#list-alex" role="tab" aria-controls="list-alex">Alex <span class="badge bg-danger">1</span></a>
-                <a class="list-group-item list-group-item-action" id="mens-jose" data-bs-toggle="list" href="#list-jose" role="tab" aria-controls="list-jose">Jose <span class="badge bg-danger">2</span></a>
-                <a class="list-group-item list-group-item-action" id="mens-marcos" data-bs-toggle="list" href="#list-marcos" role="tab" aria-controls="list-marcos">Marcos</a>
-            </div>
-        </div>
-        <div class="col-12 col-md-8 col-lg-9">
-            <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="list-alex" role="tabpanel" aria-labelledby="list-alex-list">
-                    <div class="card card-shadowed bg-light border-0 h-100 mb-2 mb-md-3">
-                        <div id="msg-app-alex" class="p-4 bg-white ">
-                            <div class="mb-1">
-                                <div class="d-flex gap-3" *ngFor="let msg of messages">
-                                    <div class="m-1">
-                                        <p class="text-primary">{{msg.user_id}}</p>
-                                    </div>
-                                    <div class="w-75">
-                                        <div class=" bg-light rounded p-2 mb-2">
-                                            <p class="text-muted">{{msg.message}}</p>
-                                        </div>
-                                        <p class="small text-muted">{{msg.created_at | date:'HH:mm:ss'}}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="m-3">
-                                <label for="resp">Mensaje:</label>
-                                <div class="d-flex gap-1">
-                                    <input id="message" class="message" type="text" placeholder="Escribe mensaje..." [(ngModel)]="message">
-                                    <button id="send" class="btn btn-lg btn-primary" (click)="sendMessage()"><i class="bi bi-telegram"></i></button>
-                                </div>
-                            </div>
-                        </div>
+<main>
+    <section class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mt-4" *ngIf="appointments.length && appointments; else not">
+        <article *ngFor="let appointment of appointments">
+            <div class="col">
+                <div class="card card-shadowed border-0 h-100 card-descubre-bg-color mb-2 mb-md-3 ">
+                    <div class="card-body text-light text-center ">
+                        <h1 class="card-title ">Tienes la cita en:</h1>
+                        <h1 class="card-title ">Fecha: {{appointment.date}}</h1>
+                        <p class="card-text ">Hora: {{appointment.time}}</p>
+                        <p class="card-text ">User: {{appointment.user_id}}</p>
+                    </div>
+                    <div class="card-footer text-center ">
+                        <button class="btn btn-info fs-4 " role="button" [ngClass]="{'disabled' : !disabled}" [routerLink]="[ '/messages', appointment.user_id] " [routerLinkActive]="[ 'active']" [routerLinkActiveOptions]="{exact:true} ">Entrar!</button>
                     </div>
                 </div>
             </div>
-        </div>
+        </article>
+    </section>
+    <ng-template #not>
+        <h3>No hay productos.</h3>
+    </ng-template>
+</main>
