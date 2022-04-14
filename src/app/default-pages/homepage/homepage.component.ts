@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MapboxService } from 'src/app/services/mapbox.service';
 
 @Component({
   selector: 'app-homepage',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private mapBoxService: MapboxService) {
   }
 
+  ngOnInit(): void {
+    this.mapBoxService.buildMap();
+  }
 }

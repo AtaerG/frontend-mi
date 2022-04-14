@@ -18,6 +18,7 @@ export class MessagesComponent implements OnInit {
   status: string | null = sessionStorage.getItem('token');
   token: string = "";
   user_id: number = 0;
+  name:string = "";
   message!: string;
   messages: Message[] = [];
   channel_presence!: any;
@@ -35,6 +36,7 @@ export class MessagesComponent implements OnInit {
     if (this.status != null) {
       this.user_id = JSON.parse(this.status).user_id;
       this.user_role = JSON.parse(this.status).user_role;
+      this.name = JSON.parse(this.status).name;
       this.token = JSON.parse(this.status).accessToken;
       Pusher.logToConsole = true;
       this.id_chat = this.route.snapshot.paramMap.get('id');
@@ -70,7 +72,8 @@ export class MessagesComponent implements OnInit {
       }
     } else {
       this.http.post('messages', {
-        user_id: this.id_chat,
+        id: this.id_chat,
+        name: this.name,
         message: this.message
       }).subscribe({
         next: () => {

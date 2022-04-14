@@ -12,6 +12,9 @@
                     <div class="card-footer text-center ">
                         <button class="btn btn-info fs-4 " role="button" [ngClass]="{'disabled' : !disabled}" [routerLink]="[ '/messages', appointment.user_id] " [routerLinkActive]="[ 'active']" [routerLinkActiveOptions]="{exact:true} ">Entrar!</button>
                     </div>
+                    <div class="card-footer text-center " *ngIf="user_role === 'admin'">
+                        <button class="btn btn-danger fs-4 " role="button" (click)="deleteAppointment(appointment.id)">Borrar Cita!</button>
+                    </div>
                 </div>
             </div>
         </article>

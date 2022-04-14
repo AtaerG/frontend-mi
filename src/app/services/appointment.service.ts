@@ -20,4 +20,11 @@ export class AppointmentService {
       catchError((resp: HttpErrorResponse) => throwError(() => new Error(`Error a la hora registrar usuario. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
   }
+
+  deleteAppointment(id:number) {
+    return this.http.delete('appointments/'+id).pipe(
+      catchError((resp: HttpErrorResponse) =>
+      throwError(()=> new Error(`Error a la hora de eliminar cita. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+    )
+  }
 }

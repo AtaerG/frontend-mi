@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Appointment } from 'src/app/interfaces/appointment';
 import { Message } from 'src/app/interfaces/message';
 import { User } from 'src/app/interfaces/user';
+import { AppointmentService } from 'src/app/services/appointment.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -19,7 +20,7 @@ export class ChatComponent implements OnInit {
   disabled: boolean = false;
   //get actual date and time
 
-  constructor( private userService: UserService) { }
+  constructor( private userService: UserService, private appointmentService: AppointmentService) { }
 
   ngOnInit(): void {
     if (this.status != null) {
@@ -63,5 +64,11 @@ export class ChatComponent implements OnInit {
       }
     });
   }
+  }
+
+  deleteAppointment(id: number){
+      this.appointmentService.deleteAppointment(id).subscribe({
+        error: error => console.log(error),
+      });
   }
 }
