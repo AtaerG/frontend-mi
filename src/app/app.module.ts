@@ -14,13 +14,14 @@ import { BaseUrlInterceptor } from './interceptors/base-url.interceptor';
 import { DefaultPagesModule } from './default-pages/default-pages.module';
 import { HomepageComponent } from './default-pages/homepage/homepage.component';
 import { ProductFindPipe } from './pipes/product-find.pipe';
-
+import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    RecaptchaV3Module,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -36,7 +37,8 @@ import { ProductFindPipe } from './pipes/product-find.pipe';
       provide: HTTP_INTERCEPTORS,
       useClass: BaseUrlInterceptor ,
       multi:true
-    }
+    },
+    { provide: RECAPTCHA_V3_SITE_KEY, useValue: '6LcPr0keAAAAANPLsWmn0RMC5UuP1pWMDN1dcQta' },
   ],
   bootstrap: [AppComponent]
 })

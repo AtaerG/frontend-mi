@@ -10,10 +10,10 @@
                     <div class="col-12">
                         <h2 class=" text-center text-primary ">Nombre y apellidos</h2>
                         <div class="form-floating mt-2">
-                            <input type="text" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="name" [formControlName]="'name'" placeholder="Elon" name="name" minlength="5" maxlength="60" required="required">
+                            <input type="text" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="name" [formControlName]="'name'" placeholder="Elon" name="name" required="required">
                             <label for="name" class="form-label ">Nombre:</label>
                             <span class="text-danger" *ngIf="!registerForm.get('name')?.valid && registerForm.get('name')?.touched">
-                               El nombre no es valido. Nombre es obligatorio y debe tener y maximo 20 carcacteres!
+                               El nombre no es valido. Nombre es obligatorio y debe tener maximo 20 carcacteres!
                             </span>
                         </div>
                         <div class="form-floating mt-2 ">

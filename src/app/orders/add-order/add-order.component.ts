@@ -61,16 +61,16 @@ export class AddOrderComponent implements OnInit {
 
   removeProdFromOrder(product: Product){
     product.amount += 1;
-    this.productService.editProduct(this.product.id, this.product.name, this.product.price,  this.product.description, this.product.amount, this.product.image_url, this.product.tag)
+    this.productService.editProduct(product.id, product.name, product.price, product.description, product.amount, product.image_url, product.tag)
     .subscribe({
       next: ()=> {
-        let prods_session = sessionStorage.getItem('product');
+        let prods_session = sessionStorage.getItem('products');
         if(prods_session != null){
           this.products = JSON.parse(prods_session);
-          this.products.push(this.product);
-          sessionStorage.setItem('product',JSON.stringify(this.products));
+          this.products.splice(this.products.findIndex(el => el.id === product.id),1);
+          sessionStorage.setItem('products',JSON.stringify(this.products));
         } else {
-          this.products.push(this.product);
+          this.products.push(product);
           sessionStorage.setItem('products',JSON.stringify(this.products));
         }
       },

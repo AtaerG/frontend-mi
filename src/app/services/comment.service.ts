@@ -20,4 +20,16 @@ export class CommentService {
     );
   }
 
+  saveComment(content:string, stars:number, user_id:number, product_id:number) {
+    return this.http.post('comments',{
+      content: content,
+      stars: stars,
+      user_id: user_id,
+      product_id: product_id
+    }).pipe(
+      catchError((resp: HttpErrorResponse) =>
+      throwError(()=> new Error(`Error a la hora de crear producto. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+    );
+  }
+
 }

@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from '../../services/auth.service';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -11,10 +13,14 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-
+  // recaptcha
+  public recentToken: string = ''
+  private singleExecutionSubscription!: Subscription;
   loginForm!: FormGroup;
   login_complete = false;
-  constructor(private authService: AuthService, private router: Router) { }
+  recaptchaAvailable = false;
+
+  constructor(private authService: AuthService, private router: Router, private recaptchaV3Service: ReCaptchaV3Service) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -24,9 +30,12 @@ export class LoginComponent implements OnInit {
   }
 
   onSignup(){
-    if(this.loginForm.valid){
+    if(this.loginForm.valid ){
       let form_values = this.loginForm.value;
-      this.authService.login(form_values['email'],form_values['password'])
+      this.recaptchaV3Service.execute('importantAction')
+      .subscribe((token: string) => {
+        console.log(token);
+        this.authService.login(form_values['email'],form_values['password'])
         .subscribe({
           next: token => {
             console.log(token);
@@ -38,6 +47,7 @@ export class LoginComponent implements OnInit {
          },
           error: error => alert('La contraseña o email son incorrectos!'),
       })
+      });
     }
   }
   canDeactivate() {

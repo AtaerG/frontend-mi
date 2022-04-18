@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
+import { Appointment } from '../interfaces/appointment';
 import { User } from '../interfaces/user';
 
 @Injectable({
@@ -12,6 +13,16 @@ export class UserService {
 
   getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>('users').pipe(
+      map((response) => {
+        return response;
+      }),
+      catchError((resp: HttpErrorResponse) =>
+      throwError(()=> new Error(`Error a la hora de crear producto. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+    );
+  }
+
+  getAllAdmins(): Observable<User[]> {
+    return this.http.get<User[]>('users-admins').pipe(
       map((response) => {
         return response;
       }),
@@ -52,5 +63,22 @@ export class UserService {
     )
   }
 
+  getAllAppointmentsOfUser(user_id:number): Observable<any> {
+    return this.http.post('appt-user',{
+      user_id: user_id
+    }).pipe(
+      catchError((resp: HttpErrorResponse) =>
+      throwError(()=> new Error(`Error a la hora de eliminar la cuenta de usuario. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+    )
+  }
+
+  getAllAppointmentsOfAdmin(admin_id:number): Observable<any> {
+    return this.http.post('appt-admin',{
+      admin_id: admin_id
+    }).pipe(
+      catchError((resp: HttpErrorResponse) =>
+      throwError(()=> new Error(`Error a la hora de eliminar la cuenta de usuario. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+    )
+  }
 
 }

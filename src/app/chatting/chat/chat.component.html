@@ -1,0 +1,25 @@
+<main>
+    <section class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mt-4" *ngIf="appointments.length && appointments; else not">
+        <article *ngFor="let appointment of appointments">
+            <div class="col">
+                <div class="card card-shadowed border-0 h-100 card-descubre-bg-color mb-2 mb-md-3 ">
+                    <div class="card-body text-light text-center ">
+                        <h1 class="card-title ">Tienes la cita en:</h1>
+                        <h1 class="card-title ">Fecha: {{appointment.date}}</h1>
+                        <p class="card-text ">Hora: {{appointment.time}}</p>
+                        <p class="card-text ">User: {{appointment.user_id}}</p>
+                    </div>
+                    <div class="card-footer text-center ">
+                        <button class="btn btn-info fs-4 " role="button" [ngClass]="{'disabled' : !disabled}" [routerLink]="[ '/messages', appointment.user_id] " [routerLinkActive]="[ 'active']" [routerLinkActiveOptions]="{exact:true} ">Entrar!</button>
+                    </div>
+                    <div class="card-footer text-center " *ngIf="user_role === 'admin'">
+                        <button class="btn btn-danger fs-4 " role="button" (click)="deleteAppointment(appointment.id)">Borrar Cita!</button>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    <ng-template #not>
+        <h3>No hay productos.</h3>
+    </ng-template>
+</main>

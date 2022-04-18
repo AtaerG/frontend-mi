@@ -1,17 +1,19 @@
-<div class='container-fluid'>
+<div class="container-fluid">
     <div class="card mx-auto col-8">
-        <img class='img-fluid' src="{{product.image_url}}" />
+        <img class="img-fluid" src="{{ product.image_url }}" />
         <div class="card-body text-center mx-auto">
-            <h5 class="card-title">{{product.name}}</h5>
-            <p class="card-text">{{product.description}}</p>
-            <p class="card-text">{{product.price |currency:'EUR':'symbol-narrow'}}</p>
-            <p class="card-text">Raiting mediano: {{medianRaiting()}}</p>
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="card-text">{{ product.description }}</p>
+            <p class="card-text">
+                {{ product.price | currency: "EUR":"symbol-narrow" }}
+            </p>
+            <p class="card-text">Raiting mediano: {{ medianRaiting() }}</p>
             <button *ngIf="role != null && role != 'admin'" class="btn btn-primary" (click)="addProdToOrder()">
-              Agregar Al Carrito
-            </button>
+        Agregar Al Carrito
+      </button>
             <button *ngIf="role === 'admin'" class="btn btn-danger" (click)="deleteProduct()">
-              Eliminar el producto
-            </button>
+        Eliminar el producto
+      </button>
         </div>
     </div>
     <h1 class="text-center text-primary m-2">Commentarios de clientes reales:</h1>
@@ -21,11 +23,16 @@
                 <div class="mb-1">
                     <div class="d-flex gap-3">
                         <div class="w-75">
-                            <div class=" bg-light rounded p-2 mb-2">
-                                <p class="text-primary fs-4">{{comment.user_name}}</p>
-                                <p class="mx-5"><span class="text-muted fs-4">{{comment.content}}.</span></p>
-                                <p class="mx-5">Valoracion: {{comment.stars}}</p>
-                                <button class=" float-end btn btn-sm btn-danger" (click)="deleteComment(comment)">Eliminar</button>
+                            <div class="bg-light rounded p-2 mb-2">
+                                <p class="text-primary fs-4">Commentario de: {{ comment.name +" "+comment.surname}}</p>
+                                <p class="mx-5">
+                                    <span class="text-muted fs-4">{{ comment.content }}.</span>
+                                </p>
+                                <p class="mx-5">Valoracion: {{ comment.stars }}</p>
+                                <p class="mx-5">Fecha de commentario: {{ comment.created_at | date }}</p>
+                                <button class="float-end btn btn-sm btn-danger" (click)="deleteComment(comment)">
+                  Eliminar
+                </button>
                             </div>
                         </div>
                     </div>
@@ -33,7 +40,35 @@
             </div>
         </div>
     </div>
-    <ng-template #not>
-        <h3 class="text-center">No hay commentarios.</h3>
-    </ng-template>
+    <div>
+        <form class="container w-100 w-lg-75" [formGroup]="addCommentForm" (ngSubmit)="submitComment()">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-floating mt-2">
+                        <textarea type="text" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="content" [formControlName]="'content'" placeholder="Elon" name="content" required="required">
+                        </textarea>
+                        <label for="content" class="form-label">Escribir commentario:</label>
+                        <span class="text-danger" *ngIf="!addCommentForm.get('content')?.valid && addCommentForm.get('content')?.touched">El commentario no puede ser vacio</span>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-floating mt-2">
+                        <input class="form-control rounded-0 border-top-0 border-start-0 border-end-0" type="number" id="stars" [formControlName]="'stars'" name="stars" min="0" max="5">
+                        <label for="stars" class="form-label">Valoracion:</label>
+                        <span class="text-danger" *ngIf="!addCommentForm.get('stars')?.valid && addCommentForm.get('stars')?.touched">Valoracion es un numero entre 0 a 5 </span>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-5">
+                <div class="d-grid col-12 mb-5 mx-auto">
+                    <button id="submit" class="btn btn-buscar text-light" href="#">Escribir commentario!
+                   </button>
+                </div>
+            </div>
+        </form>
+        <ng-template #not>
+            <h3 class="text-center text-primary">No hay commentarios.</h3>
+            <h5 class="text-center text-primary">Escribir uno:</h5>
+        </ng-template>
+    </div>
 </div>

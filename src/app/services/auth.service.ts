@@ -27,7 +27,7 @@ export class AuthService {
     return this.http.post('login', {
       email: email,
       password: password
-    })
+    });
   }
 
   logout(token:any){
@@ -39,5 +39,25 @@ export class AuthService {
     return this.http.get('logout',{
       headers:headers
     })
+  }
+
+  getPasswordChangeToken(email:string){
+    return this.http.post('password/forgot', {
+      email: email
+    }).pipe(
+      catchError((resp: HttpErrorResponse) =>
+      throwError(()=> new Error(`Error a la hora obtener token. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+    );
+  }
+
+  changePassword(token:string, password:string,password_confirm:string){
+    return this.http.post('password/reset', {
+      token: token,
+      password:password,
+      password_confirm:password_confirm
+    }).pipe(
+      catchError((resp: HttpErrorResponse) =>
+      throwError(()=> new Error(`Error a la hora obtener token. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+    );
   }
 }

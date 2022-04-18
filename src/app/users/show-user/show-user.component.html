@@ -1,4 +1,8 @@
 <h1 *ngIf="user_id == user.id" class="text-warning">Tu cuenta es:</h1>
+<div class="d-block">
+    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend">
+  </canvas>
+</div>
 <div class="card card-shadowed border-0 h-100 card-descubre-bg-color mb-2 mb-md-3 ">
     <div class="card-body text-light text-center">
         <h1 class="card-title ">Nombre: {{user.name}}</h1>
