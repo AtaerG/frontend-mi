@@ -14,10 +14,10 @@
                         </div>
                     </div>
                     <div class="form-floating mt-2 ">
-                        <input type="time" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="time" [formControlName]="'time'" required="required">
+                        <input type="time" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="time" [formControlName]="'time'" required="required" step="300">
                         <label for="price" class="form-label ">Hora:</label>
                         <span class="text-danger" *ngIf="!applyMsg.get('time')?.valid && applyMsg.get('time')?.touched">
-                          El tiempo es obligatorio y debe ser entre 8:30 hasta 18:00 de la tarde.
+                          El tiempo es obligatorio!
                         </span>
                     </div>
                 </div>

@@ -6,8 +6,7 @@ import { ListUsersComponent } from './list-users/list-users.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsersRoutingModule } from './users-routing.module';
-
-
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,8 @@ import { UsersRoutingModule } from './users-routing.module';
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
-    UsersRoutingModule
+    UsersRoutingModule,
+    NgChartsModule
   ]
 })
 export class UsersModule { }

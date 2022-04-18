@@ -52,4 +52,14 @@ export class OrderService {
       throwError(()=> new Error(`Error a la hora de obtener pedido. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
   }
+
+  getUsersOrder(user_id:number): Observable<any> {
+    return this.http.post('orders/user', {
+      user_id: user_id,
+    }).pipe(
+      map(orders=> {return orders}),
+      catchError((resp: HttpErrorResponse) =>
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+    );
+  }
 }
