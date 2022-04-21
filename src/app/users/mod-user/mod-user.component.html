@@ -37,15 +37,6 @@
                      </span>
                     </div>
                 </div>
-                <div class="col-12">
-                    <div class="form-floating mt-2 ">
-                        <input type="password" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="password" placeholder="1111" name="password" [(ngModel)]="password">
-                        <label for="password" class="form-label ">Contraseña(en blanco la contraseña anterior se permanecera)</label>
-                        <span *ngIf="!modUserForm.get('password')?.valid && modUserForm.get('password')?.touched" class="text-danger">
-                                    La contraseña debe tener como minimo 8 caracteres.
-                        </span>
-                    </div>
-                </div>
             </div>
             <div class="col-12">
                 <div class="form-floating mt-2 " *ngIf="role === 'admin'">

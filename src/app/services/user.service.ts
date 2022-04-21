@@ -42,12 +42,11 @@ export class UserService {
     );
   }
 
-  editUser(id:number,name:string, surname:number, email: string, password:string, role:string){
+  editUser(id:number,name:string, surname:number, email: string, role:string){
     return this.http.put('users/'+id,{
       name: name,
       surname: surname,
       email: email,
-      password: password,
       role:role
     }).pipe(
       map((re)=> console.log(re)),
