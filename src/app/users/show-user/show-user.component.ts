@@ -54,7 +54,6 @@ export class ShowUserComponent implements OnInit {
       error: (err) => console.log(err),
       }
     );
-    console.log(this.orders);
     this.user = this.route.snapshot.data['user'];
   }
 }

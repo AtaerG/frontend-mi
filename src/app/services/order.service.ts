@@ -26,8 +26,8 @@ export class OrderService {
       country: country
     }).pipe(
       map(product => console.log(product)),
-      catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      catchError((resp) =>
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}. ${resp}`)))
     );
   }
 
@@ -56,6 +56,23 @@ export class OrderService {
   getUsersOrder(user_id:number): Observable<any> {
     return this.http.post('orders/user', {
       user_id: user_id,
+    }).pipe(
+      map(orders=> {return orders}),
+      catchError((resp: HttpErrorResponse) =>
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+    );
+  }
+
+  deleteOrder(id:number): Observable<any> {
+    return this.http.delete('orders/'+id).pipe(
+      catchError((resp: HttpErrorResponse) =>
+      throwError(()=> new Error(`Error a la hora de eliminar pedido Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+    )
+  }
+
+  updateOrder(id:number,status:string): Observable<any> {
+    return this.http.put('orders/'+id, {
+      status: status,
     }).pipe(
       map(orders=> {return orders}),
       catchError((resp: HttpErrorResponse) =>

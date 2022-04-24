@@ -28,8 +28,7 @@ export class MessagesComponent implements OnInit {
   id_chat:any;
 
 
-  constructor(private http: HttpClient, private messageService: MessagesService, private route: ActivatedRoute) {
-  }
+  constructor(private http: HttpClient, private route: ActivatedRoute) {}
 
 
   ngOnInit(): void {
@@ -42,7 +41,6 @@ export class MessagesComponent implements OnInit {
       this.id_chat = this.route.snapshot.paramMap.get('id');
       let token = JSON.parse(this.status)["token"].accessToken
       if (token != null) {
-
         const pusher = new Pusher('5f37736952b69994f8c1', {
           authEndpoint: `${ environment.baseUrl }/broadcasting/auth`,
           cluster: 'eu',
@@ -53,7 +51,6 @@ export class MessagesComponent implements OnInit {
             }
           },
         });
-
         this.channel_presence = pusher.subscribe('presence-channel.'+this.id_chat);
         this.channel_presence.bind('my-event',(data:any) => {
             this.messages.push(data);
@@ -71,20 +68,22 @@ export class MessagesComponent implements OnInit {
         alert('Admin no esta conectado a la sesion, por favor espere!');
       }
     } else {
-      this.http.post('messages', {
-        id: this.id_chat,
-        name: this.name,
-        message: this.message
-      }).subscribe({
-        next: () => {
-          console.log(this.channel_presence.members.count);
-          this.message = "";
-
-        },
-        error: (err) => console.log(err),
-      })
+      if(Number.isInteger(this.id_chat) && this.id_chat > 0){
+        this.http.post('messages', {
+          id: this.id_chat,
+          name: this.name,
+          message: this.message
+        }).subscribe({
+          next: () => {
+            console.log(this.channel_presence.members.count);
+            this.message = "";
+          },
+          error: (err) => console.log(err),
+        })
+      } else  {
+        alert("Error! No se pudo enviar el mensaje");
+      }
     }
-
   }
 
   ngOnDestroy(): void {

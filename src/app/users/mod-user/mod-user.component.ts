@@ -28,10 +28,9 @@ export class ModUserComponent implements OnInit {
     this.password = this.user.password;
     console.log(this.user);
     this.modUserForm = new FormGroup({
-      'name': new FormControl(this.user.name, [Validators.required, Validators.maxLength(20)]),
-      'surname': new FormControl(this.user.surname, [Validators.required, Validators.max(50)]),
+      'name': new FormControl(this.user.name, [Validators.required]),
+      'surname': new FormControl(this.user.surname, [Validators.required]),
       'email': new FormControl(this.user.email, [Validators.required, Validators.email]),
-      'password': new FormControl(this.user.password, [Validators.required, Validators.maxLength(8)]),
       'role': new FormControl(this.user.role)
     });
   }
@@ -40,9 +39,9 @@ export class ModUserComponent implements OnInit {
     let form_values = this.modUserForm.value;
     if(this.modUserForm.valid){
       console.log(form_values['password']);
-      this.userService.editUser(this.user.id,form_values['name'],form_values['surname'],form_values['email'],form_values['password'],form_values['role']).subscribe({
+      this.userService.editUser(this.user.id,form_values['name'],form_values['surname'],form_values['email'],form_values['role']).subscribe({
         next: (re)=> {
-          this.router.navigate(['/products']).then(() => {
+          this.router.navigate(['/users']).then(() => {
             window.location.reload();
           });
         },

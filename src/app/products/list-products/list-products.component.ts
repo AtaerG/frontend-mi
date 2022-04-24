@@ -27,7 +27,6 @@ export class ListProductsComponent implements OnInit {
     if(this.filterForm.valid){
       let form_values = this.filterForm.value;
       this.filterFormString = form_values['filter'];
-      console.log(this.filterFormString);
     }
   }
 

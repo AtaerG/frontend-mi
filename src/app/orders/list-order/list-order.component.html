@@ -6,6 +6,16 @@
                     <div class="card-body text-light text-center ">
                         <h1 class="card-title ">ID: {{order.id}}</h1>
                         <p class="card-text ">Precio total: {{order.total_price |currency:'EUR':'symbol-narrow'}}</p>
+                        <p class="card-text ">Estado: {{order.status}}</p>
+                    </div>
+                    <div class="card-footer text-center" *ngIf="order.status == 'paid' && user_role == 'admin' && order.id">
+                        <a class="nav-link text-light fs-4 " (click)="delieveredOrder(order.id)">Marcar el pedido como entregado</a>
+                    </div>
+                    <div class="card-footer text-center" *ngIf="order.status != 'ended' && order.id">
+                        <a class="nav-link text-light fs-4 " (click)="deleteOrder(order.id)">Eliminar pedido</a>
+                    </div>
+                    <div class="card-footer text-center" *ngIf="order.status == 'ended' && user_role != 'admin'">
+                        <a class="nav-link text-light fs-4 " [routerLink]="[ '/orders', order.id] " [queryParams]="{ ended: 1 }" [routerLinkActive]=" [ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Escribir las reseñas del producto</a>
                     </div>
                     <div class="card-footer text-center ">
                         <a class="nav-link text-light fs-4 " [routerLink]="[ '/orders', order.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Mas Info</a>

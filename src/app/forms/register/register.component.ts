@@ -21,10 +21,10 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
-      'name': new FormControl(null, [Validators.required, Validators.maxLength(20)]),
-      'surname': new FormControl(null, [Validators.required, Validators.max(50)]),
+      'name': new FormControl(null, [Validators.required]),
+      'surname': new FormControl(null, [Validators.required]),
       'email': new FormControl(null, [Validators.required, Validators.email]),
-      'password': new FormControl(null, Validators.minLength(8))
+      'password': new FormControl(null, [Validators.required,Validators.minLength(8)]),
     });
   }
 
@@ -49,8 +49,7 @@ export class RegisterComponent implements OnInit {
           });
         },
         error: error =>  {
-          console.log(error);
-          return this.router.navigate(['/error_page']);
+          alert(error)
         }
       });
     }

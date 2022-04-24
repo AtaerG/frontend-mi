@@ -9,8 +9,11 @@
                     <div class="card-body text-light text-center ">
                         <h1 class="card-title ">{{product.name}}</h1>
                     </div>
-                    <div class="card-footer text-center ">
+                    <div class="card-footer text-center" *ngIf="this.ended != '1'">
                         <a class="nav-link text-light fs-4 " [routerLink]="[ '/products', product.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Mas Info</a>
+                    </div>
+                    <div class="card-footer text-center" *ngIf="this.ended == '1'">
+                        <a class="nav-link text-light fs-4 " [routerLink]="[ '/products', product.id] " [routerLinkActive]="[ 'active'] " [queryParams]="{ comment: 1 }" [routerLinkActiveOptions]="{exact:true} ">Escribir la reseña</a>
                     </div>
                 </div>
             </div>

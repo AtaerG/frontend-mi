@@ -18,10 +18,10 @@ export class AddProductComponent implements OnInit {
   ngOnInit(): void {
     this.addProdForm = new FormGroup({
       'name': new FormControl(null, [Validators.required]),
-      'price': new FormControl(null, [Validators.required, Validators.min(0)]),
+      'price': new FormControl(null, [Validators.required, Validators.min(1)]),
       'description': new FormControl(null, [Validators.required]),
       'amount': new FormControl(null, [Validators.required, Validators.min(0)]),
-      'tag': new FormControl('salon'),
+      'tag': new FormControl('salon', [Validators.required]),
       'image_url': new FormControl(null, Validators.required),
     });
   }
@@ -32,7 +32,9 @@ export class AddProductComponent implements OnInit {
       console.log(form_values['image_url'])
       this.productService.addProduct(form_values['name'],form_values['price'],form_values['description'],form_values['amount'],form_values['image_url'],form_values['tag']).subscribe({
         next: ()=> {
-          this.router.navigate(['/products']);
+          this.router.navigate(['/products']).then(() => {
+            window.location.reload();
+          });
         },
         error: error => {
           console.log(error);
