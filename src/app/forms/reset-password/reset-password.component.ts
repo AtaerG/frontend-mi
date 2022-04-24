@@ -17,8 +17,8 @@ export class ResetPasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.resetPasswordForm = new FormGroup({
-      'password': new FormControl(null, Validators.minLength(8)),
-      'password_confirm': new FormControl(null, Validators.minLength(8))
+      'password': new FormControl(null, Validators.required),
+      'password_confirm': new FormControl(null, Validators.required)
     });
     let email = JSON.parse(sessionStorage['token']).email;
     this.authService.getPasswordChangeToken(email).subscribe({
@@ -35,6 +35,15 @@ export class ResetPasswordComponent implements OnInit {
       let form_values = this.resetPasswordForm.value;
       if(form_values['password_confirm'] ===  form_values['password']){
         this.authService.changePassword(this.token_str, form_values['password'],form_values['password_confirm']).subscribe({
+          next: ()=>{
+            alert("La contraseña ha sido cambiada. En 5 sec se redireccionará a la página de productos");
+            setTimeout(
+              () => {
+                this.router.navigate(['/products']).then(() => {
+                  window.location.reload();
+                });
+              }, 5000);
+          },
           error: (er)=> console.log(er),
         })
       }

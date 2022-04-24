@@ -11,7 +11,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthCheckInterceptor } from '../interceptors/auth-check.interceptor';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { ProductFindPipe } from '../pipes/product-find.pipe';
-import { AddCommentProductComponent } from './add-comment-product/add-comment-product.component';
 
 
 
@@ -21,8 +20,7 @@ import { AddCommentProductComponent } from './add-comment-product/add-comment-pr
     ListProductsComponent,
     AddProductComponent,
     EditProductComponent,
-    ProductFindPipe,
-    AddCommentProductComponent
+    ProductFindPipe
   ],
   imports: [
     CommonModule,

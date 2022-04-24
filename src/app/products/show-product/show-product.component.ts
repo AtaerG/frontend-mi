@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/interfaces/product';
 import { Comment } from 'src/app/interfaces/comment';
 import { OrderService } from 'src/app/services/order.service';
@@ -16,6 +16,7 @@ import { CommentService } from 'src/app/services/comment.service';
 })
 export class ShowProductComponent implements OnInit {
 
+  comment_write_permission:string = '';
   status: string | null = sessionStorage.getItem('token');
   addCommentForm!: FormGroup;
   role: string = "normal_user";
@@ -25,7 +26,7 @@ export class ShowProductComponent implements OnInit {
   user_id!: number;
   product_id!:number;
 
-  constructor(private route: ActivatedRoute, private commentService: CommentService, private userService: UserService, private productService: ProductService) {
+  constructor(private route: ActivatedRoute, private commentService: CommentService, private productService: ProductService, private router: Router) {
     if (this.status != null) {
       this.role = JSON.parse(this.status).user_role;
       this.user_id = JSON.parse(this.status).user_id;
@@ -34,6 +35,7 @@ export class ShowProductComponent implements OnInit {
 
   ngOnInit(): void {
     let dates = this.route.snapshot.data['product'];
+    this.comment_write_permission = this.route.snapshot.queryParams['comment'];
     this.product = dates.product;
     this.comments = dates.comments;
     this.addCommentForm = new FormGroup({
@@ -76,6 +78,10 @@ export class ShowProductComponent implements OnInit {
             this.products.push(this.product);
             sessionStorage.setItem('products', JSON.stringify(this.products));
           }
+          alert("Product added to order");
+          this.router.navigate(['/products']).then(() => {
+            window.location.reload();
+          });
         },
         error: error => console.log(error),
       })
@@ -84,6 +90,11 @@ export class ShowProductComponent implements OnInit {
 
   deleteProduct() {
     this.productService.deleteProduct(this.product.id).subscribe({
+      next: ()=>{
+        this.router.navigate(['/products']).then(() => {
+          window.location.reload();
+      })
+    },
       error: error => console.log(error),
     });
   }
@@ -92,6 +103,11 @@ export class ShowProductComponent implements OnInit {
     if (comment != undefined) {
       console.log(comment)
       this.productService.deleteComment(comment.id!).subscribe({
+        next: ()=>{
+          this.router.navigate(['/products/', this.product_id]).then(() => {
+            window.location.reload();
+        })
+      },
         error: error => console.log(error),
       });
     }
@@ -102,6 +118,11 @@ export class ShowProductComponent implements OnInit {
     console.log(form_values['content'], form_values['stars'], this.user_id, this.product_id);
     if(this.addCommentForm.valid){
       this.commentService.saveComment(form_values['content'], form_values['stars'], this.user_id, this.product_id).subscribe({
+        next: ()=>{
+          this.router.navigate(['/products/', this.product_id]).then(() => {
+            window.location.reload();
+        })
+      },
         error: error => console.log(error),
       });
     }

@@ -13,9 +13,7 @@ import { Subscription } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
 
-  // recaptcha
   public recentToken: string = ''
-  private singleExecutionSubscription!: Subscription;
   loginForm!: FormGroup;
   login_complete = false;
   recaptchaAvailable = false;
@@ -25,7 +23,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = new FormGroup({
       'email': new FormControl(null, [Validators.required, Validators.email]),
-      'password': new FormControl(null, Validators.minLength(8))
+      'password': new FormControl(null, [Validators.required,Validators.minLength(8)])
     });
   }
 
@@ -38,14 +36,13 @@ export class LoginComponent implements OnInit {
         this.authService.login(form_values['email'],form_values['password'])
         .subscribe({
           next: token => {
-            console.log(token);
             sessionStorage.setItem('token',JSON.stringify(token));
             this.login_complete = true;
             this.router.navigate(['/products']).then(() => {
               window.location.reload();
             });;
          },
-          error: error => alert('La contraseña o email son incorrectos!'),
+          error: error => alert('La contraseña o email son incorrectos!'+error),
       })
       });
     }

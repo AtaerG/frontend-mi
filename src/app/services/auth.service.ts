@@ -27,7 +27,7 @@ export class AuthService {
     return this.http.post('login', {
       email: email,
       password: password
-    });
+    })
   }
 
   logout(token:any){

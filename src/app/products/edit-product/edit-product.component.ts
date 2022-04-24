@@ -22,7 +22,7 @@ export class EditProductComponent implements OnInit {
     console.log(this.image);
     this.editProdForm! = new FormGroup({
       'name': new FormControl(this.product.name, [Validators.required]),
-      'price': new FormControl(this.product.price, [Validators.required, Validators.min(0)]),
+      'price': new FormControl(this.product.price, [Validators.required, Validators.min(1)]),
       'description': new FormControl(this.product.description, [Validators.required]),
       'amount': new FormControl(this.product.amount, [Validators.required, Validators.min(0)]),
       'tag': new FormControl(this.product.tag),
@@ -36,7 +36,9 @@ export class EditProductComponent implements OnInit {
       this.productService.editProduct(this.product.id,form_values['name'],form_values['price'],form_values['description'],form_values['amount'],form_values['image_url'],form_values['tag']).subscribe({
         next: (re)=> {
           console.log(re);
-          //this.router.navigate(['/products']);
+          this.router.navigate(['/products']).then(() => {
+            window.location.reload();
+          });
         },
         error: error => {
           console.log(error);

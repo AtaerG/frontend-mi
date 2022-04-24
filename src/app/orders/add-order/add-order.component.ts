@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -29,7 +30,7 @@ export class AddOrderComponent implements OnInit {
     }
       this.shippingForm = new FormGroup({
           'direction': new FormControl(null, [Validators.required]),
-          'post_code': new FormControl(null, [Validators.required]),
+          'post_code': new FormControl(null, [Validators.required, Validators.min(1)]),
           'city': new FormControl(null, [Validators.required]),
           'state': new FormControl(null, [Validators.required]),
           'country': new FormControl(null, [Validators.required])
@@ -43,16 +44,15 @@ export class AddOrderComponent implements OnInit {
       this.products.forEach((el)=>{
         this.products_id.push(el.id);
       });
-      console.log(this.products_id);
-      this.orderService.createOrder(this.products_id.toString(),this.precio_total,'proceeding',form_values['direction'],form_values['post_code'],form_values['city'],form_values['state'],form_values['country'])
+      this.orderService.createOrder(this.products_id.toString(),this.precio_total,'paid',form_values['direction'],form_values['post_code'],form_values['city'],form_values['state'],form_values['country'])
       .subscribe({
         next: ()=> {
           sessionStorage.removeItem('products');
-          this.router.navigate(['/thanks']).then(() => {
+          this.router.navigate(['/orders']).then(() => {
             window.location.reload();
           });
       },
-      error: error => {
+      error: (error:HttpErrorResponse) => {
         console.log(error);
       },
       });
