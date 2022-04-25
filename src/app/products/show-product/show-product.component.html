@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="card mx-auto col-8">
+    <div class="card mx-auto col-8 col-lg-6 mt-4">
         <img class="img-fluid" src="{{ product.image_url }}" />
         <div class="card-body text-center mx-auto">
             <h5 class="card-title">{{ product.name }}</h5>
@@ -11,9 +11,12 @@
             <button *ngIf="role != null && role != 'admin'" class="btn btn-primary" (click)="addProdToOrder()">
         Agregar Al Carrito
       </button>
-            <button *ngIf="role === 'admin'" class="btn btn-danger" (click)="deleteProduct()">
-        Eliminar el producto
-      </button>
+            <div class="d-grid gap-2 mx-auto" *ngIf="role === 'admin'">
+                <a class="btn btn-danger " (click)="deleteProduct()">
+          Eliminar el producto
+        </a>
+                <a class="btn btn-warning " [routerLink]="[ '/products/edit/',product.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Editar Producto</a>
+            </div>
         </div>
     </div>
     <h1 class="text-center text-primary m-2">Commentarios de clientes reales:</h1>
@@ -31,8 +34,8 @@
                                 <p class="mx-5">Valoracion: {{ comment.stars }}</p>
                                 <p class="mx-5">Fecha de commentario: {{ comment.created_at | date }}</p>
                                 <button class="float-end btn btn-sm btn-danger" (click)="deleteComment(comment)">
-                  Eliminar
-                </button>
+                                Eliminar
+                                </button>
                             </div>
                         </div>
                     </div>

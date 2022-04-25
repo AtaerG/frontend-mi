@@ -20,7 +20,7 @@ const routes: Routes = [
       product: ProductGetResolver
     }
   },
-  { path: 'products/:id/edit', component: EditProductComponent,
+  { path: 'products/edit/:id', component: EditProductComponent,
   resolve: {
     product: ProductGetResolver
   }},

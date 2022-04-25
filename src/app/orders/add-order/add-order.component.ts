@@ -14,6 +14,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class AddOrderComponent implements OnInit {
 
+  status: string | null = sessionStorage.getItem('token');
   shippingForm!: FormGroup;
   products:Product[] = [];
   products_id: number[] = [];
@@ -38,6 +39,7 @@ export class AddOrderComponent implements OnInit {
   }
 
   sentOrder(){
+    if(this.status != null){
     let prods = sessionStorage.getItem('products');
     if(this.shippingForm.valid && prods != null){
       let form_values = this.shippingForm.value;
@@ -56,6 +58,9 @@ export class AddOrderComponent implements OnInit {
         console.log(error);
       },
       });
+    }
+    } else {
+      alert('Hay que iniciar session!')
     }
   }
 

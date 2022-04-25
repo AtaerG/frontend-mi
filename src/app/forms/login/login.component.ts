@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
               window.location.reload();
             });;
          },
-          error: error => alert('La contraseña o email son incorrectos!'+error),
+          error: error => alert('La contraseña o email son incorrectos!'),
       })
       });
     }

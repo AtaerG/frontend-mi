@@ -1,16 +1,14 @@
 <main class="container mt-3">
-    <section class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mt-4" *ngIf="users.length && users; else not">
-        <article *ngFor="let user of users">
-            <div class="col">
-                <div class="card card-shadowed border-0 h-100 card-descubre-bg-color mb-2 mb-md-3 ">
-                    <div class="card-body text-light text-center">
-                        <h1 class="card-title ">Nombre: {{user.name}}</h1>
-                        <p class="card-text ">Apellidos: {{user.surname}}</p>
-                        <p class="card-text ">Correo electronico: {{user.email}}</p>
-                    </div>
-                    <div class="card-footer text-center ">
-                        <a class="nav-link text-light fs-4 " [routerLink]="[ '/users', user.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Mas Info</a>
-                    </div>
+    <section class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-2" *ngIf="users.length && users; else not">
+        <article class="col" *ngFor="let user of users">
+            <div class="card h-100 card-shadowed border-0 card-descubre-bg-color mb-2 mb-md-3 ">
+                <div class="card-body bg-primary text-light text-center">
+                    <h1 class="card-title ">Nombre: {{user.name}}</h1>
+                    <p class="card-text ">Apellidos: {{user.surname}}</p>
+                    <p class="card-text ">Correo electronico: {{user.email}}</p>
+                </div>
+                <div class="card-footer text-center bg-primary">
+                    <a class="nav-link text-light fs-4 " [routerLink]="[ '/users', user.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Mas Info</a>
                 </div>
             </div>
         </article>

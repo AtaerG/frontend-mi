@@ -1,4 +1,4 @@
-<main>
+<main class="container">
     <section class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mt-4" *ngIf="appointments.length && appointments; else not">
         <article *ngFor="let appointment of appointments">
             <div class="col">
@@ -10,7 +10,7 @@
                         <p class="card-text ">User: {{appointment.user_id}}</p>
                     </div>
                     <div class="card-footer text-center ">
-                        <button class="btn btn-info fs-4 " role="button" [ngClass]="{'disabled' : !disabled}" [routerLink]="[ '/messages', appointment.user_id] " [routerLinkActive]="[ 'active']" [routerLinkActiveOptions]="{exact:true} ">Entrar!</button>
+                        <button class="btn btn-info fs-4 " role="button" [ngClass]="{'disabled' : disabled}" [routerLink]="[ '/messages', appointment.user_id] " [routerLinkActive]="[ 'active']" [routerLinkActiveOptions]="{exact:true} ">Entrar!</button>
                     </div>
                     <div class="card-footer text-center " *ngIf="user_role === 'admin'">
                         <button class="btn btn-danger fs-4 " role="button" (click)="deleteAppointment(appointment.id)">Borrar Cita!</button>
@@ -20,6 +20,6 @@
         </article>
     </section>
     <ng-template #not>
-        <h3>No hay productos.</h3>
+        <h1 class="text-center text-primary mt-4">No existen las citas</h1>
     </ng-template>
 </main>

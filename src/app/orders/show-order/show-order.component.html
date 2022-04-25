@@ -1,7 +1,8 @@
 <main class="container">
-    <h1>Numero de pedido: {{order.id}}</h1>
-    <p>Precio total: {{order.total_price |currency:'EUR':'symbol-narrow'}}</p>
-    <section class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mt-4">
+    <h1 class="text-center text-primary">Numero de pedido: {{order.id}}</h1>
+    <p class="text-center">Precio total: {{order.total_price |currency:'EUR':'symbol-narrow'}}</p>
+    <p class="text-center">Estado: {{order.status}}</p>
+    <section class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mt-4">
         <article *ngFor="let product of order.products">
             <div class="col">
                 <div class="card card-shadowed border-0 h-100 card-descubre-bg-color mb-2 mb-md-3 ">

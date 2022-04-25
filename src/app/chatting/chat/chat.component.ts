@@ -50,8 +50,6 @@ export class ChatComponent implements OnInit {
           next: (appointments: Appointment[]) => {
             this.appointments = appointments;
             for(let app of this.appointments){
-              console.log(app);
-              //if date is after atual date make disable
               let datetime = app.date+" "+app.time;
               let date_ev = new Date(datetime);
               let date_now = new Date();
@@ -68,6 +66,9 @@ export class ChatComponent implements OnInit {
 
   deleteAppointment(id: number){
       this.appointmentService.deleteAppointment(id).subscribe({
+        next:()=>{
+          window.location.reload();
+        },
         error: error => console.log(error),
       });
   }

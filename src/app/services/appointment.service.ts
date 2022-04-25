@@ -18,7 +18,6 @@ export class AppointmentService {
       date: date,
       time: time
     }).pipe(
-      map((data:any) => alert(data.error)),
       catchError((resp: HttpErrorResponse) => throwError(() => new Error(`Error a la hora crear cita. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
   }

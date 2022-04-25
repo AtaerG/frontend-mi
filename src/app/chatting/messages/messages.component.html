@@ -1,28 +1,30 @@
-<main class="container main-admin">
-    <h1>Nuestro agente contestara a todas las dudas!</h1>
-    <div class="col-12 col-md-8 col-lg-9">
-        <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="list-alex" role="tabpanel" aria-labelledby="list-alex-list">
-                <div class="card card-shadowed bg-light border-0 h-100 mb-2 mb-md-3">
-                    <div class="bg-white ">
-                        <div class="mb-1">
-                            <div class="d-flex" *ngFor="let msg of messages">
-                                <div class="w-100">
-                                    <p class="text-primary ">{{msg.name}}</p>
-                                    <p class="text-muted ">{{msg.message}}</p>
-                                    <hr style="width:100%">
-                                </div>
-                            </div>
-                            <div class="m-3 ">
-                                <label for="resp ">Mensaje:</label>
-                                <div class="d-flex gap-1 ">
-                                    <input id="message " class="message " type="text " placeholder="Escribe mensaje... " [(ngModel)]="message ">
-                                    <button id="send " class="btn btn-lg btn-primary "><i class="bi bi-telegram " (click)="sendMessage() "></i></button>
+<main class="container">
+    <h1 class="text-center text-primary">Nuestro agente contestara a todas las dudas!</h1>
+    <div class="row">
+        <div class="col-12">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="list-alex" role="tabpanel" aria-labelledby="list-alex-list">
+                    <div class="card card-shadowed bg-light border-0 h-100 mb-2 mb-md-3">
+                        <div class="bg-white ">
+                            <div class="mb-1">
+                                <div class="d-flex" *ngFor="let msg of messages">
+                                    <div class="w-100">
+                                        <p class="text-primary ">{{msg.name}}</p>
+                                        <p class="text-muted ">{{msg.message}}</p>
+                                        <hr style="width:100%">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <label for="resp">Mensaje:</label>
+            <div class="d-flex justify-content-center align-items-stretch gap-1">
+                <input id="message" class="flex-grow-1" type="text" placeholder="Escribe mensaje..." [(ngModel)]="message">
+                <button id="send" class=" btn btn-lg btn-primary"><i class="bi bi-telegram" (click)="sendMessage()"></i></button>
             </div>
         </div>
     </div>

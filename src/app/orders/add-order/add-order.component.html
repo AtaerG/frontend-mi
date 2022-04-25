@@ -17,7 +17,7 @@
                 </div>
             </article>
         </section>
-        <div class="col-6 my-auto bg-light rounded-3">
+        <div class="col-6 my-auto bg-light rounded-3" *ngIf="products.length != 0">
             <form class="mx-auto col-10 p-2" [formGroup]="shippingForm" (ngSubmit)="sentOrder()">
                 <h2 class="text-center text-primary mx-3">Domicilio</h2>
                 <div>
@@ -371,7 +371,7 @@
             </form>
         </div>
         <ng-template #not>
-            <div class="col-6">
+            <div class="col">
                 <h3 class="text-center text-primary">La cesta esta vacia....</h3>
             </div>
         </ng-template>

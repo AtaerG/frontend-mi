@@ -1,85 +1,86 @@
 <header class="container-fluid mt-2">
-    <nav class="navbar navbar-light navbar-expand-sm bg-light rounded">
+    <nav class="navbar navbar-light navbar-expand-md bg-light rounded">
         <div class="container-fluid">
             <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbarCollapse" aria-controls="mainNavbarCollapse" aria-expanded="false">
               <span class="navbar-toggler-icon"></span>
           </button>
-            <a class="navbar-brand gradient fs-1 d-none d-lg-block" aria-current="page" href="#" data-bs-toggle="offcanvas" data-bs-target="#mi">Muebles Inteligentes</a>
-            <a class="navbar-brand mx-xxl-auto gradient fs-1 d-block d-lg-none" aria-current="page" href="#" data-bs-toggle="offcanvas" data-bs-target="#mi">MI</a>
-            <div class="navbar-collapse collapse" id="mainNavbarCollapse">
-                <ul class="navbar-nav justify-content-around w-100">
-                    <li class="nav-item fw-bold" *ngIf="role === 'normal_user'">
-                        <a class="nav-link gradient fs-4 active" [routerLink]="['/']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Inicio</a>
+            <a class="navbar-brand gradient fs-1 d-none d-xl-block" [routerLink]="['/']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Muebles Inteligentes</a>
+            <a class=" navbar-brand mx-xxl-auto gradient fs-1 d-block d-xl-none" [routerLink]="[ '/'] " [routerLinkActive]="[ 'active']" [routerLinkActiveOptions]="{exact:true}">MI</a>
+            <div class=" navbar-collapse collapse" id="mainNavbarCollapse">
+                <ul class="navbar-nav justify-content-around w-100 ">
+                    <li class="nav-item fw-bold " *ngIf="role==='normal_user' ">
+                        <a class="nav-link gradient fs-4 active " [routerLink]="[ '/'] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Inicio</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-primary fs-4" [routerLink]="['/products']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Productos</a>
+                    <li class="nav-item" *ngIf="role ===' normal_user' || status == null ">
+                        <a class="nav-link text-primary fs-4 " [routerLink]="[ '/products'] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Productos</a>
                     </li>
-                    <li class="nav-item " *ngIf="status === null">
+                    <li class="nav-item" *ngIf="role === 'admin'">
+                        <div class="dropdown show">
+                            <a class="nav-link text-primary fs-4 dropdown-toggle" href="#" role="button" id="dropdownReg" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="d-sm-none d-lg-inline"></span>Productos
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownReg">
+                                <a class="dropdown-item fs-4" [routerLink]="[ '/products']" [routerLinkActive]="[ 'active']" [routerLinkActiveOptions]="{exact:true}">Todos productos</a>
+                                <a class="dropdown-item fs-4" [routerLink]="[ '/products/create']" [routerLinkActive]="[ 'active']" [routerLinkActiveOptions]="{exact:true}">Agregar producto nuevo</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item " *ngIf="role !='admin' ">
+                        <a class="position-relative nav-link text-primary fs-4 " [routerLink]="[ '/orders/create'] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">
+                            <i class="bi bi-bag "></i><span class="d-lg-inline ">Cesta</span>
+                        </a>
+                    </li>
+                    <li class="nav-item " *ngIf="status !=null ">
+                        <a class="position-relative nav-link text-primary fs-4 " [routerLink]="[ '/users', user_id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">
+                            <i class="bi bi-person "></i><span class="d-lg-inline ">Cuenta</span>
+                        </a>
+                    </li>
+                    <li class="nav-item " *ngIf="role !='normal_user' ">
+                        <a class="position-relative nav-link text-primary fs-4 " [routerLink]="[ '/users'] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">
+                            <i class="bi bi-person-lines-fill "></i><span class="d-lg-inline "> Usuarios</span>
+                        </a>
+                    </li>
+                    <li class="nav-item " *ngIf="status !=null ">
+                        <a class="position-relative nav-link text-primary fs-4 " [routerLink]="[ '/orders'] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">
+                            <i class="bi bi-archive "></i><span class="d-lg-inline "> Pedidos</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" *ngIf="role =='normal_user' && status !== null">
+                        <div class="dropdown show">
+                            <a class="nav-link text-primary fs-4 dropdown-toggle" href="#" role="button" id="dropdownReg" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-chat-dots"></i><span class="d-lg-inline">Mensajeria</span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownReg">
+                                <a class="dropdown-item fs-4" [routerLink]="[ '/chat']" [routerLinkActive]="[ 'active']" [routerLinkActiveOptions]="{exact:true}">Citas</a>
+                                <a class="dropdown-item fs-4" [routerLink]="[ '/apply']" [routerLinkActive]="[ 'active']" [routerLinkActiveOptions]="{exact:true}">Pedir nueva cita</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item" *ngIf="role =='admin'">
+                        <a class="nav-link text-primary fs-4" [routerLink]="[ '/chat']" [routerLinkActive]="[ 'active']" [routerLinkActiveOptions]="{exact:true}">
+                            <i class="bi bi-chat-dots"></i><span class="d-lg-inline">Mensajeria</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" *ngIf="status===null">
                         <div class="dropdown show">
                             <a class="nav-link text-primary fs-4 dropdown-toggle" href="#" role="button" id="dropdownReg" data-bs-toggle="dropdown" aria-expanded="false">
                                 <span class="d-sm-none d-lg-inline"></span>Identifícate
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownReg">
-                                <a class="dropdown-item fs-4" [routerLink]="['/register']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Registrarse</a>
-                                <a class="dropdown-item fs-4" [routerLink]="['/login']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Login</a>
+                                <a class="dropdown-item fs-4" [routerLink]="[ '/register']" [routerLinkActive]="[ 'active']" [routerLinkActiveOptions]="{exact:true}">Registrarse</a>
+                                <a class="dropdown-item fs-4" [routerLink]="[ '/login']" [routerLinkActive]="[ 'active']" [routerLinkActiveOptions]="{exact:true}">Login</a>
                             </div>
                         </div>
                     </li>
-                    <li class="nav-item " *ngIf="role != 'admin'">
-                        <a class="position-relative nav-link text-primary fs-4" [routerLink]="['/orders/create']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-                            <i class="bi bi-bag"></i><span class="d-lg-inline">Cesta</span>
-                        </a>
-                    </li>
-                    <li class="nav-item " *ngIf="status != null">
-                        <a class="position-relative nav-link text-primary fs-4" [routerLink]="['/users', user_id]" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-                            <i class="bi bi-person"></i><span class="d-lg-inline">Cuenta</span>
-                        </a>
-                    </li>
-                    <li class="nav-item " *ngIf="role != 'normal_user'">
-                        <a class="position-relative nav-link text-primary fs-4" [routerLink]="['/users']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-                            <i class="bi bi-person-lines-fill"></i><span class="d-none d-lg-inline"> Usuarios</span>
-                        </a>
-                    </li>
-                    <li class="nav-item " *ngIf="role != 'normal_user'">
-                        <a class="position-relative nav-link text-primary fs-4" [routerLink]="['/orders']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-                            <i class="bi bi-archive"></i><span class="d-none d-lg-inline"> Pedidos</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" *ngIf="status != null">
-                        <button class="nav-link text-primary border-0 like_nav fs-4" (click)="logout()">
-                            <i class="bi bi-box-arrow-right"></i><span class="d-none d-lg-inline">Logout</span>
+                    <li class="nav-item " *ngIf="status !== null ">
+                        <button class="nav-link text-primary border-0 like_nav fs-4 " (click)="logout() ">
+                            <i class="bi bi-box-arrow-right "></i><span class="d-lg-inline ">Logout</span>
                         </button>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-    <div class="offcanvas offcanvas-start" id="mi">
-        <div class="offcanvas-header">
-            <h1 class="gradient">MUEBLES INTELIGENTES</h1>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
-        </div>
-        <div class="offcanvas-body">
-            <div class="dropdown d-grid mb-2">
-                <button type="button" class="btn btn-buscar text-light dropdown-toggle" data-bs-toggle="dropdown">
-                Sobre nosotros
-              </button>
-                <ul class="dropdown-menu w-100">
-                    <li><a class="dropdown-item text-primary" href="#">Historia</a></li>
-                    <li><a class="dropdown-item text-primary" href="#">Tecnologias</a></li>
-                    <li><a class="dropdown-item text-primary" href="#">Metas</a></li>
-                </ul>
-            </div>
-            <ul class="nav flex-column text-primary">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Politica de proteccion de datos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Devoluciones</a>
-                </li>
-            </ul>
-        </div>
-    </div>
 </header>
 <router-outlet>
 </router-outlet>
