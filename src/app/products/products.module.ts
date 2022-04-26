@@ -13,14 +13,13 @@ import { EditProductComponent } from './edit-product/edit-product.component';
 import { ProductFindPipe } from '../pipes/product-find.pipe';
 
 
-
 @NgModule({
   declarations: [
     ShowProductComponent,
     ListProductsComponent,
     AddProductComponent,
     EditProductComponent,
-    ProductFindPipe
+    ProductFindPipe,
   ],
   imports: [
     CommonModule,
@@ -29,14 +28,5 @@ import { ProductFindPipe } from '../pipes/product-find.pipe';
     FormsModule,
     ProductsRoutingModule
   ],
-  /*
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthCheckInterceptor ,
-      multi:true
-    }
-  ],
-  */
 })
 export class ProductsModule { }

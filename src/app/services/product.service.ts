@@ -74,4 +74,14 @@ export class ProductService {
     );
   }
 
+  getProductAmount(id:number){
+    return this.http.get('products/amount/'+id).pipe(
+      map((response) => {
+        return response;
+      }),
+      catchError((resp: HttpErrorResponse) =>
+      throwError(()=> new Error(`Error a la hora de obtener datos del producto. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+    );
+  }
+
 }

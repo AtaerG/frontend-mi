@@ -20,7 +20,7 @@ export class ApplyChatComponent implements OnInit {
   this.admins = this.route.snapshot.data['admins'];
     console.log(this.admins);
     this.applyMsg = new FormGroup({
-      'date': new FormControl(null, [Validators.required, Validators.pattern('/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/')]),
+      'date': new FormControl(null, [Validators.required]),
       'time': new FormControl(null, [Validators.required, Validators.pattern('^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$')]),
     });
     if (this.status != null) {
@@ -35,6 +35,15 @@ export class ApplyChatComponent implements OnInit {
       let mes = this.applyMsg.value.date.slice(5,7);
       let dia = this.applyMsg.value.date.slice(8,10);
       let converted_date = dia+"/"+mes+"/"+year;
+      let date = new Date(year+'-'+mes+'-'+dia);
+      let today = new Date();
+      console.log(today);
+      console.log(date);
+      console.log(date  < today);
+      if(date  < today){
+        alert("Error! La fecha debe ser posterior a la fecha actual");
+        return;
+      }
       this.appointmentService.createAppointment(this.user_id, this.admins[random_admin], converted_date, this.applyMsg.value.time)
       .subscribe({
         next: () => {
@@ -48,5 +57,4 @@ export class ApplyChatComponent implements OnInit {
       alert("Error! No se puede asignar una cita");
     }
   }
-
 }

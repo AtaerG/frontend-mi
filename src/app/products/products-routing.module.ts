@@ -14,13 +14,13 @@ const routes: Routes = [
   resolve: {
     products: AllProductsResolver
   } },
-  { path: 'products/create', component: AddProductComponent},//, canActivate: [UserTypeAdminCheckerGuard]  },
+  { path: 'products/create', component: AddProductComponent, canActivate: [UserTypeAdminCheckerGuard]  },
   { path: 'products/:id', component: ShowProductComponent,
     resolve: {
       product: ProductGetResolver
     }
   },
-  { path: 'products/:id/edit', component: EditProductComponent,
+  { path: 'products/edit/:id', component: EditProductComponent, canActivate: [UserTypeAdminCheckerGuard],
   resolve: {
     product: ProductGetResolver
   }},

@@ -1,49 +1,47 @@
-<div class="container-fluid">
-    <div class="card mx-auto col-8">
+<main class="container">
+    <div class="card card-background-card rounded shadow border-0 h-100 mx-auto col-8 col-lg-4 mt-4">
         <img class="img-fluid" src="{{ product.image_url }}" />
-        <div class="card-body text-center mx-auto">
-            <h5 class="card-title">{{ product.name }}</h5>
-            <p class="card-text">{{ product.description }}</p>
-            <p class="card-text">
-                {{ product.price | currency: "EUR":"symbol-narrow" }}
+        <div class="card-body text-center text-light">
+            <h1 class="card-title">{{ product.name }}</h1>
+            <p class="card-text">Descripcion: {{ product.description }}</p>
+            <p class="card-text ">Precio: {{ product.price | currency: "EUR":"symbol-narrow" }}
             </p>
-            <p class="card-text">Raiting mediano: {{ medianRaiting() }}</p>
-            <button *ngIf="role != null && role != 'admin'" class="btn btn-primary" (click)="addProdToOrder()">
-        Agregar Al Carrito
-      </button>
-            <button *ngIf="role === 'admin'" class="btn btn-danger" (click)="deleteProduct()">
-        Eliminar el producto
-      </button>
+            <p class="card-text">Raiting mediano: {{ medianRaiting() }}/5</p>
+            <button *ngIf="role != null && role != 'admin'" class="btn btn-outline-light fs-4" [ngClass]="btn_active? '': 'disabled'" (click)="addProdToOrder()">
+              Agregar Al Carrito
+            </button>
+            <p class='text-danger' *ngIf="!btn_active">Producto esta agotado</p>
+            <div class="d-grid gap-2 mx-auto" *ngIf="role === 'admin'">
+                <a class="btn btn-delete" (click)="deleteProduct()">
+                  Eliminar el producto
+                </a>
+                <a class="btn btn-warning" [routerLink]="[ '/products/edit/',product.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Editar Producto</a>
+            </div>
         </div>
     </div>
-    <h1 class="text-center text-primary m-2">Commentarios de clientes reales:</h1>
+    <h1 class="text-center text-primary mt-2">Commentarios de clientes reales</h1>
     <div *ngIf="comments.length && comments; else not">
-        <div class="col-12" *ngFor="let comment of comments">
-            <div class="card card-shadowed bg-light border-0 h-100 m-3">
-                <div class="mb-1">
-                    <div class="d-flex gap-3">
-                        <div class="w-75">
-                            <div class="bg-light rounded p-2 mb-2">
-                                <p class="text-primary fs-4">Commentario de: {{ comment.name +" "+comment.surname}}</p>
-                                <p class="mx-5">
-                                    <span class="text-muted fs-4">{{ comment.content }}.</span>
-                                </p>
-                                <p class="mx-5">Valoracion: {{ comment.stars }}</p>
-                                <p class="mx-5">Fecha de commentario: {{ comment.created_at | date }}</p>
-                                <button class="float-end btn btn-sm btn-danger" (click)="deleteComment(comment)">
+        <div class="col-12 col-md-8 mx-auto" *ngFor="let comment of comments">
+            <div class="card rounded shadow border-0 h-100 justify-content-center p-2 m-3">
+                <h3 class="mx-auto text-primary">Commentario de: {{ comment.name +" "+comment.surname}}</h3>
+                <hr>
+                <div class="mx-auto">
+                    <p>
+                        <span class="text-muted fs-4">{{ comment.content }}.</span>
+                    </p>
+                    <p>Valoracion: {{ comment.stars }}/5</p>
+                    <p>Fecha de commentario: {{ comment.created_at | date }}</p>
+                </div>
+                <button class="btn rounded-0 btn-delete" (click)="deleteComment(comment)" *ngIf="status != null">
                   Eliminar
                 </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
     <div>
-        <form class="container w-100 w-lg-75" [formGroup]="addCommentForm" (ngSubmit)="submitComment()" *ngIf="this.comment_write_permission =='1'">
-            <div class="row">
-                <div class="col-12">
+        <form class="container" [formGroup]="addCommentForm" (ngSubmit)="submitComment()" *ngIf="this.comment_write_permission =='1'">
+            <div class="row justify-content-center">
+                <div class="col-8">
                     <div class="form-floating mt-2">
                         <textarea type="text" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="content" [formControlName]="'content'" placeholder="Elon" name="content" required="required">
                         </textarea>
@@ -51,7 +49,7 @@
                         <span class="text-danger" *ngIf="!addCommentForm.get('content')?.valid && addCommentForm.get('content')?.touched">El commentario no puede ser vacio</span>
                     </div>
                 </div>
-                <div class="col-12">
+                <div class="col-8">
                     <div class="form-floating mt-2">
                         <input class="form-control rounded-0 border-top-0 border-start-0 border-end-0" type="number" id="stars" [formControlName]="'stars'" name="stars" min="0" max="5">
                         <label for="stars" class="form-label">Valoracion:</label>
@@ -60,15 +58,14 @@
                 </div>
             </div>
             <div class="mt-5">
-                <div class="d-grid col-12 mb-5 mx-auto">
+                <div class="d-grid col-8 mb-5 mx-auto">
                     <button id="submit" class="btn btn-buscar text-light" href="#">Escribir commentario!
                    </button>
                 </div>
             </div>
         </form>
         <ng-template #not>
-            <h3 class="text-center text-primary">No hay commentarios.</h3>
-            <h5 class="text-center text-primary">Escribir uno:</h5>
+            <h3 class="text-center text-primary mt-4">No hay commentarios.</h3>
         </ng-template>
     </div>
-</div>
+</main>

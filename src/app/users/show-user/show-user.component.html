@@ -1,15 +1,50 @@
-<h1 *ngIf="user_id == user.id" class="text-warning">Tu cuenta es:</h1>
-<div class="d-block">
-    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend">
-  </canvas>
-</div>
-<div class="card card-shadowed border-0 h-100 card-descubre-bg-color mb-2 mb-md-3 ">
-    <div class="card-body text-light text-center">
-        <h1 class="card-title ">Nombre: {{user.name}}</h1>
-        <p class="card-text ">Apellidos: {{user.surname}}</p>
-        <p class="card-text ">Correo electronico: {{user.email}}</p>
+<main class="container">
+    <div class="row m-1">
+        <div class="col-12 col-md-8 card card-serv-bg-color rounded shadow border-0 text-light mx-auto mt-3">
+            <div class="card-body text-center">
+                <h1 class="card-title">Nombre: {{user.name}}</h1>
+                <h2 class="card-title">Apellidos: {{user.surname}}</h2>
+                <p class="card-text">Correo electronico: {{user.email}}</p>
+                <p class="card-text ">Role: {{user.role}}</p>
+                <div class="row g-1">
+                    <a *ngIf="user_id == user.id" class="btn btn-warning fs-4" [routerLink]="['/resetpswd'] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Modificar contraseña</a>
+                    <a *ngIf="user_id == user.id" class="btn btn-warning text-light fs-4" [routerLink]="[ '/users/edit',user.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Modificar datos</a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="card-footer text-center " *ngIf="user_id == user.id">
-        <a class="nav-link text-light fs-4 " [routerLink]="[ '/users/edit',user.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Modificar datos</a>
+    <div class="mt-3" *ngIf="user_role == 'admin' && user.name != user_name">
+        <h1 class="text-center text-primary">Pedidos de usuario</h1>
+        <section class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-2 justify-content-center mt-3" *ngIf="orders.length && orders; else not">
+            <article class="col" *ngFor="let order of orders">
+                <div class="card rounded shadow border-0 h-100 mb-2 mb-md-3">
+                    <div class="card-body text-secondary text-center">
+                        <h1 class="card-title text-primary">ID: {{order.id}}</h1>
+                        <p class="card-text ">Precio total: {{order.total_price |currency:'EUR':'symbol-narrow'}}</p>
+                        <p class="card-text ">Estado: {{order.status}}</p>
+                    </div>
+                    <div class="card-footer text-center" *ngIf="order.status == 'paid' && user_role == 'admin' && order.id">
+                        <a class="nav-link text-light fs-4 " (click)="delieveredOrder(order.id)">Marcar el pedido como entregado</a>
+                    </div>
+                    <div class="card-footer bg-danger text-center" *ngIf="order.status != 'ended' && order.id">
+                        <a class="nav-link text-light fs-4 " (click)="deleteOrder(order.id)">Eliminar pedido</a>
+                    </div>
+                    <div class="card-footer text-center" *ngIf="order.status == 'ended' && user_role != 'admin'">
+                        <a class="nav-link text-light fs-4 " [routerLink]="[ '/orders', order.id] " [queryParams]="{ ended: 1 }" [routerLinkActive]=" [ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Escribir las reseñas del producto</a>
+                    </div>
+                    <a class="btn btn-buscar rounded-0 text-light fs-4 " [routerLink]="[ '/orders', order.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Mas Info</a>
+                </div>
+            </article>
+        </section>
+        <ng-template #not>
+            <h3>No hay pedidos.</h3>
+        </ng-template>
     </div>
-</div>
+    <div *ngIf="user_role!='admin'">
+        <h1 class="text-center text-primary mt-3">Sus pedidos terminados:</h1>
+        <div class="d-block mx-auto w-75">
+            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend">
+          </canvas>
+        </div>
+    </div>
+</main>

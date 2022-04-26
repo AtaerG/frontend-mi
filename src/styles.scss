@@ -12,6 +12,10 @@ $gradient-for-btn-finalizar: linear-gradient(to right, #FF512F 0%, #DD2476 51%, 
 $gradient-link-cesta-grad: linear-gradient(to right, #F09819 0%, #EDDE5D 51%, #F09819 100%);
 $gradient-for-servicios: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
 $gradient-for-search: linear-gradient(to right, #1FA2FF 0%, #12D8FA 51%, #1FA2FF 100%);
+$gradient-for-delete: linear-gradient(to right, #FF512F 0%, #DD2476 51%, #FF512F 100%);
+$gradient-for-warning:linear-gradient(to right, #F09819 0%, #EDDE5D 51%, #F09819 100%);
+$gradient-for-info: linear-gradient(to right, #06beb6 0%, #48b1bf 51%, #06beb6 100%);
+$gradient-for-success: linear-gradient(to right, #56ab2f 0%, #a8e063 51%, #56ab2f 100%);
 * {
     font-family: 'Roboto', sans-serif;
 }
@@ -89,6 +93,26 @@ $gradient-for-search: linear-gradient(to right, #1FA2FF 0%, #12D8FA 51%, #1FA2FF
     @include gradient-btn-generator($gradient-for-search);
 }
 
+.btn-success {
+    color: #fff;
+    @include gradient-btn-generator($gradient-for-success);
+}
+
+.btn-warning {
+    color: #fff;
+    @include gradient-btn-generator($gradient-for-warning);
+}
+
+.btn-delete {
+    color: #fff;
+    @include gradient-btn-generator($gradient-for-delete);
+}
+
+.btn-info {
+    color: #fff;
+    @include gradient-btn-generator($gradient-for-info);
+}
+
 .grad-text-1 {
     @include gradient-text-generator($gradient-for-servicios);
 }
@@ -96,6 +120,17 @@ $gradient-for-search: linear-gradient(to right, #1FA2FF 0%, #12D8FA 51%, #1FA2FF
 .card-descubre-bg-color {
     background-color: #2575fc;
     max-height: 40rem;
+}
+
+.btn-warning:hover,
+.btn-delete:hover,
+.btn-info:hover,
+.btn-success:hover {
+    color: #fff;
+}
+
+.card-background-card {
+    background-image: linear-gradient( 135deg, #3C8CE7 10%, #00EAFF 100%);
 }
 
 %prepare-text-for-btns {
@@ -106,7 +141,11 @@ $gradient-for-search: linear-gradient(to right, #1FA2FF 0%, #12D8FA 51%, #1FA2FF
 
 .btn-finalizar,
 .link-cesta-grad,
-.btn-buscar {
+.btn-buscar,
+.btn-delete,
+.btn-warning,
+.btn-info,
+.btn-success {
     @extend %prepare-text-for-btns;
     &:hover {
         background-position: right center;

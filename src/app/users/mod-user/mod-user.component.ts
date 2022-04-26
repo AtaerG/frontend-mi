@@ -58,7 +58,7 @@ export class ModUserComponent implements OnInit {
       this.userService.deleteUserAccount(this.user.id).subscribe({
         next: (re)=> {
           sessionStorage.clear();
-          this.router.navigate(['/home']).then(() => {
+          this.router.navigate(['/']).then(() => {
             window.location.reload();
           });;
         },

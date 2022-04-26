@@ -1,17 +1,15 @@
-<main>
+<main class="container">
     <h1 class="text-center text-primary mt-3">Pedir cita con el trabajador</h1>
     <div class="row">
-        <div>
-            <form class="container w-100 w-lg-75" [formGroup]="applyMsg" (ngSubmit)="apply()">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="form-floating mt-2 ">
-                            <input type="date" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="surname" [formControlName]="'date'" required="required">
-                            <label for="price" class="form-label ">Fecha:</label>
-                            <span class="text-danger" *ngIf="!applyMsg.get('date')?.valid && applyMsg.get('date')?.touched">
-                              La fecha debe tener formato dd/mm/yyyy
+        <form class="container w-100 w-lg-75" [formGroup]="applyMsg" (ngSubmit)="apply()">
+            <div class="row">
+                <div class="col-12 col-md-8 mx-auto my-auto">
+                    <div class="form-floating mt-2 ">
+                        <input type="date" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="surname" [formControlName]="'date'" required="required">
+                        <label for="price" class="form-label ">Fecha:</label>
+                        <span class="text-danger" *ngIf="!applyMsg.get('date')?.valid && applyMsg.get('date')?.touched">
+                              La fecha debe tener formato dd.mm.yyyy
                           </span>
-                        </div>
                     </div>
                     <div class="form-floating mt-2 ">
                         <input type="time" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="time" [formControlName]="'time'" required="required" step="300">
@@ -20,15 +18,15 @@
                           El tiempo es obligatorio!
                         </span>
                     </div>
-                </div>
-                <div class="mt-5">
-                    <div class="d-grid col-12 mb-5 mx-auto">
-                        <button id="submit" class="btn btn-buscar" href="#">
-                          <i class="bi bi-check2 text-light fs-3"></i>
-                        </button>
+                    <div class="mt-5">
+                        <div class="d-grid col-12 mb-5 mx-auto">
+                            <button id="submit" class="btn btn-buscar" href="#">
+                            <i class="bi bi-check2 text-light fs-3"></i>
+                          </button>
+                        </div>
                     </div>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </main>

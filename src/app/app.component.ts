@@ -25,7 +25,7 @@ export class AppComponent {
     this.authService.logout(token).subscribe({
       next: () =>  {
         sessionStorage.clear();
-        this.router.navigate(['/home']).then(() => {
+        this.router.navigate(['/']).then(() => {
           window.location.reload();
         });;
     },

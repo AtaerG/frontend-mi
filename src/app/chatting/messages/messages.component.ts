@@ -68,7 +68,7 @@ export class MessagesComponent implements OnInit {
         alert('Admin no esta conectado a la sesion, por favor espere!');
       }
     } else {
-      if(Number.isInteger(this.id_chat) && this.id_chat > 0){
+      if(this.id_chat > 0){
         this.http.post('messages', {
           id: this.id_chat,
           name: this.name,

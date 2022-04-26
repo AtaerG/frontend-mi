@@ -11,15 +11,14 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class EditProductComponent implements OnInit {
 
-  product!: Product;
+  product!: any;
   image:any;
   editProdForm!: FormGroup;
   constructor(private route: ActivatedRoute,private router:Router, private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.product = this.route.snapshot.data['product'];
+    this.product = this.route.snapshot.data['product'].product;
     this.image = this.product.image_url;
-    console.log(this.image);
     this.editProdForm! = new FormGroup({
       'name': new FormControl(this.product.name, [Validators.required]),
       'price': new FormControl(this.product.price, [Validators.required, Validators.min(1)]),

@@ -1,5 +1,5 @@
 <main class="container  mt-3">
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col-12 col-md-9">
             <input class="form-control text-center text-primary rounded-0 border-top-0 border-start-0 border-end-0 border-primary" type="text " placeholder="Buscar producto" [(ngModel)]="filterSearchProduct">
         </div>
@@ -19,17 +19,18 @@
             </form>
         </div>
     </div>
-    <section class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mt-4" *ngIf="products.length && products; else not">
+    <section class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mt-4 justify-content-center" *ngIf="products.length && products; else not">
         <article *ngFor="let product of products | productFind:filterSearchProduct:filterFormString">
             <div class="col">
-                <div class="card card-shadowed border-0 h-100 card-descubre-bg-color mb-2 mb-md-3 ">
+                <div class="card rounded shadow border-0 card-background-card text-light h-100 mb-2 mb-md-3">
                     <img src="{{product.image_url}}" class="card-img-top card-img-descubre " alt="mesa ">
-                    <div class="card-body text-light text-center ">
+                    <div class="card-body border-1 text-center ">
                         <h1 class="card-title ">{{product.name}}</h1>
                         <p class="card-text ">{{product.price |currency:'EUR':'symbol-narrow'}}</p>
                     </div>
-                    <div class="card-footer text-center ">
-                        <a class="nav-link text-light fs-4 " [routerLink]="[ '/products', product.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Mas Info</a>
+                    <div class="text-center m-3">
+                        <hr>
+                        <a class="btn btn-outline-light fs-4" [routerLink]="[ '/products', product.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Mas Info</a>
                     </div>
                 </div>
             </div>

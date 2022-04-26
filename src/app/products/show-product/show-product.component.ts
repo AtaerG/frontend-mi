@@ -25,6 +25,8 @@ export class ShowProductComponent implements OnInit {
   comments!: Comment[];
   user_id!: number;
   product_id!:number;
+  amount:any = 0;
+  btn_active = true;
 
   constructor(private route: ActivatedRoute, private commentService: CommentService, private productService: ProductService, private router: Router) {
     if (this.status != null) {
@@ -38,6 +40,13 @@ export class ShowProductComponent implements OnInit {
     this.comment_write_permission = this.route.snapshot.queryParams['comment'];
     this.product = dates.product;
     this.comments = dates.comments;
+    this.amount = dates.amount;
+    console.log(this.amount[0].amount);
+
+    if(this.amount[0].amount == 0){
+      this.btn_active = false;
+    }
+
     this.addCommentForm = new FormGroup({
       'content': new FormControl(null, [Validators.required]),
       'stars': new FormControl(0, [Validators.required, Validators.min(0), Validators.max(5)]),

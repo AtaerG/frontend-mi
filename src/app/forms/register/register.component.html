@@ -25,33 +25,33 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <h2 class=" text-center text-primary mt-4">Correo electronico y contraseña</h2>
-                    <div class="form-floating mt-2 ">
-                        <input type="email" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="email" placeholder="a@algo.com " [formControlName]="'email'" name="email" required="required">
-                        <label for="email" class="form-label ">Correo electronico:</label>
-                        <span class="text-danger" *ngIf="!registerForm.get('email')?.valid && registerForm.get('email')?.touched">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class=" text-center text-primary mt-5">Correo electronico y contraseña</h2>
+                        <div class="form-floating mt-2 ">
+                            <input type="email" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="email" placeholder="a@algo.com " [formControlName]="'email'" name="email" required="required">
+                            <label for="email" class="form-label ">Correo electronico:</label>
+                            <span class="text-danger" *ngIf="!registerForm.get('email')?.valid && registerForm.get('email')?.touched">
                          Correo electronico es obligatorio y debe tener formato de correo electronico!
                        </span>
+                        </div>
                     </div>
-                </div>
-                <div class="col-12">
-                    <div class="form-floating mt-2 ">
-                        <input type="password" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="password" placeholder="1111" name="password" [formControlName]="'password'" required="required">
-                        <label for="password" class="form-label ">Contraseña:</label>
-                        <span class="text-danger" *ngIf="!registerForm.get('password')?.valid && registerForm.get('password')?.touched">
+                    <div class="col-12">
+                        <div class="form-floating mt-2 ">
+                            <input type="password" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="password" placeholder="1111" name="password" [formControlName]="'password'" required="required">
+                            <label for="password" class="form-label ">Contraseña:</label>
+                            <span class="text-danger" *ngIf="!registerForm.get('password')?.valid && registerForm.get('password')?.touched">
                           La contraseña debe tener como minimo 8 caracteres.
                         </span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row mt-5">
-                <div class="d-grid col-12 mb-5 mx-auto">
-                    <button id="submit" class="btn btn-buscar" href="#">
-                          <i class="bi bi-check2 text-light fs-3"></i>
-                      </button>
+                <div class="row mt-5">
+                    <div class="d-grid col-12 mb-5 mx-auto">
+                        <button id="submit" class="btn btn-buscar" href="#">
+                            <i class="bi bi-check2 text-light fs-3"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
