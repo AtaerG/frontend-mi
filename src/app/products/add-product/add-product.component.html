@@ -1,11 +1,11 @@
 <h1 class="text-center text-primary mt-3">Añadir un producto nuevo</h1>
 
 <div class="row">
-    <div class="col-6 col-md-12 col-lg-8 my-auto mx-auto">
+    <div class="col-12 col-lg-8 my-auto mx-auto">
         <h1 class="text-center text-secondary" *ngIf="image == null">Aqui se va a poner el imagen del producto nuevo</h1>
-        <img id="image" class="d-block img-fluid mx-auto" [src]="image" width="400">
+        <img id="image" class="d-block img-fluid mx-auto m-1" [src]="image" width="400">
     </div>
-    <div class="col-6 col-md-12 col-lg-8 my-auto mx-auto">
+    <div class="col-12 col-lg-8 my-auto mx-auto">
         <form class="container w-100 w-lg-75" [formGroup]="addProdForm" (ngSubmit)="createProduct()">
             <div class="row">
                 <div class="col-12">

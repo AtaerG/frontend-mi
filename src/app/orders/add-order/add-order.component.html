@@ -1,23 +1,21 @@
 <main class="container">
     <h1 class="text-center text-primary mt-3">Cesta:</h1>
     <div class="row">
-        <section class="col-6 row row-cols-1" *ngIf="products.length && products; else not">
+        <section class="col-12  col-md-6 row row-cols-1  mx-auto" *ngIf="products.length && products; else not">
             <article *ngFor="let product of products">
                 <div class="col">
-                    <div class="card card-shadowed border-0 h-100 card-descubre-bg-color mb-2 mb-md-3 ">
-                        <img src="{{product.image_url}}" class="card-img-top card-img-descubre " alt="mesa ">
-                        <div class="card-body text-light text-center ">
-                            <h1 class="card-title ">{{product.name}}</h1>
-                            <p class="card-text ">{{product.price |currency:'EUR':'symbol-narrow'}}</p>
+                    <div class="card rounded shadow border-0 h-100 mb-2 mb-md-3">
+                        <img src="{{product.image_url}}" class="card-img-top card-img-descubre" alt="mesa">
+                        <div class="card-body text-secondary text-center ">
+                            <h1 class="card-title">{{product.name}}</h1>
+                            <p class="card-text">{{product.price |currency:'EUR':'symbol-narrow'}}</p>
                         </div>
-                        <div class="card-footer text-center ">
-                            <button class="btn btn-danger" (click)="removeProdFromOrder(product)">Eliminar de la cesta</button>
-                        </div>
+                        <button class="btn btn-outline-danger rounded-0" (click)="removeProdFromOrder(product)">Eliminar de la cesta</button>
                     </div>
                 </div>
             </article>
         </section>
-        <div class="col-6 my-auto bg-light rounded-3" *ngIf="products.length != 0">
+        <div class="col-12 col-md-6  mx-auto my-auto bg-light rounded-3" *ngIf="products.length != 0">
             <form class="mx-auto col-10 p-2" [formGroup]="shippingForm" (ngSubmit)="sentOrder()">
                 <h2 class="text-center text-primary mx-3">Domicilio</h2>
                 <div>

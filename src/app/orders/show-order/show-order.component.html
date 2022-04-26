@@ -1,23 +1,24 @@
 <main class="container">
-    <h1 class="text-center text-primary">Numero de pedido: {{order.id}}</h1>
-    <p class="text-center">Precio total: {{order.total_price |currency:'EUR':'symbol-narrow'}}</p>
-    <p class="text-center">Estado: {{order.status}}</p>
-    <section class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mt-4">
-        <article *ngFor="let product of order.products">
-            <div class="col">
-                <div class="card card-shadowed border-0 h-100 card-descubre-bg-color mb-2 mb-md-3 ">
-                    <img src="{{product.image_url}}" class="card-img-top card-img-descubre " alt="mesa ">
-                    <div class="card-body text-light text-center ">
-                        <h1 class="card-title ">{{product.name}}</h1>
-                    </div>
-                    <div class="card-footer text-center" *ngIf="this.ended != '1'">
-                        <a class="nav-link text-light fs-4 " [routerLink]="[ '/products', product.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Mas Info</a>
-                    </div>
-                    <div class="card-footer text-center" *ngIf="this.ended == '1'">
-                        <a class="nav-link text-light fs-4 " [routerLink]="[ '/products', product.id] " [routerLinkActive]="[ 'active'] " [queryParams]="{ comment: 1 }" [routerLinkActiveOptions]="{exact:true} ">Escribir la reseña</a>
+    <div class="card rounded card-serv-bg-color shadow border-0  mb-2 mb-md-3 text-secondary p-3 mt-4 text-light">
+        <h1 class="text-center ">Numero de pedido: {{order.id}}</h1>
+        <p class="text-center">Precio total: {{order.total_price |currency:'EUR':'symbol-narrow'}}</p>
+        <p class="text-center">Estado: {{order.status}}</p>
+        <h1 class="text-center">Productos del pedido:</h1>
+        <section class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mt-4 justify-content-center">
+            <article *ngFor="let product of order.products">
+                <div class="col">
+                    <div class="card rounded shadow border-0 h-100 mb-2 text-secondary">
+                        <img src="{{product.image_url}}" class="card-img-top card-img-descubre " alt="mesa ">
+                        <div class="card-body text-center ">
+                            <h1 class="card-title ">{{product.name}}</h1>
+                        </div>
+                        <a class="btn btn-buscar rounded-0 text-light" [routerLink]="[ '/products', product.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} " *ngIf="this.ended != '1'">Mas Info</a>
+                        <a class="btn btn-outline-secondary rounded-0" [routerLink]="[ '/products', product.id] " [routerLinkActive]="[ 'active'] " [queryParams]="{ comment: 1 }" [routerLinkActiveOptions]="{exact:true} " *ngIf="this.ended == '1'">Escribir la reseña</a>
                     </div>
                 </div>
-            </div>
-        </article>
-    </section>
+            </article>
+        </section>
+        <a class="btn btn-success w-100 w-md-50 mx-auto rounded-0 fs-4 mt-1" (click)="delieveredOrder(order.id)" *ngIf="order.status == 'paid' && user_role == 'admin' && order.id">Marcar el pedido como entregado</a>
+        <a class="btn btn-delete w-100 w-md-50 mx-auto rounded-0 fs-4 text-light mt-1" *ngIf="order.status != 'ended' && order.id" (click)="deleteOrder(order.id)">Eliminar pedido</a>
+    </div>
 </main>

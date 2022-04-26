@@ -1,15 +1,14 @@
 <main class="container mt-3">
-    <section class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-2" *ngIf="users.length && users; else not">
+    <section class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3 justify-content-center" *ngIf="users.length && users; else not">
         <article class="col" *ngFor="let user of users">
-            <div class="card h-100 card-shadowed border-0 card-descubre-bg-color mb-2 mb-md-3 ">
-                <div class="card-body bg-primary text-light text-center">
-                    <h1 class="card-title ">Nombre: {{user.name}}</h1>
+            <div class="card rounded shadow border-0 h-100 mb-2 mb-md-3">
+                <div class="card-body text-secodnary text-center">
+                    <h1 class="card-title text-primary">Nombre: {{user.name}}</h1>
                     <p class="card-text ">Apellidos: {{user.surname}}</p>
                     <p class="card-text ">Correo electronico: {{user.email}}</p>
+                    <p class="card-text ">Role: {{user.role}}</p>
                 </div>
-                <div class="card-footer text-center bg-primary">
-                    <a class="nav-link text-light fs-4 " [routerLink]="[ '/users', user.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Mas Info</a>
-                </div>
+                <a class="btn btn-buscar rounded-0 text-light" [routerLink]="[ '/users', user.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Mas Info</a>
             </div>
         </article>
     </section>

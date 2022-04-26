@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
       let form_values = this.loginForm.value;
       this.recaptchaV3Service.execute('importantAction')
       .subscribe((token: string) => {
-        console.log(token);
         this.authService.login(form_values['email'],form_values['password'])
         .subscribe({
           next: token => {

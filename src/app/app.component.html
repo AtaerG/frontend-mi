@@ -11,13 +11,13 @@
                     <li class="nav-item fw-bold " *ngIf="role==='normal_user' ">
                         <a class="nav-link gradient fs-4 active " [routerLink]="[ '/'] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Inicio</a>
                     </li>
-                    <li class="nav-item" *ngIf="role ===' normal_user' || status == null ">
-                        <a class="nav-link text-primary fs-4 " [routerLink]="[ '/products'] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Productos</a>
+                    <li class="nav-item" *ngIf="role ==='normal_user' || status == null ">
+                        <a class="nav-link text-primary fs-4" [routerLink]="[ '/products'] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Productos</a>
                     </li>
                     <li class="nav-item" *ngIf="role === 'admin'">
                         <div class="dropdown show">
                             <a class="nav-link text-primary fs-4 dropdown-toggle" href="#" role="button" id="dropdownReg" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span class="d-sm-none d-lg-inline"></span>Productos
+                                Productos
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownReg">
                                 <a class="dropdown-item fs-4" [routerLink]="[ '/products']" [routerLinkActive]="[ 'active']" [routerLinkActiveOptions]="{exact:true}">Todos productos</a>
@@ -28,11 +28,6 @@
                     <li class="nav-item " *ngIf="role !='admin' ">
                         <a class="position-relative nav-link text-primary fs-4 " [routerLink]="[ '/orders/create'] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">
                             <i class="bi bi-bag "></i><span class="d-lg-inline ">Cesta</span>
-                        </a>
-                    </li>
-                    <li class="nav-item " *ngIf="status !=null ">
-                        <a class="position-relative nav-link text-primary fs-4 " [routerLink]="[ '/users', user_id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">
-                            <i class="bi bi-person "></i><span class="d-lg-inline ">Cuenta</span>
                         </a>
                     </li>
                     <li class="nav-item " *ngIf="role !='normal_user' ">
@@ -48,7 +43,7 @@
                     <li class="nav-item" *ngIf="role =='normal_user' && status !== null">
                         <div class="dropdown show">
                             <a class="nav-link text-primary fs-4 dropdown-toggle" href="#" role="button" id="dropdownReg" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-chat-dots"></i><span class="d-lg-inline">Mensajeria</span>
+                                <i class="bi bi-chat-dots"></i><span class="d-inline d-md-none d-xxl-inline">Mensajeria</span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownReg">
                                 <a class="dropdown-item fs-4" [routerLink]="[ '/chat']" [routerLinkActive]="[ 'active']" [routerLinkActiveOptions]="{exact:true}">Citas</a>
@@ -56,9 +51,14 @@
                             </div>
                         </div>
                     </li>
+                    <li class="nav-item " *ngIf="status !=null ">
+                        <a class="position-relative nav-link text-primary fs-4 " [routerLink]="[ '/users', user_id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">
+                            <i class="bi bi-person "></i><span class="d-lg-inline ">Cuenta</span>
+                        </a>
+                    </li>
                     <li class="nav-item" *ngIf="role =='admin'">
                         <a class="nav-link text-primary fs-4" [routerLink]="[ '/chat']" [routerLinkActive]="[ 'active']" [routerLinkActiveOptions]="{exact:true}">
-                            <i class="bi bi-chat-dots"></i><span class="d-lg-inline">Mensajeria</span>
+                            <i class="bi bi-chat-dots"></i><span class="d-inline d-md-none d-xxl-inline">Mensajeria</span>
                         </a>
                     </li>
                     <li class="nav-item" *ngIf="status===null">
@@ -74,7 +74,7 @@
                     </li>
                     <li class="nav-item " *ngIf="status !== null ">
                         <button class="nav-link text-primary border-0 like_nav fs-4 " (click)="logout() ">
-                            <i class="bi bi-box-arrow-right "></i><span class="d-lg-inline ">Logout</span>
+                            <i class="bi bi-box-arrow-right "></i><span class="d-inline d-md-none d-xxl-inline">Logout</span>
                         </button>
                     </li>
                 </ul>

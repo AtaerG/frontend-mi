@@ -7,9 +7,10 @@ import { ListUsersComponent } from './list-users/list-users.component';
 import { AllUsersResolver } from '../resolvers/all-users.resolver';
 import { UserGetResolver } from '../resolvers/user-get.resolver';
 import { GetUserOrderResolver } from '../resolvers/get-user-order.resolver';
+import { UserTypeAdminCheckerGuard } from '../guards/user-type-admin-checker.guard';
 
 const routes: Routes = [
-  { path: 'users', component: ListUsersComponent,
+  { path: 'users', component: ListUsersComponent, canActivate: [UserTypeAdminCheckerGuard],
   resolve: {
     users: AllUsersResolver
   }

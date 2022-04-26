@@ -2,11 +2,11 @@
     <h1 class="text-center text-primary mt-3">Editar el producto</h1>
 
     <div class="row">
-        <div class="col-6 col-md-12 col-lg-8 my-auto mx-auto">
+        <div class="col-12  col-lg-8 my-auto mx-auto">
             <h1 class="text-center text-secondary" *ngIf="image == null">Aqui se va a poner el imagen del producto modificado</h1>
             <img id="image" class="d-block img-fluid mx-auto" [src]="image" width="400">
         </div>
-        <div class="col-6 col-md-12 col-lg-8 mx-auto">
+        <div class="col-12 col-lg-8 mx-auto">
             <form class="container w-100 w-lg-75" [formGroup]="editProdForm" (ngSubmit)="editProduct()">
                 <div class="row">
                     <div class="col-12">
