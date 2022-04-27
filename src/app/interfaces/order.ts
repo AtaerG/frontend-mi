@@ -1,7 +1,7 @@
 import { Product } from "./product";
 
 export interface Order {
-  id?:number,
+  id:number,
   products: Product[];
   total_price:number,
   status:string,
@@ -9,5 +9,6 @@ export interface Order {
   post_code: number,
   city: string,
   state: string,
-  country: string
+  country: string,
+  valoration: 0
 }

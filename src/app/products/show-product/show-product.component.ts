@@ -23,6 +23,7 @@ export class ShowProductComponent implements OnInit {
   product!: Product;
   products: Product[] = [];
   comments!: Comment[];
+  order_info!: {'valoration':number, 'country':string};
   user_id!: number;
   product_id!:number;
   amount:any = 0;
@@ -42,14 +43,14 @@ export class ShowProductComponent implements OnInit {
     this.comments = dates.comments;
     this.amount = dates.amount;
     console.log(this.amount[0].amount);
-
+    console.log(this.comments);
     if(this.amount[0].amount == 0){
       this.btn_active = false;
     }
 
     this.addCommentForm = new FormGroup({
       'content': new FormControl(null, [Validators.required]),
-      'stars': new FormControl(0, [Validators.required, Validators.min(0), Validators.max(5)]),
+      'valoration': new FormControl(0, [Validators.required, Validators.min(0), Validators.max(5)]),
     });
     this.product_id = this.product.id;
     console.log(this.product_id);
@@ -60,13 +61,13 @@ export class ShowProductComponent implements OnInit {
   medianRaiting() {
     let median: number = 0
     let comments_counter: number = 0;
-    let all_stars: number = 0;
+    let all_valoration: number = 0;
     this.comments.forEach((comment) => {
       comments_counter += 1;
-      all_stars += comment.stars;
+      all_valoration += comment.valoration;
     })
-    if (all_stars > 0) {
-      median = all_stars / comments_counter;
+    if (all_valoration > 0) {
+      median = all_valoration / comments_counter;
     }
     return median;
   }
@@ -112,9 +113,9 @@ export class ShowProductComponent implements OnInit {
 
   submitComment(){
     let form_values = this.addCommentForm.value;
-    console.log(form_values['content'], form_values['stars'], this.user_id, this.product_id);
+    console.log(form_values['content'], form_values['valoration'], this.user_id, this.product_id);
     if(this.addCommentForm.valid){
-      this.commentService.saveComment(form_values['content'], form_values['stars'], this.user_id, this.product_id).subscribe({
+      this.commentService.saveComment(form_values['content'], form_values['valoration'], this.user_id, this.product_id).subscribe({
         next: ()=>{
           this.router.navigate(['/products/', this.product_id]).then(() => {
             window.location.reload();

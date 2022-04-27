@@ -10,14 +10,17 @@ import { OrdersRoutingModule } from './orders-routing.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BaseUrlInterceptor } from '../interceptors/base-url.interceptor';
 import { AuthCheckInterceptor } from '../interceptors/auth-check.interceptor';
-
+import { EditOrderComponent } from './edit-order/edit-order.component';
+import { OrderFindPipe } from '../pipes/order-find.pipe';
 
 
 @NgModule({
   declarations: [
     ListOrderComponent,
     AddOrderComponent,
-    ShowOrderComponent
+    ShowOrderComponent,
+    EditOrderComponent,
+    OrderFindPipe
   ],
   imports: [
     CommonModule,

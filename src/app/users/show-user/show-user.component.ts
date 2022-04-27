@@ -84,7 +84,7 @@ export class ShowUserComponent implements OnInit {
   }
 
   delieveredOrder(id:number){
-    this.orderService.updateOrder(id, "ended").subscribe({
+    this.orderService.updateStatusOrder(id, "terminado").subscribe({
       next: ()=>{
         alert('Pedido marcado como entregado');
         window.location.reload();
