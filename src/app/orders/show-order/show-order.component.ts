@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Order } from 'src/app/interfaces/order';
 import { OrderService } from 'src/app/services/order.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-show-order',
@@ -9,7 +11,8 @@ import { OrderService } from 'src/app/services/order.service';
   styleUrls: ['./show-order.component.scss']
 })
 export class ShowOrderComponent implements OnInit {
-  status: string | null = sessionStorage.getItem('token');
+  evaluateForm!: FormGroup;
+  status: string | null = localStorage.getItem('token');
   ended: string = '';
   order: any;
   user_role:string = "";
@@ -21,6 +24,9 @@ export class ShowOrderComponent implements OnInit {
     if (this.status != null) {
       this.user_role = JSON.parse(this.status).user_role;
     }
+    this.evaluateForm = new FormGroup({
+      'valoration': new FormControl(0, [Validators.required]),
+    });
   }
 
   deleteOrder(id:number){
@@ -34,7 +40,7 @@ export class ShowOrderComponent implements OnInit {
   }
 
   delieveredOrder(id:number){
-    this.orderService.updateOrder(id, "ended").subscribe({
+    this.orderService.updateStatusOrder(id, "terminado").subscribe({
       next: ()=>{
         alert('Pedido marcado como entregado');
         window.location.reload();
@@ -42,4 +48,17 @@ export class ShowOrderComponent implements OnInit {
       error: (error:any) => console.log(error),
     });
   }
+
+  evaluateOrder(id:number){
+    let form_values = this.evaluateForm.value;
+    if(this.evaluateForm.valid){
+      this.orderService.updateValorationOrder(id, form_values['valoration']).subscribe({
+        next: ()=>{
+          alert('Pedido se ha valorado con exito!');
+          window.location.reload();
+        },
+        error: (error:any) => console.log(error),
+      });
+  }
+}
 }

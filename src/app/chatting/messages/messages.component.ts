@@ -15,7 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class MessagesComponent implements OnInit {
 
-  status: string | null = sessionStorage.getItem('token');
+  status: string | null = localStorage.getItem('token');
   token: string = "";
   user_id: number = 0;
   name:string = "";

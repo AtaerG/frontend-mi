@@ -1,7 +1,7 @@
 <main class="container">
-    <section class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mt-4 justify-content-center" *ngIf="appointments.length && appointments; else not">
+    <section class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2 mt-4 justify-content-center" *ngIf="appointments.length && appointments; else not">
         <article *ngFor="let appointment of appointments">
-            <div class="card card-background-card rounded shadow border-0 h-100 mx-auto mt-4">
+            <div class="card card-background-card rounded shadow border-0 h-100 mx-auto mt-4 ">
                 <div class="card-body text-light text-center ">
                     <h1 class="card-title ">Tienes la cita en:</h1>
                     <h1 class="card-title ">Fecha: {{appointment.date}}</h1>

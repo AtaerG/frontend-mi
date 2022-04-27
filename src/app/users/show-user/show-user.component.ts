@@ -16,7 +16,7 @@ export class ShowUserComponent implements OnInit {
   date_orders: any[] = [];
   dates_orders: any[] = [];
   user!:User;
-  status:string|null = sessionStorage.getItem('token');
+  status:string|null = localStorage.getItem('token');
   user_id: number = 0;
   user_role: string = '';
   user_name: string = '';
@@ -30,9 +30,10 @@ export class ShowUserComponent implements OnInit {
    }
 
   public barChartOptions = {
-    barThickness: 250,
+    barThickness: 150,
+    maintainAspectRatio: false,
     scaleShowVerticalLines: false,
-    responsive: true
+    responsive: true,
   };
   public barChartLabels: any[] = [];
   public barChartType = 'bar';
@@ -83,7 +84,7 @@ export class ShowUserComponent implements OnInit {
   }
 
   delieveredOrder(id:number){
-    this.orderService.updateOrder(id, "ended").subscribe({
+    this.orderService.updateStatusOrder(id, "terminado").subscribe({
       next: ()=>{
         alert('Pedido marcado como entregado');
         window.location.reload();

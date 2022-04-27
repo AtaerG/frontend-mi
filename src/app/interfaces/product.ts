@@ -7,6 +7,7 @@ export interface Product {
   amount:number,
   image_url:string,
   tag:string,
-  comments:Comment[]
+  comments:Comment[],
+  visible: string
 }
 

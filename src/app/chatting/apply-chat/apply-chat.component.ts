@@ -10,7 +10,7 @@ import { AppointmentService } from 'src/app/services/appointment.service';
   styleUrls: ['./apply-chat.component.scss']
 })
 export class ApplyChatComponent implements OnInit {
-  status: string | null = sessionStorage.getItem('token');
+  status: string | null = localStorage.getItem('token');
   applyMsg!: FormGroup;
   admins: any [] =[];
   user_id:number = 0;

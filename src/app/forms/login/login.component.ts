@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
         this.authService.login(form_values['email'],form_values['password'])
         .subscribe({
           next: token => {
-            sessionStorage.setItem('token',JSON.stringify(token));
+            localStorage.setItem('token',JSON.stringify(token));
             this.login_complete = true;
             this.router.navigate(['/products']).then(() => {
               window.location.reload();

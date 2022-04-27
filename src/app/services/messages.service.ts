@@ -35,7 +35,7 @@ export class MessagesService {
   sendMessage(user_id:number, message: string, token:string) {
     const url = "messages";
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${ sessionStorage.getItem('token') }`
+      Authorization: `Bearer ${ localStorage.getItem('token') }`
     });
     return this.http.post(url, {
       user_id: user_id,

@@ -23,16 +23,10 @@
                         <p class="card-text ">Precio total: {{order.total_price |currency:'EUR':'symbol-narrow'}}</p>
                         <p class="card-text ">Estado: {{order.status}}</p>
                     </div>
-                    <div class="card-footer text-center" *ngIf="order.status == 'paid' && user_role == 'admin' && order.id">
-                        <a class="nav-link text-light fs-4 " (click)="delieveredOrder(order.id)">Marcar el pedido como entregado</a>
-                    </div>
-                    <div class="card-footer bg-danger text-center" *ngIf="order.status != 'ended' && order.id">
-                        <a class="nav-link text-light fs-4 " (click)="deleteOrder(order.id)">Eliminar pedido</a>
-                    </div>
-                    <div class="card-footer text-center" *ngIf="order.status == 'ended' && user_role != 'admin'">
-                        <a class="nav-link text-light fs-4 " [routerLink]="[ '/orders', order.id] " [queryParams]="{ ended: 1 }" [routerLinkActive]=" [ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Escribir las reseñas del producto</a>
-                    </div>
-                    <a class="btn btn-buscar rounded-0 text-light fs-4 " [routerLink]="[ '/orders', order.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Mas Info</a>
+                    <a class="btn btn-success rounded-0 fs-4 mt-1" (click)="delieveredOrder(order.id)" *ngIf="order.status == 'paid' && user_role == 'admin' && order.id">Marcar el pedido como entregado</a>
+                    <a class="btn btn-info rounded-0 fs-4" [routerLink]="[ '/orders', order.id] " [queryParams]="{ ended: 1 }" [routerLinkActive]=" [ 'active'] " [routerLinkActiveOptions]="{exact:true} " *ngIf="order.status == 'ended' && user_role != 'admin'">Escribir reseña</a>
+                    <a class="btn btn-delete rounded-0 fs-4 text-light" *ngIf="order.status != 'ended' && order.id" (click)="deleteOrder(order.id)">Eliminar pedido</a>
+                    <a class="btn btn-buscar rounded-0 fs-4 text-light" [routerLink]="[ '/orders', order.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Mas Info</a>
                 </div>
             </article>
         </section>
@@ -42,8 +36,8 @@
     </div>
     <div *ngIf="user_role!='admin'">
         <h1 class="text-center text-primary mt-3">Sus pedidos terminados:</h1>
-        <div class="d-block mx-auto w-75">
-            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend">
+        <div class="d-block">
+            <canvas class="chart-style" baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend">
           </canvas>
         </div>
     </div>

@@ -10,7 +10,7 @@ import { AuthService } from './services/auth.service';
 export class AppComponent {
   title = 'frontend-mi';
 
-  status:string|null = sessionStorage.getItem('token');
+  status:string|null = localStorage.getItem('token');
   role: string = "normal_user";
   user_id!: number;
   constructor(private authService: AuthService, private router: Router){
@@ -21,10 +21,10 @@ export class AppComponent {
   }
 
   logout(){
-    let token = sessionStorage.getItem('token');
+    let token = localStorage.getItem('token');
     this.authService.logout(token).subscribe({
       next: () =>  {
-        sessionStorage.clear();
+        localStorage.clear();
         this.router.navigate(['/']).then(() => {
           window.location.reload();
         });;

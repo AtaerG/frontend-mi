@@ -11,7 +11,7 @@ export class UserTypeUnauthCheckerGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       let checker = true;
-      let token = sessionStorage.getItem('token');
+      let token = localStorage.getItem('token');
       console.log(token)
       checker = true;
       if(token != null) {

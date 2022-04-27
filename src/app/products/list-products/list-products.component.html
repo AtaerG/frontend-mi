@@ -1,9 +1,9 @@
-<main class="container  mt-3">
+<main class="container">
     <div class="row justify-content-center">
-        <div class="col-12 col-md-9">
+        <div class="col-12 col-lg-9">
             <input class="form-control text-center text-primary rounded-0 border-top-0 border-start-0 border-end-0 border-primary" type="text " placeholder="Buscar producto" [(ngModel)]="filterSearchProduct">
         </div>
-        <div class="col-12 col-md-3">
+        <div class="col-12 col-lg-3">
             <form [formGroup]="filterForm" (ngSubmit)="aplicarFiltro()">
                 <label for="filter">Mostrar los muebles solo para:</label>
                 <div class="d-flex flex-row gap-2">
@@ -19,14 +19,15 @@
             </form>
         </div>
     </div>
-    <section class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mt-4 justify-content-center" *ngIf="products.length && products; else not">
+    <section class="row row-cols-1 row-cols-md-3 row-cols-lg-4 mt-4 justify-content-center" *ngIf="products.length && products; else not">
         <article *ngFor="let product of products | productFind:filterSearchProduct:filterFormString">
-            <div class="col">
-                <div class="card rounded shadow border-0 card-background-card text-light h-100 mb-2 mb-md-3">
+            <div class="col" *ngIf="product.visible == 'true' || role == 'admin'; else not">
+                <div class="card rounded shsadow border-0 card-background-card text-light h-100 mb-2 mb-md-3">
                     <img src="{{product.image_url}}" class="card-img-top card-img-descubre " alt="mesa ">
-                    <div class="card-body border-1 text-center ">
+                    <div class="card-body border-1 text-center">
                         <h1 class="card-title ">{{product.name}}</h1>
                         <p class="card-text ">{{product.price |currency:'EUR':'symbol-narrow'}}</p>
+                        <p *ngIf="role == 'admin'">Visibilidad: {{product.visible}}</p>
                     </div>
                     <div class="text-center m-3">
                         <hr>
@@ -37,6 +38,6 @@
         </article>
     </section>
     <ng-template #not>
-        <h3>No hay productos.</h3>
+        <h3 class="text-primary text-center">No hay productos.</h3>
     </ng-template>
 </main>

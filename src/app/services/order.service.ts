@@ -31,6 +31,21 @@ export class OrderService {
     );
   }
 
+  editOrder(id:number, direction:string,post_code:number,city:string,state:string,country:string  ){
+    return this.http.put('orders/'+id, {
+      direction: direction,
+      post_code: post_code,
+      city: city,
+      state: state,
+      country: country
+    }).pipe(
+      map(product => console.log(product)),
+      catchError((resp) =>
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}. ${resp}`)))
+    );
+  }
+
+
 
   getOrder(id:number): Observable<Order> {
     return this.http.get<Order>('orders/'+id).pipe(
@@ -70,9 +85,19 @@ export class OrderService {
     )
   }
 
-  updateOrder(id:number,status:string): Observable<any> {
-    return this.http.put('orders/'+id, {
+  updateStatusOrder(id:number,status:string): Observable<any> {
+    return this.http.patch('status/orders/'+id, {
       status: status,
+    }).pipe(
+      map(orders=> {return orders}),
+      catchError((resp: HttpErrorResponse) =>
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+    );
+  }
+
+  updateValorationOrder(id:number,valoration:number): Observable<any> {
+    return this.http.patch('valoration/orders/'+id, {
+      valoration: valoration,
     }).pipe(
       map(orders=> {return orders}),
       catchError((resp: HttpErrorResponse) =>

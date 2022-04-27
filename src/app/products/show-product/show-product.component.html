@@ -1,5 +1,5 @@
 <main class="container">
-    <div class="card card-background-card rounded shadow border-0 h-100 mx-auto col-8 col-lg-4 mt-4">
+    <div class="card card-background-card rounded shadow border-0 h-100 mx-auto col-12 col-md-8 col-lg-4 mt-4">
         <img class="img-fluid" src="{{ product.image_url }}" />
         <div class="card-body text-center text-light">
             <h1 class="card-title">{{ product.name }}</h1>
@@ -12,16 +12,13 @@
             </button>
             <p class='text-danger' *ngIf="!btn_active">Producto esta agotado</p>
             <div class="d-grid gap-2 mx-auto" *ngIf="role === 'admin'">
-                <a class="btn btn-delete" (click)="deleteProduct()">
-                  Eliminar el producto
-                </a>
                 <a class="btn btn-warning" [routerLink]="[ '/products/edit/',product.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Editar Producto</a>
             </div>
         </div>
     </div>
     <h1 class="text-center text-primary mt-2">Commentarios de clientes reales</h1>
-    <div *ngIf="comments.length && comments; else not">
-        <div class="col-12 col-md-8 mx-auto" *ngFor="let comment of comments">
+    <div class="col-12  mx-auto" *ngIf="comments.length && comments; else not">
+        <div *ngFor="let comment of comments">
             <div class="card rounded shadow border-0 h-100 justify-content-center p-2 m-3">
                 <h3 class="mx-auto text-primary">Commentario de: {{ comment.name +" "+comment.surname}}</h3>
                 <hr>
@@ -29,8 +26,10 @@
                     <p>
                         <span class="text-muted fs-4">{{ comment.content }}.</span>
                     </p>
-                    <p>Valoracion: {{ comment.stars }}/5</p>
+                    <p>Valoracion del producto: {{ comment.valoration }}/5</p>
                     <p>Fecha de commentario: {{ comment.created_at | date }}</p>
+                    <p>Valoracion del pedido: {{ comment.valoration_order}}</p>
+                    <p>Pais a donde se enviado el pedido: {{ comment.country}}</p>
                 </div>
                 <button class="btn rounded-0 btn-delete" (click)="deleteComment(comment)" *ngIf="status != null">
                   Eliminar
@@ -51,9 +50,9 @@
                 </div>
                 <div class="col-8">
                     <div class="form-floating mt-2">
-                        <input class="form-control rounded-0 border-top-0 border-start-0 border-end-0" type="number" id="stars" [formControlName]="'stars'" name="stars" min="0" max="5">
-                        <label for="stars" class="form-label">Valoracion:</label>
-                        <span class="text-danger" *ngIf="!addCommentForm.get('stars')?.valid && addCommentForm.get('stars')?.touched">Valoracion es un numero entre 0 a 5 </span>
+                        <input class="form-control rounded-0 border-top-0 border-start-0 border-end-0" type="number" id="valoration" [formControlName]="'valoration'" name="valoration" min="0" max="5">
+                        <label for="valoration" class="form-label">Valoracion:</label>
+                        <span class="text-danger" *ngIf="!addCommentForm.get('valoration')?.valid && addCommentForm.get('valoration')?.touched">Valoracion es un numero entre 0 a 5 </span>
                     </div>
                 </div>
             </div>

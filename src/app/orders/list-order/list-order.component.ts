@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Order } from 'src/app/interfaces/order';
 import { OrderService } from 'src/app/services/order.service';
@@ -9,8 +10,9 @@ import { OrderService } from 'src/app/services/order.service';
   styleUrls: ['./list-order.component.scss']
 })
 export class ListOrderComponent implements OnInit {
-
-  status: string | null = sessionStorage.getItem('token');
+  filterSearchID!:string;
+  evaluateForm!: FormGroup;
+  status: string | null = localStorage.getItem('token');
   user_role:string = "";
   orders: Order[] = [];
   constructor(private route: ActivatedRoute, private orderService: OrderService) { }
@@ -20,7 +22,9 @@ export class ListOrderComponent implements OnInit {
       this.user_role = JSON.parse(this.status).user_role;
     }
     this.orders = this.route.snapshot.data['orders'];
-    console.log(this.orders)
+    this.evaluateForm = new FormGroup({
+      'valoration': new FormControl(0, [Validators.required]),
+    });
   }
 
   deleteOrder(id:number){
@@ -34,7 +38,7 @@ export class ListOrderComponent implements OnInit {
   }
 
   delieveredOrder(id:number){
-    this.orderService.updateOrder(id, "ended").subscribe({
+    this.orderService.updateStatusOrder(id, "terminado").subscribe({
       next: ()=>{
         alert('Pedido marcado como entregado');
         window.location.reload();
@@ -43,4 +47,16 @@ export class ListOrderComponent implements OnInit {
     });
   }
 
+  evaluateOrder(id:number){
+    let form_values = this.evaluateForm.value;
+    if(this.evaluateForm.valid){
+      this.orderService.updateValorationOrder(id, form_values['valoration']).subscribe({
+        next: ()=>{
+          alert('Pedido se ha valorado con exito!');
+          window.location.reload();
+        },
+        error: (error:any) => console.log(error),
+      });
+  }
+}
 }
