@@ -9,7 +9,7 @@ import { OrderService } from 'src/app/services/order.service';
   styleUrls: ['./show-order.component.scss']
 })
 export class ShowOrderComponent implements OnInit {
-  status: string | null = sessionStorage.getItem('token');
+  status: string | null = localStorage.getItem('token');
   ended: string = '';
   order: any;
   user_role:string = "";
@@ -34,7 +34,7 @@ export class ShowOrderComponent implements OnInit {
   }
 
   delieveredOrder(id:number){
-    this.orderService.updateOrder(id, "ended").subscribe({
+    this.orderService.updateOrder(id, "terminado").subscribe({
       next: ()=>{
         alert('Pedido marcado como entregado');
         window.location.reload();

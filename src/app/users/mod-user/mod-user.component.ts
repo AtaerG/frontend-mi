@@ -14,7 +14,7 @@ export class ModUserComponent implements OnInit {
   user!:User;
   modUserForm!: FormGroup;
   password!: string
-  status:string|null = sessionStorage.getItem('token');
+  status:string|null = localStorage.getItem('token');
   role: string = "";
 
   constructor(private route: ActivatedRoute, private userService: UserService, private router: Router) {
@@ -57,7 +57,7 @@ export class ModUserComponent implements OnInit {
     if(con){
       this.userService.deleteUserAccount(this.user.id).subscribe({
         next: (re)=> {
-          sessionStorage.clear();
+          localStorage.clear();
           this.router.navigate(['/']).then(() => {
             window.location.reload();
           });;

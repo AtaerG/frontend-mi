@@ -17,7 +17,7 @@ import { CommentService } from 'src/app/services/comment.service';
 export class ShowProductComponent implements OnInit {
 
   comment_write_permission:string = '';
-  status: string | null = sessionStorage.getItem('token');
+  status: string | null = localStorage.getItem('token');
   addCommentForm!: FormGroup;
   role: string = "normal_user";
   product!: Product;
@@ -74,18 +74,18 @@ export class ShowProductComponent implements OnInit {
   addProdToOrder() {
     console.log(this.product);
     this.product.amount -= 1;
-    this.productService.editProduct(this.product.id, this.product.name, this.product.price, this.product.description, this.product.amount, this.product.image_url, this.product.tag)
+    this.productService.editProduct(this.product.id, this.product.name, this.product.price, this.product.description, this.product.amount, this.product.image_url, this.product.tag, this.product.visible)
       .subscribe({
         next: () => {
-          let prods_session = sessionStorage.getItem('products');
+          let prods_session = localStorage.getItem('products');
           if (prods_session != null) {
             this.products = JSON.parse(prods_session);
             console.log(this.products);
             this.products.push(this.product);
-            sessionStorage.setItem('products', JSON.stringify(this.products));
+            localStorage.setItem('products', JSON.stringify(this.products));
           } else {
             this.products.push(this.product);
-            sessionStorage.setItem('products', JSON.stringify(this.products));
+            localStorage.setItem('products', JSON.stringify(this.products));
           }
           alert("Product added to order");
           this.router.navigate(['/products']).then(() => {
@@ -94,18 +94,6 @@ export class ShowProductComponent implements OnInit {
         },
         error: error => console.log(error),
       })
-  }
-
-
-  deleteProduct() {
-    this.productService.deleteProduct(this.product.id).subscribe({
-      next: ()=>{
-        this.router.navigate(['/products']).then(() => {
-          window.location.reload();
-      })
-    },
-      error: error => console.log(error),
-    });
   }
 
   deleteComment(comment: Comment) {

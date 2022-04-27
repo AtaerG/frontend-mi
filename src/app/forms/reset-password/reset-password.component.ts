@@ -20,7 +20,7 @@ export class ResetPasswordComponent implements OnInit {
       'password': new FormControl(null, Validators.required),
       'password_confirm': new FormControl(null, Validators.required)
     });
-    let email = JSON.parse(sessionStorage['token']).email;
+    let email = JSON.parse(localStorage['token']).email;
     this.authService.getPasswordChangeToken(email).subscribe({
       next: (tkn)=>{
         this.token_str = tkn;

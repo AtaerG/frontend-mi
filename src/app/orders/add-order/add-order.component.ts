@@ -14,7 +14,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class AddOrderComponent implements OnInit {
 
-  status: string | null = sessionStorage.getItem('token');
+  status: string | null = localStorage.getItem('token');
   shippingForm!: FormGroup;
   products:Product[] = [];
   products_id: number[] = [];
@@ -22,7 +22,7 @@ export class AddOrderComponent implements OnInit {
   constructor(private orderService:OrderService, private router: Router,private productService:ProductService) { }
 
   ngOnInit(): void {
-    let prods = sessionStorage.getItem('products');
+    let prods = localStorage.getItem('products');
     if(prods != null){
       this.products = JSON.parse(prods);
       this.products.forEach((product)=> {
@@ -40,16 +40,16 @@ export class AddOrderComponent implements OnInit {
 
   sentOrder(){
     if(this.status != null){
-    let prods = sessionStorage.getItem('products');
+    let prods = localStorage.getItem('products');
     if(this.shippingForm.valid && prods != null){
       let form_values = this.shippingForm.value;
       this.products.forEach((el)=>{
         this.products_id.push(el.id);
       });
-      this.orderService.createOrder(this.products_id.toString(),this.precio_total,'paid',form_values['direction'],form_values['post_code'],form_values['city'],form_values['state'],form_values['country'])
+      this.orderService.createOrder(this.products_id.toString(),this.precio_total,'pagado',form_values['direction'],form_values['post_code'],form_values['city'],form_values['state'],form_values['country'])
       .subscribe({
         next: ()=> {
-          sessionStorage.removeItem('products');
+          localStorage.removeItem('products');
           this.router.navigate(['/orders']).then(() => {
             window.location.reload();
           });
@@ -66,17 +66,17 @@ export class AddOrderComponent implements OnInit {
 
   removeProdFromOrder(product: Product){
     product.amount += 1;
-    this.productService.editProduct(product.id, product.name, product.price, product.description, product.amount, product.image_url, product.tag)
+    this.productService.editProduct(product.id, product.name, product.price, product.description, product.amount, product.image_url, product.tag, product.visible)
     .subscribe({
       next: ()=> {
-        let prods_session = sessionStorage.getItem('products');
+        let prods_session = localStorage.getItem('products');
         if(prods_session != null){
           this.products = JSON.parse(prods_session);
           this.products.splice(this.products.findIndex(el => el.id === product.id),1);
-          sessionStorage.setItem('products',JSON.stringify(this.products));
+          localStorage.setItem('products',JSON.stringify(this.products));
         } else {
           this.products.push(product);
-          sessionStorage.setItem('products',JSON.stringify(this.products));
+          localStorage.setItem('products',JSON.stringify(this.products));
         }
       },
       error: error=>console.log(error),

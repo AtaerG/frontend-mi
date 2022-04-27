@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
           this.authService.login(form_values['email'],form_values['password']).subscribe({
             next: token => {
               console.log(token);
-              sessionStorage.setItem('token',JSON.stringify(token));
+              localStorage.setItem('token',JSON.stringify(token));
               console.log(token);
               this.regitser_complete = true;
               this.router.navigate(['/products']).then(() => {

@@ -10,7 +10,7 @@ import { OrderService } from 'src/app/services/order.service';
 })
 export class ListOrderComponent implements OnInit {
 
-  status: string | null = sessionStorage.getItem('token');
+  status: string | null = localStorage.getItem('token');
   user_role:string = "";
   orders: Order[] = [];
   constructor(private route: ActivatedRoute, private orderService: OrderService) { }

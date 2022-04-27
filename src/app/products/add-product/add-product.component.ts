@@ -22,6 +22,7 @@ export class AddProductComponent implements OnInit {
       'description': new FormControl(null, [Validators.required]),
       'amount': new FormControl(null, [Validators.required, Validators.min(0)]),
       'tag': new FormControl('salon', [Validators.required]),
+      'visible': new FormControl('true', [Validators.required]),
       'image_url': new FormControl(null, Validators.required),
     });
   }
@@ -30,7 +31,7 @@ export class AddProductComponent implements OnInit {
     let form_values = this.addProdForm.value;
     if(this.addProdForm.valid){
       console.log(form_values['image_url'])
-      this.productService.addProduct(form_values['name'],form_values['price'],form_values['description'],form_values['amount'],form_values['image_url'],form_values['tag']).subscribe({
+      this.productService.addProduct(form_values['name'],form_values['price'],form_values['description'],form_values['amount'],form_values['image_url'],form_values['tag'],form_values['visible']).subscribe({
         next: ()=> {
           this.router.navigate(['/products']).then(() => {
             window.location.reload();

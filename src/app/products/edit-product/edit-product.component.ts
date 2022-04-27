@@ -24,7 +24,8 @@ export class EditProductComponent implements OnInit {
       'price': new FormControl(this.product.price, [Validators.required, Validators.min(1)]),
       'description': new FormControl(this.product.description, [Validators.required]),
       'amount': new FormControl(this.product.amount, [Validators.required, Validators.min(0)]),
-      'tag': new FormControl(this.product.tag),
+      'tag': new FormControl(this.product.tag,[Validators.required]),
+      'visible': new FormControl(this.product.visible, [Validators.required]),
       'image_url': new FormControl(this.image),
     });
   }
@@ -32,7 +33,7 @@ export class EditProductComponent implements OnInit {
   editProduct(){
     let form_values = this.editProdForm.value;
     if(this.editProdForm.valid){
-      this.productService.editProduct(this.product.id,form_values['name'],form_values['price'],form_values['description'],form_values['amount'],form_values['image_url'],form_values['tag']).subscribe({
+      this.productService.editProduct(this.product.id,form_values['name'],form_values['price'],form_values['description'],form_values['amount'],form_values['image_url'],form_values['tag'], form_values['visible']).subscribe({
         next: (re)=> {
           console.log(re);
           this.router.navigate(['/products']).then(() => {

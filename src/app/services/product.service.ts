@@ -10,14 +10,15 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  addProduct(name:string, price:number, description: string, amount:number, image_url:string, tag:string){
+  addProduct(name:string, price:number, description: string, amount:number, image_url:string, tag:string, visible:string){
     return this.http.post('products',{
       name: name,
       price: price,
       description: description,
       amount: amount,
       image_url: image_url,
-      tag:tag
+      tag:tag,
+      visible: visible
     }).pipe(
       catchError((resp: HttpErrorResponse) =>
       throwError(()=> new Error(`Error a la hora de crear producto. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
@@ -45,10 +46,12 @@ export class ProductService {
     );
   }
 
-  deleteProduct(id:number) {
-    return this.http.delete('products/'+id).pipe(
+  deleteProduct(id:number, visible:string) {
+    return this.http.patch('products/'+id, {
+      visible: visible,
+    }).pipe(
       catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error a la hora de eliminar producto. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      throwError(()=> new Error(`Error a la hora decambiar propiedades del producto. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     )
   }
 
@@ -59,14 +62,15 @@ export class ProductService {
     )
   }
 
-  editProduct(id:number,name:string, price:number, description: string, amount:number, image_url:string, tag:string){
+  editProduct(id:number,name:string, price:number, description: string, amount:number, image_url:string, tag:string, visible:string){
     return this.http.put('products/'+id,{
       name: name,
       price: price,
       description: description,
       amount: amount,
       image_url: image_url,
-      tag:tag
+      tag:tag,
+      visible:visible
     }).pipe(
       map((re)=> console.log(re)),
       catchError((resp: HttpErrorResponse) =>

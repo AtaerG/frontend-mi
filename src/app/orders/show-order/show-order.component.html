@@ -13,12 +13,12 @@
                             <h1 class="card-title ">{{product.name}}</h1>
                         </div>
                         <a class="btn btn-buscar rounded-0 text-light" [routerLink]="[ '/products', product.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} " *ngIf="this.ended != '1'">Mas Info</a>
-                        <a class="btn btn-outline-secondary rounded-0" [routerLink]="[ '/products', product.id] " [routerLinkActive]="[ 'active'] " [queryParams]="{ comment: 1 }" [routerLinkActiveOptions]="{exact:true} " *ngIf="this.ended == '1'">Escribir la reseña</a>
+                        <a class="btn btn-info rounded-0 fs-4" [routerLink]="[ '/products', product.id]  " [queryParams]="{comment: 1 }" [routerLinkActive]=" [ 'active'] " [routerLinkActiveOptions]="{exact:true} " *ngIf="this.ended == '1'">Escribir reseña</a>
                     </div>
                 </div>
             </article>
         </section>
-        <a class="btn btn-success w-100 w-md-50 mx-auto rounded-0 fs-4 mt-1" (click)="delieveredOrder(order.id)" *ngIf="order.status == 'paid' && user_role == 'admin' && order.id">Marcar el pedido como entregado</a>
+        <a class="btn btn-success w-100 w-md-50 mx-auto rounded-0 fs-4 mt-1" (click)="delieveredOrder(order.id)" *ngIf="order.status == 'pagado' && user_role == 'admin' && order.id">Marcar el pedido como entregado</a>
         <a class="btn btn-delete w-100 w-md-50 mx-auto rounded-0 fs-4 text-light mt-1" *ngIf="order.status != 'ended' && order.id" (click)="deleteOrder(order.id)">Eliminar pedido</a>
     </div>
 </main>

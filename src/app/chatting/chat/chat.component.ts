@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
-  status: string | null = sessionStorage.getItem('token');
+  status: string | null = localStorage.getItem('token');
   appointments: Appointment[] =[];
   token: string = "";
   admins:User[] = [];

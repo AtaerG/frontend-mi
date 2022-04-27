@@ -1,5 +1,5 @@
 <main class="container">
-    <div class="card card-background-card rounded shadow border-0 h-100 mx-auto col-8 col-lg-4 mt-4">
+    <div class="card card-background-card rounded shadow border-0 h-100 mx-auto col-12 col-md-8 col-lg-4 mt-4">
         <img class="img-fluid" src="{{ product.image_url }}" />
         <div class="card-body text-center text-light">
             <h1 class="card-title">{{ product.name }}</h1>
@@ -12,16 +12,13 @@
             </button>
             <p class='text-danger' *ngIf="!btn_active">Producto esta agotado</p>
             <div class="d-grid gap-2 mx-auto" *ngIf="role === 'admin'">
-                <a class="btn btn-delete" (click)="deleteProduct()">
-                  Eliminar el producto
-                </a>
                 <a class="btn btn-warning" [routerLink]="[ '/products/edit/',product.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Editar Producto</a>
             </div>
         </div>
     </div>
     <h1 class="text-center text-primary mt-2">Commentarios de clientes reales</h1>
-    <div *ngIf="comments.length && comments; else not">
-        <div class="col-12 col-md-8 mx-auto" *ngFor="let comment of comments">
+    <div class="col-12  mx-auto" *ngIf="comments.length && comments; else not">
+        <div *ngFor="let comment of comments">
             <div class="card rounded shadow border-0 h-100 justify-content-center p-2 m-3">
                 <h3 class="mx-auto text-primary">Commentario de: {{ comment.name +" "+comment.surname}}</h3>
                 <hr>
