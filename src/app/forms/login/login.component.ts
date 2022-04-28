@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.valid ){
       let form_values = this.loginForm.value;
       this.recaptchaV3Service.execute('importantAction')
-      .subscribe((token: string) => {
-        this.authService.login(form_values['email'],form_values['password'])
+      .subscribe((token_recapV3: string) => {
+        this.authService.login(form_values['email'],form_values['password'], token_recapV3)
         .subscribe({
           next: token => {
             localStorage.setItem('token',JSON.stringify(token));

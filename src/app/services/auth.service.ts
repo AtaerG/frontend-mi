@@ -23,11 +23,15 @@ export class AuthService {
     );
   }
 
-  login(email: string, password:  string) {
+  login(email: string, password:  string, token_recapV3: string) {
     return this.http.post('login', {
       email: email,
-      password: password
-    })
+      password: password,
+      token_recapV3: token_recapV3
+    }).pipe(
+      catchError((resp: HttpErrorResponse) =>
+      throwError(()=> new Error(`Error. Posiblemente, eres un robot. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+    );
   }
 
   logout(token:any){

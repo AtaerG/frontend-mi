@@ -9,7 +9,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [UserTypeUnauthCheckerGuard] },
-  { path: 'register', component: RegisterComponent, canDeactivate: [SaveChangesGuard]},
+  { path: 'register', component: RegisterComponent},
   { path: 'resetpswd', component: ResetPasswordComponent}
 ];
 

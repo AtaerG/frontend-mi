@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from 'src/app/interfaces/user';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -33,33 +32,17 @@ export class RegisterComponent implements OnInit {
     if(this.registerForm.valid){
       let form_values = this.registerForm.value;
       this.authService.register(form_values['name'], form_values['surname'],form_values['email'],form_values['password'])
-      .subscribe({
-        next: () => {
-          this.authService.login(form_values['email'],form_values['password']).subscribe({
-            next: token => {
-              console.log(token);
-              localStorage.setItem('token',JSON.stringify(token));
-              console.log(token);
-              this.regitser_complete = true;
-              this.router.navigate(['/products']).then(() => {
-                window.location.reload();
-              });
-            },
-            error: error => console.log(error),
-          });
-        },
-        error: error =>  {
-          alert(error)
-        }
+        .subscribe({
+          next: () => {
+            alert('La cuena se ha creado con exito');
+            this.router.navigate(['/login']).then(() => {
+              window.location.reload();
+            });;
+          },
+          error: error =>  {
+            alert("Error al crear la cuenta!");
+          }
       });
-    }
-  }
-
-  canDeactivate() {
-    if(!this.regitser_complete){
-      return confirm("Quiere abandonar la pagina? La cuenta no se guardara!");
-    } else {
-      return true;
     }
   }
 }
