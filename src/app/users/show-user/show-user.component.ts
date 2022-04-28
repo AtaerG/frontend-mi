@@ -47,20 +47,19 @@ export class ShowUserComponent implements OnInit {
       next: (data: any) => {
         for (let ob of data) {
           console.log(ob);
-          if(ob.status =='ended'){
+          if(ob.status =='terminado'){
             this.date_orders.push(ob.total_price);
             let year = ob.created_at.slice(0,4);
             let mes = ob.created_at.slice(5,7);
             let dia = ob.created_at.slice(8,10);
             let converted_date = dia+"/"+mes+"/"+year;
-            // check if converted_date is already in the array
-            console.log(this.dates_orders.includes(converted_date));
             if(this.dates_orders.includes(converted_date)){
               let index = this.dates_orders.indexOf(converted_date);
               this.barChartData[index].data[0] += ob.total_price;
               continue;
             }
             this.dates_orders.push(converted_date);
+            console.log(this.dates_orders);
             this.barChartLabels = this.dates_orders;
             this.barChartData[0].data = this.date_orders;
           }

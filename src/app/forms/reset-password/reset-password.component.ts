@@ -36,13 +36,10 @@ export class ResetPasswordComponent implements OnInit {
       if(form_values['password_confirm'] ===  form_values['password']){
         this.authService.changePassword(this.token_str, form_values['password'],form_values['password_confirm']).subscribe({
           next: ()=>{
-            alert("La contraseña ha sido cambiada. En 5 sec se redireccionará a la página de productos");
-            setTimeout(
-              () => {
+            alert("La contraseña ha sido cambiada.");
                 this.router.navigate(['/products']).then(() => {
                   window.location.reload();
-                });
-              }, 5000);
+            });
           },
           error: (er)=> console.log(er),
         })
