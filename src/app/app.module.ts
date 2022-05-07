@@ -37,7 +37,7 @@ import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
       useClass: BaseUrlInterceptor ,
       multi:true
     },
-    { provide: RECAPTCHA_V3_SITE_KEY, useValue: '6LcPr0keAAAAANPLsWmn0RMC5UuP1pWMDN1dcQta' },
+    { provide: RECAPTCHA_V3_SITE_KEY, /*desarollo useValue: '6Le7t7sfAAAAAA4OIXhlEPZ-vQks9H5_R0R8AJAY'*//*local host:*/ useValue: '6LcPr0keAAAAANPLsWmn0RMC5UuP1pWMDN1dcQta' },
   ],
   bootstrap: [AppComponent]
 })

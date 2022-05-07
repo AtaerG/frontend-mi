@@ -26,14 +26,16 @@ export class EditProductComponent implements OnInit {
       'amount': new FormControl(this.product.amount, [Validators.required, Validators.min(0)]),
       'tag': new FormControl(this.product.tag,[Validators.required]),
       'visible': new FormControl(this.product.visible, [Validators.required]),
-      'image_url': new FormControl(this.image),
     });
   }
 
   editProduct(){
     let form_values = this.editProdForm.value;
     if(this.editProdForm.valid){
-      this.productService.editProduct(this.product.id,form_values['name'],form_values['price'],form_values['description'],form_values['amount'],form_values['image_url'],form_values['tag'], form_values['visible']).subscribe({
+      if(this.image == null){
+        alert('Seleccione una imagen');
+      } else {
+      this.productService.editProduct(this.product.id,form_values['name'],form_values['price'],form_values['description'],form_values['amount'],this.image,form_values['tag'], form_values['visible']).subscribe({
         next: (re)=> {
           console.log(re);
           this.router.navigate(['/products']).then(() => {
@@ -44,6 +46,7 @@ export class EditProductComponent implements OnInit {
           console.log(error);
         },
       })
+    }
     }
 
   }

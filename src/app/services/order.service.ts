@@ -14,7 +14,7 @@ export class OrderService {
 
   constructor(private http: HttpClient, private productService:ProductService) { }
 
-  createOrder(products:string,total_price:number,status:string, direction:string,post_code:number,city:string,state:string,country:string  ){
+  createOrder(products:any,total_price:number,status:string, direction:string,post_code:number,city:string,state:string,country:string  ){
     return this.http.post('orders', {
       products: products,
       total_price: total_price,

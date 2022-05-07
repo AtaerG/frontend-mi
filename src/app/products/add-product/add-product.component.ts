@@ -23,24 +23,26 @@ export class AddProductComponent implements OnInit {
       'amount': new FormControl(null, [Validators.required, Validators.min(0)]),
       'tag': new FormControl('salon', [Validators.required]),
       'visible': new FormControl('true', [Validators.required]),
-      'image_url': new FormControl(null, Validators.required),
     });
   }
 
   createProduct(){
     let form_values = this.addProdForm.value;
-    if(this.addProdForm.valid){
-      console.log(form_values['image_url'])
-      this.productService.addProduct(form_values['name'],form_values['price'],form_values['description'],form_values['amount'],form_values['image_url'],form_values['tag'],form_values['visible']).subscribe({
-        next: ()=> {
-          this.router.navigate(['/products']).then(() => {
-            window.location.reload();
-          });
-        },
-        error: error => {
-          console.log(error);
-        },
-      })
+    if(this.image == null){
+      alert('Seleccione una imagen');
+    } else {
+      if(this.addProdForm.valid){
+        this.productService.addProduct(form_values['name'],form_values['price'],form_values['description'],form_values['amount'],this.image,form_values['tag'],form_values['visible']).subscribe({
+          next: ()=> {
+            this.router.navigate(['/products']).then(() => {
+              window.location.reload();
+            });
+          },
+          error: error => {
+            console.log(error);
+          },
+        })
+      }
     }
   }
 
