@@ -40,7 +40,6 @@ export class RegisterComponent implements OnInit {
             });;
           },
           error: error =>  {
-            alert("Error al crear la cuenta!");
           }
       });
     }

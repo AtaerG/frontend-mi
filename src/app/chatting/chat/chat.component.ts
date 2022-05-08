@@ -37,7 +37,7 @@ export class ChatComponent implements OnInit {
             let datetime = app.date+" "+app.time;
             let date_ev = new Date(datetime);
             let date_now = new Date();
-              if(date_ev  >= date_now ){
+              if(date_ev  <= date_now ){
                 this.disabled = true;
               }else{
                 this.disabled = false;
@@ -53,7 +53,7 @@ export class ChatComponent implements OnInit {
               let datetime = app.date+" "+app.time;
               let date_ev = new Date(datetime);
               let date_now = new Date();
-                if(date_ev  >= date_now ){
+                if(date_ev  <= date_now ){
                   this.disabled = true;
                 }else{
                   this.disabled = false;

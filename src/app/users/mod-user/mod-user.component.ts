@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
+import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class ModUserComponent implements OnInit {
   status:string|null = localStorage.getItem('token');
   role: string = "";
 
-  constructor(private route: ActivatedRoute, private userService: UserService, private router: Router) {
+  constructor(private route: ActivatedRoute, private authService: AuthService, private userService: UserService, private router: Router) {
     if(this.status != null){
       this.role = JSON.parse(this.status).user_role;
     }
@@ -55,15 +56,16 @@ export class ModUserComponent implements OnInit {
 
   deleteUser(){
     let con = confirm("Quere eliminar la cuenta de usuario?");
-    if(con){
-      this.userService.deleteUserAccount(this.user.id).subscribe({
-        next: (re)=> {
+    let token = localStorage.getItem('token');
+    if(con && token != null){
+      this.userService.deleteUserAccount(this.user.id, token).subscribe({
+        next: ()=>{
+          alert("La cuenta de usuario ha sido eliminada con exito!");
           localStorage.clear();
           this.router.navigate(['/']).then(() => {
             window.location.reload();
           });;
-        },
-        error: error=> console.log(error),
+        }
       });
     }
   }

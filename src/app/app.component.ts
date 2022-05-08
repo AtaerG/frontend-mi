@@ -22,6 +22,7 @@ export class AppComponent {
 
   logout(){
     let token = localStorage.getItem('token');
+    if(token != null){
     this.authService.logout(token).subscribe({
       next: () =>  {
         localStorage.clear();
@@ -31,4 +32,5 @@ export class AppComponent {
     },
     });
   }
+ }
 }

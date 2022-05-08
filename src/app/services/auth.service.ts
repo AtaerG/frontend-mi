@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private router:Router) { }
+  constructor(private http: HttpClient) { }
 
 
   register(name:string, surname:string, email: string, password:  string){
@@ -34,7 +34,7 @@ export class AuthService {
     );
   }
 
-  logout(token:any){
+  logout(token:string){
     console.log(JSON.parse(token)['token'].accessToken);
     let headers = new HttpHeaders({
       Authorization: `Bearer ${JSON.parse(token)['token'].accessToken}`

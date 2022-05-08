@@ -1,6 +1,7 @@
 import { Product } from "./product";
 
 export interface Order {
+  order_detail: any;
   id:number,
   products: Product[];
   total_price:number,

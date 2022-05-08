@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { Order } from '../interfaces/order';
 import { Product } from '../interfaces/product';
@@ -12,7 +13,7 @@ export class OrderService {
 
   order!: Order;
 
-  constructor(private http: HttpClient, private productService:ProductService) { }
+  constructor(private http: HttpClient, private productService:ProductService,private router: Router) { }
 
   createOrder(products:any,total_price:number,status:string, direction:string,post_code:number,city:string,state:string,country:string  ){
     return this.http.post('orders', {
@@ -45,6 +46,15 @@ export class OrderService {
     );
   }
 
+  getOrderForCanActivate(id:number): Observable<any> {
+    return this.http.get<any>('orders/'+id).pipe(
+      map((response) => {
+        return response;
+      }),
+      catchError((resp: HttpErrorResponse) =>
+      throwError(()=> new Error(`Error a la hora de mostrar el pedido. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+    );
+  }
 
 
   getOrder(id:number): Observable<Order> {

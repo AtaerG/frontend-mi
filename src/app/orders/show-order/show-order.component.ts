@@ -27,7 +27,6 @@ export class ShowOrderComponent implements OnInit {
     this.evaluateForm = new FormGroup({
       'valoration': new FormControl(0, [Validators.required]),
     });
-    console.log(this.order);
   }
 
   deleteOrder(id:number){
