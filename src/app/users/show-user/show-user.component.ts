@@ -39,7 +39,7 @@ export class ShowUserComponent implements OnInit {
   public barChartType = 'bar';
   public barChartLegend = true;
   public barChartData = [
-    {data: [0], label: 'Sus compras'},
+    {data: [0], label: 'Valor de compra en EUR'},
   ];
 
   ngOnInit(): void {

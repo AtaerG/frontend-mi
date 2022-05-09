@@ -8,7 +8,7 @@
             </p>
             <p class="card-text text-danger" *ngIf="show_msg">Queda solamente: {{product.amount}}</p>
             <p class="card-text">Valoracion mediano: {{ medianValoration() }}/5</p>
-            <form class="container w-100 w-lg-75 p-2" [formGroup]="amountForm" (ngSubmit)="addProdToOrder()">
+            <form class="container w-100 w-lg-75 p-2" [formGroup]="amountForm" (ngSubmit)="addProdToOrder()" *ngIf="btn_active">
                 <input *ngIf="role !== 'admin'" type="number" class="form-control" placeholder="Cantidad a comprar" [formControlName]="'amount_to_buy'" min="0" max="10" />
                 <div class="text-danger mt-3 mb-3" *ngIf="!amountForm.get('amount_to_buy')?.valid && amountForm.get('amount_to_buy')?.touched">
                     La cantidad a comprar debe ser un número entre 0 y 10
@@ -43,7 +43,7 @@
         </div>
     </div>
     <div>
-        <form class="container" [formGroup]="addCommentForm" (ngSubmit)="submitComment()" *ngIf="this.comment_write_permission == user_id && !has_comments && status != null && role !== 'admin'">
+        <form class="container" [formGroup]="addCommentForm" (ngSubmit)="submitComment()" *ngIf="this.comment_write_permission == user_id && !has_comments && status != null && role !== 'admin' && order_id !== 0">
             <div class="row justify-content-center">
                 <div class="col-8">
                     <div class="form-floating mt-2">

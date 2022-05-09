@@ -12,6 +12,7 @@ import { UserTypeAdminCheckerGuard } from '../guards/user-type-admin-checker.gua
 import { UserTypeNormalGuard } from '../guards/user-type-normal.guard';
 import { CheckOrderIsUserOrAdminGuard } from '../guards/check-order-is-user-or-admin.guard';
 import { CheckOrderIsUsersGuard } from '../guards/check-order-is-users.guard';
+import { CheckIfNormalOrUnauthGuard } from '../guards/check-if-normal-or-unauth.guard';
 
 const routes: Routes = [
   { path: 'orders', component: ListOrderComponent, canActivate: [UserTypeAuthCheckerGuard],
@@ -19,7 +20,7 @@ const routes: Routes = [
     orders: AllOrdersResolver
   }
 },
-  { path: 'orders/create', component: AddOrderComponent },
+  { path: 'orders/create', component: AddOrderComponent, canActivate: [CheckIfNormalOrUnauthGuard] },
   { path: 'orders/:id', component: ShowOrderComponent,  canActivate: [CheckOrderIsUserOrAdminGuard],
     resolve: {
       order: OrderGetResolver

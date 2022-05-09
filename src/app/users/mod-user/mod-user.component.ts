@@ -17,15 +17,21 @@ export class ModUserComponent implements OnInit {
   password!: string
   status:string|null = localStorage.getItem('token');
   role: string = "";
+  session_user_id: number= 0;
+  actual_user: boolean = false;
 
   constructor(private route: ActivatedRoute, private authService: AuthService, private userService: UserService, private router: Router) {
-    if(this.status != null){
-      this.role = JSON.parse(this.status).user_role;
-    }
   }
 
   ngOnInit(): void {
     this.user = this.route.snapshot.data['user'];
+    if(this.status != null){
+      this.role = JSON.parse(this.status).user_role;
+      this.session_user_id = JSON.parse(this.status).user_id;
+    }
+    if(this.session_user_id == this.user.id){
+      this.actual_user = true;
+    }
     this.password = this.user.password;
     console.log(this.user);
     this.modUserForm = new FormGroup({
@@ -57,6 +63,8 @@ export class ModUserComponent implements OnInit {
   deleteUser(){
     let con = confirm("Quere eliminar la cuenta de usuario?");
     let token = localStorage.getItem('token');
+    console.log(this.session_user_id);
+    console.log(this.user.id);
     if(con && token != null){
       this.userService.deleteUserAccount(this.user.id, token).subscribe({
         next: ()=>{

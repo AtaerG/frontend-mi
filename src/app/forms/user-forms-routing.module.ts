@@ -10,7 +10,7 @@ import { UserTypeAuthCheckerGuard } from '../guards/user-type-auth-checker.guard
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [UserTypeUnauthCheckerGuard] },
-  { path: 'register', component: RegisterComponent},
+  { path: 'register', component: RegisterComponent, canActivate: [UserTypeUnauthCheckerGuard]},
   { path: 'resetpswd', component: ResetPasswordComponent, canActivate: [UserTypeAuthCheckerGuard]}
 ];
 

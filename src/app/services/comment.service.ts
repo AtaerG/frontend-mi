@@ -20,8 +20,9 @@ export class CommentService {
     );
   }
 
-  saveComment(content:string, valoration:number, user_id:number, product_id:number) {
+  saveComment(order_id:number,content:string, valoration:number, user_id:number, product_id:number) {
     return this.http.post('comments',{
+      order_id: order_id,
       content: content,
       valoration: valoration,
       user_id: user_id,
