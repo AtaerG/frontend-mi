@@ -15,6 +15,7 @@ export class ShowOrderComponent implements OnInit {
   status: string | null = localStorage.getItem('token');
   ended: string = '';
   order: any;
+  user_id: number = 0;
   user_role:string = "";
   constructor(private route: ActivatedRoute, private orderService: OrderService,private router: Router) { }
 
@@ -23,6 +24,7 @@ export class ShowOrderComponent implements OnInit {
     this.ended = this.route.snapshot.queryParams['ended'];
     if (this.status != null) {
       this.user_role = JSON.parse(this.status).user_role;
+      this.user_id  = JSON.parse(this.status).user_id;
     }
     this.evaluateForm = new FormGroup({
       'valoration': new FormControl(0, [Validators.required]),

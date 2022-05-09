@@ -5,9 +5,9 @@
             <div class="card card-shadowed shadow-lg border-0 h-100 card-descubre-bg-color mb-2 mb-md-3 ">
                 <img src="../../../assets/images/card-1.jpeg " class="card-img-top card-img-descubre" alt="mesa">
                 <div class="card-body ">
-                    <h1 class="card-title text-light text-center ">Ver todos Muebles</h1>
+                    <h1 class="card-title text-light text-center">Ver todos Muebles</h1>
                 </div>
-                <a class="btn btn-lg text-light " [routerLink]="[ '/products']">
+                <a class="btn btn-lg text-light" [routerLink]="['/products']">
                     <i class="bi bi-arrow-right-circle fs-1 "></i>
                 </a>
             </div>
@@ -16,10 +16,15 @@
             <div class="card card-shadowed shadow-lg h-100 border-0 card-descubre-bg-color mb-3 ">
                 <img src="../../../assets/images/card-4.png" class="card-img-top card-img-descubre">
                 <div class="card-body ">
-                    <h1 class="card-title text-light text-center ">Ver mis pedidos
+                    <h1 class="card-title text-light text-center " *ngIf="user_role !== ''">Ver mis pedidos
+                    </h1>
+                    <h1 class="card-title text-light text-center " *ngIf="user_role == ''">Entrar a sesion
                     </h1>
                 </div>
-                <a class="btn btn-lg text-light " [routerLink]="[ '/orders']">
+                <a class="btn btn-lg text-light " [routerLink]="[ '/orders']" *ngIf="user_role !== ''">
+                    <i class="bi bi-arrow-right-circle fs-1 "></i>
+                </a>
+                <a class="btn btn-lg text-light " [routerLink]="[ '/login']" *ngIf="user_role == ''">
                     <i class="bi bi-arrow-right-circle fs-1 "></i>
                 </a>
             </div>

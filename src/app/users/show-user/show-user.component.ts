@@ -30,7 +30,7 @@ export class ShowUserComponent implements OnInit {
    }
 
   public barChartOptions = {
-    barThickness: 150,
+    barThickness: 100,
     maintainAspectRatio: false,
     scaleShowVerticalLines: false,
     responsive: true,

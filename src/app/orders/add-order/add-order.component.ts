@@ -55,7 +55,6 @@ export class AddOrderComponent implements OnInit {
       this.orderService.createOrder(products,this.precio_total,'pagado',form_values['direction'],form_values['post_code'],form_values['city'],form_values['state'],form_values['country'])
       .subscribe({
         next: ()=> {
-          alert(this.precio_total);
           localStorage.removeItem('products');
           this.router.navigate(['/orders']).then(() => {
             window.location.reload();
@@ -74,11 +73,12 @@ export class AddOrderComponent implements OnInit {
   removeProdFromOrder(product: Product){
     this.products.forEach((el)=>{
       if(el.product.id == product.id){
-        console.log(el.amount);
-        console.log(el.product.amount);
-        el.amount--;
+        console.log( el.amount);//2
+        el.amount--;//1
+        console.log(el.amount)//1
+        console.log(el.product.amount);//2
         el.product.amount++;
-        console.log(product.amount);
+        console.log(el.product.amount);//3
         if(el.amount == 0){
           this.products.splice(this.products.indexOf(el),1);
         }
@@ -90,7 +90,7 @@ export class AddOrderComponent implements OnInit {
     .subscribe({
       next: ()=> {
         let prods_session = localStorage.getItem('products');
-        console.log(prods_session);
+        window.location.reload();
       },
       error: error=>console.log(error),
     })

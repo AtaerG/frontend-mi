@@ -1,25 +1,26 @@
 <main class="container">
     <h1 class="text-center text-primary mt-3">Cesta:</h1>
-    <div class="row">
-        <section class="col-12  col-md-6 row row-cols-1  mx-auto" *ngIf="products != null; else not">
+    <p *ngIf="products.length == 0" class="text-center text-primary">La cesta esta vacia</p>
+    <div *ngIf="products.length !== 0">
+        <section class="col-12 row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 justify-content-center g-3">
             <article *ngFor="let product of products">
                 <div class="col">
-                    <div class="card rounded shadow border-0 h-100 mx-auto col-12 col-lg-4 mt-4 p-4">
-                        <img src="{{product.product.image_url}}" class="card-img-top card-img-descubre" alt="mesa">
-                        <div class="card-body text-secondary text-center ">
+                    <div class="card rounded shadow border-0 h-100 mb-2 text-secondary">
+                        <img src="{{product.product.image_url}}" class="img-fluid card-img-descubre" alt="mesa">
+                        <div class="card-body text-center ">
                             <h1 class="card-title">{{product.product.name}}</h1>
                             <p class="card-text">{{product.product.price |currency:'EUR':'symbol-narrow'}}</p>
                             <p class="card-text text-danger" *ngIf="show_msg">Queda solamente: {{product.product.amount}}</p>
-                        </div>
-                        <p class="text-center text-primary">Cantidad a comprar: {{product.amount}}</p>
-                        <button id="submit" class="btn btn-outline-danger fs-4" (click)="removeProdFromOrder(product.product)">
+                            <p class="text-center text-primary">Cantidad a comprar: {{product.amount}}</p>
+                            <button id="submit" class="btn btn-outline-danger fs-4" (click)="removeProdFromOrder(product.product)">
                           Eliminar 1 producto
                         </button>
+                        </div>
                     </div>
                 </div>
             </article>
         </section>
-        <div class="col-12 col-md-6  mx-auto my-auto bg-light rounded-3">
+        <div class="col-12  mx-auto my-auto bg-light rounded-3 mt-3">
             <form class="mx-auto col-10 p-2" [formGroup]="shippingForm" (ngSubmit)="sentOrder()">
                 <h2 class="text-center text-primary mx-3">Domicilio</h2>
                 <div>
@@ -372,10 +373,5 @@
                 <h3 class="text-primary text-center">Precio total: {{precio_total |currency:'EUR':'symbol-narrow' }}</h3>
             </form>
         </div>
-        <ng-template #not>
-            <div class="col">
-                <h3 class="text-center text-primary">La cesta esta vacia....</h3>
-            </div>
-        </ng-template>
     </div>
 </main>

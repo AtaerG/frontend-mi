@@ -23,7 +23,7 @@
                             <p class="card-title ">Cantidad comprado: {{product.amount}}</p>
                         </div>
                         <a class="btn btn-buscar rounded-0 text-light" [routerLink]="[ '/products', product.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} " *ngIf="this.ended != '1'">Mas Info</a>
-                        <a class="btn btn-info rounded-0 fs-4" [routerLink]="[ '/products', product.id]  " [queryParams]="{comment: 1 }" [routerLinkActive]=" [ 'active'] " [routerLinkActiveOptions]="{exact:true} " *ngIf="this.ended == '1'">Escribir reseña</a>
+                        <a class="btn btn-info rounded-0 fs-4" [routerLink]="[ '/products', product.id]  " [queryParams]="{user_id: user_id, order: order.id}" [routerLinkActive]=" [ 'active'] " [routerLinkActiveOptions]="{exact:true} " *ngIf="this.ended == '1'">Escribir reseña</a>
                     </div>
                 </div>
             </article>
