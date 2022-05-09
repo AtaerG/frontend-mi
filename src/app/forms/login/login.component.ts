@@ -32,6 +32,8 @@ export class LoginComponent implements OnInit {
       let form_values = this.loginForm.value;
       this.recaptchaV3Service.execute('importantAction')
       .subscribe((token_recapV3: string) => {
+        console.log(token_recapV3);
+        alert();
         this.authService.login(form_values['email'],form_values['password'], token_recapV3)
         .subscribe({
           next: token => {

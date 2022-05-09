@@ -16,7 +16,7 @@ export class EditOrderComponent implements OnInit {
 
   shippingForm!: FormGroup;
   status: string | null = localStorage.getItem('token');
-  order!:Order;
+  order!:any;
 
   constructor(private orderService:OrderService, private router: Router,private route: ActivatedRoute) { }
 
@@ -24,11 +24,11 @@ export class EditOrderComponent implements OnInit {
     this.order  = this.route.snapshot.data['order'];
     console.log(this.order);
       this.shippingForm = new FormGroup({
-          'direction': new FormControl(this.order.direction, [Validators.required]),
-          'post_code': new FormControl(this.order.post_code, [Validators.required, Validators.min(1)]),
-          'city': new FormControl(this.order.city, [Validators.required]),
-          'state': new FormControl(this.order.state, [Validators.required]),
-          'country': new FormControl(this.order.country, [Validators.required])
+          'direction': new FormControl(this.order.order_details.direction, [Validators.required]),
+          'post_code': new FormControl(this.order.order_details.post_code, [Validators.required, Validators.min(1)]),
+          'city': new FormControl(this.order.order_details.city, [Validators.required]),
+          'state': new FormControl(this.order.order_details.state, [Validators.required]),
+          'country': new FormControl(this.order.order_details.country, [Validators.required])
       });
   }
 

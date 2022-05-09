@@ -1,9 +1,9 @@
 <main class="container">
     <div class="card rounded card-serv-bg-color shadow border-0  mb-2 mb-md-3 text-secondary p-3 mt-4 text-light">
-        <h1 class="text-center ">Numero de pedido: {{order.id}}</h1>
-        <p class="text-center">Precio total: {{order.total_price |currency:'EUR':'symbol-narrow'}}</p>
-        <p class="text-center">Estado: {{order.status}}</p>
-        <div *ngIf="order.status == 'terminado' && user_role != 'admin' && order.id && order.valoration == null">
+        <h1 class="text-center ">Numero de pedido: {{order.order_details.id}}</h1>
+        <p class="text-center">Precio total: {{order.order_details.total_price |currency:'EUR':'symbol-narrow'}}</p>
+        <p class="text-center">Estado: {{order.order_details.status}}</p>
+        <div *ngIf="order.status == 'terminado' && user_role != 'admin' && order.order_details.id && order.order_details.valoration == null">
             <form class="m-2" [formGroup]="evaluateForm" (ngSubmit)="evaluateOrder(order.id)">
                 <label for="valoration" class="form-label">Valoracion de la entrega:</label>
                 <input class="form-control rounded-0 border-top-0 border-start-0 border-end-0" type="number" id="valoration" [formControlName]="'valoration'" name="valoration" min="0" max="5">
@@ -14,15 +14,16 @@
         </div>
         <h1 class="text-center">Productos del pedido:</h1>
         <section class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mt-4 justify-content-center">
-            <article *ngFor="let product of order.products">
+            <article *ngFor="let product of order.order_with_products_and_amount">
                 <div class="col">
                     <div class="card rounded shadow border-0 h-100 mb-2 text-secondary">
                         <img src="{{product.image_url}}" class="card-img-top card-img-descubre " alt="mesa ">
                         <div class="card-body text-center ">
                             <h1 class="card-title ">{{product.name}}</h1>
+                            <p class="card-title ">Cantidad comprado: {{product.amount}}</p>
                         </div>
                         <a class="btn btn-buscar rounded-0 text-light" [routerLink]="[ '/products', product.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} " *ngIf="this.ended != '1'">Mas Info</a>
-                        <a class="btn btn-info rounded-0 fs-4" [routerLink]="[ '/products', product.id]  " [queryParams]="{comment: 1 }" [routerLinkActive]=" [ 'active'] " [routerLinkActiveOptions]="{exact:true} " *ngIf="this.ended == '1'">Escribir reseña</a>
+                        <a class="btn btn-info rounded-0 fs-4" [routerLink]="[ '/products', product.id]  " [queryParams]="{user_id: user_id, order: order.id}" [routerLinkActive]=" [ 'active'] " [routerLinkActiveOptions]="{exact:true} " *ngIf="this.ended == '1'">Escribir reseña</a>
                     </div>
                 </div>
             </article>

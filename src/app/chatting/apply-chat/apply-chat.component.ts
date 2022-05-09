@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
 import { AppointmentService } from 'src/app/services/appointment.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-apply-chat',
@@ -14,12 +15,13 @@ export class ApplyChatComponent implements OnInit {
   applyMsg!: FormGroup;
   admins: any [] =[];
   user_id:number = 0;
-  constructor(private route: ActivatedRoute, private router: Router, private appointmentService: AppointmentService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private appointmentService: AppointmentService, private userService:UserService) { }
 
   ngOnInit(): void {
   this.admins = this.route.snapshot.data['admins'];
     console.log(this.admins);
     this.applyMsg = new FormGroup({
+      'admin_id': new FormControl(null, [Validators.required]),
       'date': new FormControl(null, [Validators.required]),
       'time': new FormControl(null, [Validators.required, Validators.pattern('^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$')]),
     });
@@ -30,6 +32,7 @@ export class ApplyChatComponent implements OnInit {
 
   apply(){
     if(this.admins != null && this.user_id != null){
+      console.log(this.admins);
       let random_admin = Math.floor(Math.random() * this.admins.length);
       let year = this.applyMsg.value.date.slice(0,4);
       let mes = this.applyMsg.value.date.slice(5,7);
@@ -40,21 +43,48 @@ export class ApplyChatComponent implements OnInit {
       console.log(today);
       console.log(date);
       console.log(date  < today);
-      if(date  < today){
+      if(date < today){
         alert("Error! La fecha debe ser posterior a la fecha actual");
         return;
       }
+      this.appointmentService.getAdminsAppointmentsWithDateTime(this.admins[random_admin], converted_date, this.applyMsg.value.time).subscribe({
+        next: (res) => {
+          if(res.length == 0){
+            this.appointmentService.createAppointment(this.user_id, this.admins[random_admin], converted_date, this.applyMsg.value.time)
+            .subscribe({
+              next: () => {
+
+                this.router.navigate(['/chat']).then(() => {
+                  window.location.reload();
+                });
+
+              },
+              error: (er: any)=> console.log(er)
+            });
+          } else {
+            while(res.length != 0){
+
+            }
+          }
+          console.log(res.length);
+        }
+      })
+      /*
       this.appointmentService.createAppointment(this.user_id, this.admins[random_admin], converted_date, this.applyMsg.value.time)
       .subscribe({
         next: () => {
+          /*
           this.router.navigate(['/chat']).then(() => {
             window.location.reload();
           });
+
         },
-        error: (er: any)=> alert(er)
+        error: (er: any)=> console.log(er)
       });
     } else {
       alert("Error! No se puede asignar una cita");
     }
+    */
   }
+}
 }

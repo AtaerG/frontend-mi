@@ -5,23 +5,28 @@
             <div class="card card-shadowed shadow-lg border-0 h-100 card-descubre-bg-color mb-2 mb-md-3 ">
                 <img src="../../../assets/images/card-1.jpeg " class="card-img-top card-img-descubre" alt="mesa">
                 <div class="card-body ">
-                    <h1 class="card-title text-light text-center ">Ver todos Muebles</h1>
+                    <h1 class="card-title text-light text-center">Ver todos Muebles</h1>
                 </div>
-                <button class="btn btn-lg text-light ">
-                  <i class="bi bi-arrow-right-circle fs-1 "></i>
-              </button>
+                <a class="btn btn-lg text-light" [routerLink]="['/products']">
+                    <i class="bi bi-arrow-right-circle fs-1 "></i>
+                </a>
             </div>
         </article>
         <article class="col-12 col-md-6">
             <div class="card card-shadowed shadow-lg h-100 border-0 card-descubre-bg-color mb-3 ">
                 <img src="../../../assets/images/card-4.png" class="card-img-top card-img-descubre">
                 <div class="card-body ">
-                    <h1 class="card-title text-light text-center ">Mas sobre nuestra tecnologia
+                    <h1 class="card-title text-light text-center " *ngIf="user_role !== ''">Ver mis pedidos
+                    </h1>
+                    <h1 class="card-title text-light text-center " *ngIf="user_role == ''">Entrar a sesion
                     </h1>
                 </div>
-                <button class="btn btn-lg text-light ">
-                  <i class="bi bi-arrow-right-circle fs-1 "></i>
-              </button>
+                <a class="btn btn-lg text-light " [routerLink]="[ '/orders']" *ngIf="user_role !== ''">
+                    <i class="bi bi-arrow-right-circle fs-1 "></i>
+                </a>
+                <a class="btn btn-lg text-light " [routerLink]="[ '/login']" *ngIf="user_role == ''">
+                    <i class="bi bi-arrow-right-circle fs-1 "></i>
+                </a>
             </div>
         </article>
     </section>
@@ -34,9 +39,6 @@
                         <h1 class="text-center text-light pt-3 "><i class="bi bi-pencil "></i></h1>
                         <p class="card-title fs-3 text-light text-center ">Planificacion</p>
                     </div>
-                    <button class="btn btn-lg text-light ">
-                  <i class="bi bi-arrow-right-circle fs-1 "></i>
-              </button>
                 </div>
             </article>
             <article class="col-12 col-sm-6 col-md-3 ">
@@ -45,9 +47,6 @@
                         <h1 class="text-center text-light pt-3 "><i class="bi bi-cart-check "></i></h1>
                         <p class="card-title fs-3 text-light text-center ">Envio a domicilio</p>
                     </div>
-                    <button class="btn btn-lg text-light ">
-                  <i class="bi bi-arrow-right-circle fs-1 "></i>
-              </button>
                 </div>
             </article>
             <article class="col-12 col-sm-6 col-md-3 ">
@@ -57,9 +56,6 @@
                         </h1>
                         <p class="card-title fs-3 text-light text-center">Venta telefonica</p>
                     </div>
-                    <button class="btn btn-lg text-light">
-                  <i class="bi bi-arrow-right-circle fs-1 "></i>
-              </button>
                 </div>
             </article>
             <article class="col-12 col-sm-6 col-md-3">
@@ -68,9 +64,6 @@
                         <h1 class="text-center text-light pt-3 "><i class="bi bi-currency-euro"></i></h1>
                         <p class="card-title fs-3 text-light text-center ">Facilidades de pago</p>
                     </div>
-                    <button class="btn btn-lg text-light ">
-                  <i class="bi bi-arrow-right-circle fs-1 "></i>
-                  </button>
                 </div>
             </article>
         </section>

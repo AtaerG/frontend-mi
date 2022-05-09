@@ -18,6 +18,7 @@ export class AppointmentService {
       date: date,
       time: time
     }).pipe(
+      map(res => res),
       catchError((resp: HttpErrorResponse) => throwError(() => new Error(`Error a la hora crear cita. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
   }
@@ -27,5 +28,15 @@ export class AppointmentService {
       catchError((resp: HttpErrorResponse) =>
       throwError(()=> new Error(`Error a la hora de eliminar cita. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     )
+  }
+
+  getAdminsAppointmentsWithDateTime(admin_id:any, date:string, time:string): Observable<any> {
+    return this.http.post('appt-admin-dt', {
+      admin_id: admin_id.id,
+      date: date,
+      time: time
+    }).pipe(
+      catchError((resp: HttpErrorResponse) => throwError(() => new Error(`Error a la hora crear cita. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+    );
   }
 }

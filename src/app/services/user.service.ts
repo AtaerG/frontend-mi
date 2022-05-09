@@ -1,15 +1,17 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { Router } from '@angular/router';
+import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { Appointment } from '../interfaces/appointment';
 import { User } from '../interfaces/user';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService:AuthService, private router:Router) { }
 
   getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>('users').pipe(
@@ -55,8 +57,16 @@ export class UserService {
     );
   }
 
-  deleteUserAccount(id: number){
+  deleteUserAccount(id: number, token: string) {
     return this.http.delete('users/'+id).pipe(
+      tap(
+        ()=> {
+          this.authService.logout(token).subscribe({
+            next: () =>  {
+              alert('La cuenta esta eliminada con exito!');
+            },
+          });
+        }),
       catchError((resp: HttpErrorResponse) =>
       throwError(()=> new Error(`Error a la hora de eliminar la cuenta de usuario. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     )
