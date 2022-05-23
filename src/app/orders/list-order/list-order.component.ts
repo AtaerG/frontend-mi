@@ -30,7 +30,7 @@ export class ListOrderComponent implements OnInit {
   deleteOrder(id:number){
     this.orderService.deleteOrder(id).subscribe({
       next: ()=>{
-        alert('Pedido eliminado. El dinero pronto volvera a su cuenta');
+        alert('Pedido eliminado. El dinero pronto volvera a la cuenta');
         window.location.reload();
      },
       error: (error:any) => console.log(error),

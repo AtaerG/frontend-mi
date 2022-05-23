@@ -5,7 +5,8 @@ import { ProductsRoutingModule } from './chatting-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChatComponent } from './chat/chat.component';
 import { ApplyChatComponent } from './apply-chat/apply-chat.component';
-
+import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -18,7 +19,9 @@ import { ApplyChatComponent } from './apply-chat/apply-chat.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    ProductsRoutingModule
+    ProductsRoutingModule,
+    MatToolbarModule,
+    MatProgressSpinnerModule
   ]
 })
 export class ChattingModule { }

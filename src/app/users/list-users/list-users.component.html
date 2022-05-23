@@ -8,6 +8,7 @@
                     <p class="card-text ">Correo electronico: {{user.email}}</p>
                     <p class="card-text ">Role: {{user.role}}</p>
                 </div>
+                <a class="btn btn-success rounded-0 text-light" *ngIf="user.role == 'normal_user' || (user.id == user_id && user.role == 'admin')" [routerLink]="[ '/users/edit/', user.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Editar</a>
                 <a class="btn btn-buscar rounded-0 text-light" [routerLink]="[ '/users', user.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Mas Info</a>
             </div>
         </article>

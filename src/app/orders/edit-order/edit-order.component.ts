@@ -33,9 +33,9 @@ export class EditOrderComponent implements OnInit {
   }
 
   sentOrder(){
-    if(this.shippingForm.valid && this.order.id != null){
+    if(this.shippingForm.valid && this.order.order_details.id != null){
       let form_values = this.shippingForm.value;
-        this.orderService.editOrder(this.order.id,form_values['direction'],form_values['post_code'],form_values['city'],form_values['state'],form_values['country'])
+        this.orderService.editOrder(this.order.order_details.id,form_values['direction'],form_values['post_code'],form_values['city'],form_values['state'],form_values['country'])
         .subscribe({
           next: ()=> {
             this.router.navigate(['/orders']).then(() => {

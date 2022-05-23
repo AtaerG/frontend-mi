@@ -18,7 +18,7 @@ const routes: Routes = [
     users: AllUsersResolver
   }
   },
-  { path: 'users/edit/:id', component: ModUserComponent, canActivate: [CheckIfIsUsersAccountGuard],
+  { path: 'users/edit/:id', component: ModUserComponent,
   resolve: {
     user: UserGetResolver
   }

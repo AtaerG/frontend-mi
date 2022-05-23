@@ -32,6 +32,7 @@ export class ShowProductComponent implements OnInit {
   amountForm!: FormGroup;
   has_comments = false;
   show_msg:boolean = false;
+  order_id: number = 0;
 
   constructor(private route: ActivatedRoute, private commentService: CommentService, private productService: ProductService, private router: Router) {
     if (this.status != null) {
@@ -55,6 +56,11 @@ export class ShowProductComponent implements OnInit {
     this.amountForm = new FormGroup({
       'amount_to_buy': new FormControl(1, [Validators.required, Validators.min(1), Validators.max(10)]),
     });
+    if(this.route.snapshot.queryParams['order'] != undefined){
+      this.order_id = parseInt(this.route.snapshot.queryParams['order']);
+    }else {
+      this.order_id = 0;
+    }
     let dates = this.route.snapshot.data['product'];
     if(this.route.snapshot.queryParams['user_id'] == undefined){
       this.comment_write_permission = 0;
@@ -166,9 +172,8 @@ export class ShowProductComponent implements OnInit {
 
   submitComment(){
     let form_values = this.addCommentForm.value;
-    console.log(form_values['content'], form_values['valoration'], this.user_id, this.product_id);
-    if(this.addCommentForm.valid){
-      this.commentService.saveComment(form_values['content'], form_values['valoration'], this.user_id, this.product_id).subscribe({
+    if(this.addCommentForm.valid && this.order_id !== 0){
+      this.commentService.saveComment(this.order_id,form_values['content'], form_values['valoration'], this.user_id, this.product_id).subscribe({
         next: ()=>{
           this.router.navigate(['/products/', this.product_id]).then(() => {
             window.location.reload();
@@ -176,6 +181,8 @@ export class ShowProductComponent implements OnInit {
       },
         error: error => console.log(error),
       });
+    } else {
+      alert("Error!");
     }
   }
 }

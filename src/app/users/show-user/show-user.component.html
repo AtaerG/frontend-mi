@@ -23,9 +23,9 @@
                         <p class="card-text ">Precio total: {{order.total_price |currency:'EUR':'symbol-narrow'}}</p>
                         <p class="card-text ">Estado: {{order.status}}</p>
                     </div>
-                    <a class="btn btn-success rounded-0 fs-4 mt-1" (click)="delieveredOrder(order.id)" *ngIf="order.status == 'paid' && user_role == 'admin' && order.id">Marcar el pedido como entregado</a>
+                    <a class="btn btn-success rounded-0 fs-4 mt-1" (click)="delieveredOrder(order.id)" *ngIf="order.status == 'pagado' && user_role == 'admin' && order.id">Marcar el pedido como entregado</a>
                     <a class="btn btn-info rounded-0 fs-4" [routerLink]="[ '/orders', order.id] " [queryParams]="{ ended: 1 }" [routerLinkActive]=" [ 'active'] " [routerLinkActiveOptions]="{exact:true} " *ngIf="order.status == 'ended' && user_role != 'admin'">Escribir reseña</a>
-                    <a class="btn btn-delete rounded-0 fs-4 text-light" *ngIf="order.status != 'ended' && order.id" (click)="deleteOrder(order.id)">Eliminar pedido</a>
+                    <a class="btn btn-delete rounded-0 fs-4 text-light" *ngIf="order.status != 'terminado' && order.id" (click)="deleteOrder(order.id)">Eliminar pedido</a>
                     <a class="btn btn-buscar rounded-0 fs-4 text-light" [routerLink]="[ '/orders', order.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Mas Info</a>
                 </div>
             </article>
