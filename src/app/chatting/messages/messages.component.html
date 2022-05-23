@@ -1,5 +1,5 @@
 <main class="container">
-    <div class="row">
+    <div class="row mt-4">
         <div class="col-12">
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="list-alex" role="tabpanel" aria-labelledby="list-alex-list">
@@ -25,6 +25,8 @@
                 <input id="message" class="flex-grow-1" type="text" placeholder="Escribe mensaje..." [(ngModel)]="message">
                 <button id="send" class=" btn btn-lg btn-primary"><i class="bi bi-telegram" (click)="sendMessage()"></i></button>
             </div>
+            <mat-spinner *ngIf="loading$ | async" [mode]="'indeterminate'">
+            </mat-spinner>
         </div>
     </div>
 </main>

@@ -17,8 +17,8 @@ export class ResetPasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.resetPasswordForm = new FormGroup({
-      'password': new FormControl(null, Validators.required),
-      'password_confirm': new FormControl(null, Validators.required)
+      'password': new FormControl(null, [Validators.required, Validators.minLength(8)]),
+      'password_confirm': new FormControl(null, [Validators.required, Validators.minLength(8)])
     });
     let email = JSON.parse(localStorage['token']).email;
     this.authService.getPasswordChangeToken(email).subscribe({

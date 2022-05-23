@@ -7,6 +7,8 @@ import Echo from 'laravel-echo';
 import { User } from 'src/app/interfaces/user';
 import { environment } from 'src/environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-messages',
@@ -14,7 +16,6 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./messages.component.scss']
 })
 export class MessagesComponent implements OnInit {
-
   status: string | null = localStorage.getItem('token');
   token: string = "";
   user_id: number = 0;
@@ -26,9 +27,9 @@ export class MessagesComponent implements OnInit {
   echo!: Echo;
   user_role: string = "";
   id_chat:any;
+  loading$ = this.loaderService.loading$;
 
-
-  constructor(private http: HttpClient, private route: ActivatedRoute) {}
+  constructor(private http: HttpClient, private route: ActivatedRoute, private loaderService: LoaderService) {}
 
 
   ngOnInit(): void {
@@ -59,8 +60,8 @@ export class MessagesComponent implements OnInit {
     }
   }
 
-
   sendMessage() {
+    if(this.message != null){
     if(this.channel_presence.members.count < 2){
       if(this.user_role == 'admin'){
         alert('No hay usuario conectado');
@@ -68,6 +69,7 @@ export class MessagesComponent implements OnInit {
         alert('Admin no esta conectado a la sesion, por favor espere!');
       }
     } else {
+      this.loaderService.show();
       if(this.id_chat > 0){
         this.http.post('messages', {
           id: this.id_chat,
@@ -79,11 +81,13 @@ export class MessagesComponent implements OnInit {
             this.message = "";
           },
           error: (err) => console.log(err),
+          complete: () => this.loaderService.hide()
         })
       } else  {
         alert("Error! No se pudo enviar el mensaje");
       }
     }
+  }
   }
 
   ngOnDestroy(): void {
