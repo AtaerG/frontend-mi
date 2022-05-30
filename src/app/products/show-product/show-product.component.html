@@ -6,7 +6,8 @@
             <p class="card-text">Descripcion: {{ product.description }}</p>
             <p class="card-text ">Precio: {{ product.price | currency: "EUR":"symbol-narrow" }}
             </p>
-            <p class="card-text text-danger" *ngIf="show_msg">Queda solamente: {{product.amount}}</p>
+            <p class="card-text" *ngIf="role === 'admin'">Cantidad total en almacen: {{ product.amount}}</p>
+            <p class="card-text text-danger" *ngIf="show_msg && role === 'normal_user'">Queda solamente: {{product.amount}}</p>
             <p class="card-text">Valoracion mediano: {{ medianValoration() }}/5</p>
             <form class="container w-100 w-lg-75 p-2" [formGroup]="amountForm" (ngSubmit)="addProdToOrder()" *ngIf="btn_active">
                 <input *ngIf="role !== 'admin'" type="number" class="form-control" placeholder="Cantidad a comprar" [formControlName]="'amount_to_buy'" min="0" max="10" />
