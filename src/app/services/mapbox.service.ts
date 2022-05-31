@@ -13,7 +13,7 @@ export class MapboxService {
   lat = "38.536160";
   long = "-0.181999";
   zoom = 6;
-
+  coord:number[] = [Number(this.long), Number(this.lat)];
   constructor() {
     this.mapbox.accessToken = environment.mapBoxToken;
   }
@@ -34,7 +34,6 @@ export class MapboxService {
           type: 'Feature',
           geometry: {
               type: 'Point',
-              coordinates: [this.long, this.lat]
           },
           properties: {
               title: 'MI',
@@ -55,7 +54,7 @@ export class MapboxService {
       for (const feature of geojson.features) {
           const el = document.createElement('div');
           el.className = 'marker';
-          new mapboxgl.Marker(el).setLngLat(feature.geometry.coordinates)
+          new mapboxgl.Marker(el).setLngLat(this.coord)
               .setPopup(
                   new mapboxgl.Popup({ offset: 1 }).setHTML(
                       '<div class="text-primary text-center"><p>Si quiere visitarnos, estamos aqui:</p><p>C/Campello, 1 nave 12. Polígono La Cala</p><p>03509 Finestrat, Alicante, España</p></div>'

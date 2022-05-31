@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class RegisterComponent implements OnInit {
   email_controller:string ="";
   regitser_complete = false;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private recaptchaV3Service: ReCaptchaV3Service) { }
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
@@ -28,10 +29,12 @@ export class RegisterComponent implements OnInit {
   }
 
   createUser(){
-    console.log(this.registerForm);
-    if(this.registerForm.valid){
+
+    if(this.registerForm.valid ){
       let form_values = this.registerForm.value;
-      this.authService.register(form_values['name'], form_values['surname'],form_values['email'],form_values['password'])
+      this.recaptchaV3Service.execute('importantAction')
+      .subscribe((token_recapV3: string) => {
+        this.authService.register(form_values['name'], form_values['surname'],form_values['email'],form_values['password'], token_recapV3)
         .subscribe({
           next: () => {
             alert('La cuena se ha creado con exito');
@@ -42,6 +45,7 @@ export class RegisterComponent implements OnInit {
           error: error =>  {
           }
       });
-    }
+    });
   }
+}
 }

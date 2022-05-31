@@ -51,4 +51,15 @@ export class AppointmentService {
       throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
   }
+
+  getDateOfAppointment(id:number): Observable<any> {
+    return this.http.get<Appointment>('appointments/date/'+id).pipe(
+      map((response) => {
+        console.log(response);
+        return response;
+      }),
+      catchError((resp: HttpErrorResponse) =>
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+    );
+  }
 }
