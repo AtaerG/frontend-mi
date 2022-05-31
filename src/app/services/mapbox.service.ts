@@ -9,7 +9,6 @@ export class MapboxService {
   mapbox = (mapboxgl as typeof mapboxgl);
   map!: mapboxgl.Map;
   style = `mapbox://styles/mapbox/streets-v11`;
-  // Coordenadas de la localización donde queremos centrar el mapa
   lat = "38.536160";
   long = "-0.181999";
   zoom = 6;

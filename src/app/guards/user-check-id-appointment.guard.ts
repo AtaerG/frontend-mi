@@ -52,34 +52,3 @@ export class UserCheckIdAppointmentGuard implements CanActivate {
     });
   }
 }
-
-/*
-let obj_token = JSON.parse(token);
-let user_role = obj_token['user_role'];
-let user_id =obj_token['user_id'];
-if (user_role === 'normal_user') {
-  let id = route.paramMap.get('id')
-  if(user_id == id){
-    checker = true;
-  } else {
-    checker = false;
-  }
-} else {
-  let all_appointments = [];
-  this.userService.getAllAppointmentsOfAdmin(obj_token['user_id']).subscribe({
-    next: (appointments: Appointment[]) => {
-      all_appointments = appointments;
-    }
-  });
-  //check if the appointment id is in the list of appointments of the admin
-
-  checker = true;
-}
-}
-if(!checker){
-return this.router.createUrlTree(['/access_denied']);
-}
-return checker;
-}
-}
-*/

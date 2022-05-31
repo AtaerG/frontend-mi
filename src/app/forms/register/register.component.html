@@ -13,26 +13,26 @@
                             <input type="text" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="name" [formControlName]="'name'" placeholder="Elon" name="name" required="required">
                             <label for="name" class="form-label ">Nombre:</label>
                             <span class="text-danger" *ngIf="!registerForm.get('name')?.valid && registerForm.get('name')?.touched">
-                               El nombre no es valido. Nombre es obligatorio y debe tener maximo 20 carcacteres!
+                              ¡Nombre es obligatorio!
                             </span>
                         </div>
                         <div class="form-floating mt-2 ">
                             <input type="text" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="surname" [formControlName]="'surname'" placeholder="Musk" name="surname" required="required">
                             <label for="surname" class="form-label ">Apellidos:</label>
                             <span class="text-danger" *ngIf="!registerForm.get('surname')?.valid && registerForm.get('surname')?.touched">
-                              Apellidos no es valido. Apellidos es obligatorio y debe tener y maximo 50 carcacteres!
+                              ¡Apellidos son obligatorio!
                            </span>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <h2 class=" text-center text-primary mt-5">Correo electronico y contraseña</h2>
+                        <h2 class=" text-center text-primary mt-5">Correo electrónico y contraseña:</h2>
                         <div class="form-floating mt-2 ">
                             <input type="email" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="email" placeholder="a@algo.com " [formControlName]="'email'" name="email" required="required">
-                            <label for="email" class="form-label ">Correo electronico:</label>
+                            <label for="email" class="form-label ">Correo electrónico:</label>
                             <span class="text-danger" *ngIf="!registerForm.get('email')?.valid && registerForm.get('email')?.touched">
-                         Correo electronico es obligatorio y debe tener formato de correo electronico!
+                              ¡Correo electrónico es obligatorio y debe tener formato de correo electrónico!
                        </span>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                             <input type="password" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="password" placeholder="1111" name="password" [formControlName]="'password'" required="required">
                             <label for="password" class="form-label ">Contraseña:</label>
                             <span class="text-danger" *ngIf="!registerForm.get('password')?.valid && registerForm.get('password')?.touched">
-                          La contraseña debe tener como minimo 8 caracteres.
+                              ¡La contraseña debe tener como mínimo 8 caracteres!
                         </span>
                         </div>
                     </div>

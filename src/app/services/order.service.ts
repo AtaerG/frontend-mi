@@ -52,7 +52,7 @@ export class OrderService {
         return response;
       }),
       catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error a la hora de mostrar el pedido. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
   }
 
@@ -64,7 +64,7 @@ export class OrderService {
         return response;
       }),
       catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error a la hora de mostrar el pedido. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
   }
 
@@ -74,7 +74,7 @@ export class OrderService {
         return response;
       }),
       catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error a la hora de obtener pedido. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
   }
 
@@ -91,7 +91,7 @@ export class OrderService {
   deleteOrder(id:number): Observable<any> {
     return this.http.delete('orders/'+id).pipe(
       catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error a la hora de eliminar pedido Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     )
   }
 

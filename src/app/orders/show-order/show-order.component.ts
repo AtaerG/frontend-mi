@@ -35,22 +35,22 @@ export class ShowOrderComponent implements OnInit {
     this.orderService.deleteOrder(id).subscribe({
       next: ()=>{
         if(this.user_role == 'admin'){
-          alert('Pedido eliminado con exito!');
+          alert('¡Pedido eliminado con éxito!');
         } else {
-          alert('Pedido eliminado. El dinero pronto volvera a su cuenta');
+          alert('Pedido eliminado. El dinero pronto volverá a su cuenta');
         }
         this.router.navigate(['/orders']).then(() => {
           window.location.reload();
         });
      },
-      error: (error:any) => alert("Error a la hora de elimianar el pedido, por favor ponga en contacto con el administrador"),
+      error: (error:any) => alert("Error a la hora de eliminar el pedido, por favor ponga en contacto con el administrador"),
     });
   }
 
   delieveredOrder(id:number){
     this.orderService.updateStatusOrder(id, "terminado").subscribe({
       next: ()=>{
-        alert('Pedido marcado como entregado');
+        alert('¡Pedido marcado como entregado!');
         window.location.reload();
       },
       error: (error:any) => alert("Error a la hora de marcar el pedido como entregado, por favor ponga en contacto con el administrador"),
@@ -62,7 +62,7 @@ export class ShowOrderComponent implements OnInit {
     if(this.evaluateForm.valid){
       this.orderService.updateValorationOrder(id, form_values['valoration']).subscribe({
         next: ()=>{
-          alert('Pedido se ha valorado con exito!');
+          alert('¡Pedido se ha valorado con éxito!');
           window.location.reload();
         },
         error: (error:any) => alert("Error a la hora de valorar el pedido, por favor ponga en contacto con el administrador"),

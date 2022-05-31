@@ -16,7 +16,7 @@ export class CommentService {
         return response;
       }),
       catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error a la hora de crear producto. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
   }
 
@@ -29,7 +29,7 @@ export class CommentService {
       product_id: product_id
     }).pipe(
       catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error a la hora de crear producto. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
   }
 

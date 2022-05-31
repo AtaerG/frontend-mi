@@ -38,10 +38,8 @@ export class CheckIfIsUsersAccountOrIsAdminGuard implements CanActivate {
         complete: () =>{
           console.log(data);
           if (data.id === user_id) {
-            console.log('access denied');
             observer.next(true);
           } else {
-            console.log('access denied');
             this.router.navigate(['/access_denied']);
           }
         }

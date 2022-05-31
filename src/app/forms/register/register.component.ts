@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
         this.authService.register(form_values['name'], form_values['surname'],form_values['email'],form_values['password'], token_recapV3)
         .subscribe({
           next: () => {
-            alert('La cuena se ha creado con exito');
+            alert('La cuenta se ha creado con éxito');
             this.router.navigate(['/login']).then(() => {
               window.location.reload();
             });;

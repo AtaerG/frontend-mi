@@ -21,7 +21,7 @@ export class ProductService {
       visible: visible
     }).pipe(
       catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error a la hora de crear producto. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
   }
 
@@ -32,7 +32,7 @@ export class ProductService {
         return response;
       }),
       catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error a la hora de crear producto. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
   }
 
@@ -42,7 +42,7 @@ export class ProductService {
         return response;
       }),
       catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error a la hora de crear producto. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
   }
 
@@ -51,14 +51,14 @@ export class ProductService {
       visible: visible,
     }).pipe(
       catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error a la hora decambiar propiedades del producto. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     )
   }
 
   deleteComment(id:number){
     return this.http.delete('comments/'+id).pipe(
       catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error a la hora de eliminar commentario. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     )
   }
 
@@ -74,7 +74,7 @@ export class ProductService {
     }).pipe(
       map((re)=> console.log(re)),
       catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error a la hora de modificar producto. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
   }
 
@@ -84,7 +84,7 @@ export class ProductService {
         return response;
       }),
       catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error a la hora de obtener datos del producto. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
   }
 

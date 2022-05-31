@@ -1,5 +1,5 @@
 <main class="container">
-    <h1 class="text-center text-primary mt-3">Pedir cita con el trabajador</h1>
+    <h1 class="text-center text-primary mt-3">Pedir cita con el administrador</h1>
     <div class="row">
         <form class="container w-100 w-lg-75" [formGroup]="applyMsg" (ngSubmit)="apply()">
             <div class="row">
@@ -12,7 +12,7 @@
                         </select>
                         <label for="admin_id" class="form-label ">Administrador:</label>
                         <span class="text-danger" *ngIf="!applyMsg.get('admin_id')?.valid && applyMsg.get('admin_id')?.touched">
-                          Tiene que eligir administrador
+                          Tiene que eligir un administrador
                       </span>
                     </div>
                     <div class="form-floating mt-2 ">

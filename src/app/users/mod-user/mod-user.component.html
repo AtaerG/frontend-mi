@@ -11,28 +11,28 @@
                     <input type="text" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="name" [formControlName]="'name'" placeholder="Elon" name="name" required="required" [readonly]="role === 'admin' && this.user.role =='normal_user'">
                     <label for="name" class="form-label ">Nombre:</label>
                     <span class="text-danger" *ngIf="!modUserForm.get('name')?.valid && modUserForm.get('name')?.touched">
-                             El nombre no es valido. Nombre es obligatorio y debe tener y maximo 20 carcacteres!
+                      El nombre no es válido. ¡Nombre es obligatorio!
                           </span>
                 </div>
                 <div class="form-floating mt-2">
                     <input type="text" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="surname" [formControlName]="'surname'" placeholder="Musk" name="surname" required="required" [readonly]="role === 'admin' && this.user.role =='normal_user'">
                     <label for="surname" class="form-label ">Apellidos:</label>
                     <span class="text-danger" *ngIf="!modUserForm.get('surname')?.valid && modUserForm.get('surname')?.touched">
-                            Apellidos no es valido. Apellidos es obligatorio y debe tener y maximo 50 carcacteres!
+                      Apellidos no son válidos. ¡Apellidos son obligatorio!
                          </span>
                 </div>
-                <h2 class=" text-center text-primary mt-4">Correo electronico y contraseña</h2>
+                <h2 class=" text-center text-primary mt-4">Correo electrónico y contraseña</h2>
                 <div class="form-floating mt-2 ">
                     <input type="email" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="email" placeholder="a@algo.com " [formControlName]="'email'" name="email" required="required" [readonly]="role === 'admin' && this.user.role =='normal_user'">
                     <label for="email" class="form-label ">Correo electronico:</label>
                     <span class="text-danger" *ngIf="!modUserForm.get('email')?.valid && modUserForm.get('email')?.touched">
-                       Correo electronico es obligatorio y debe tener formato de correo electronico!
+                      ¡Correo electrónico es obligatorio y debe tener formato de correo electrónico!
                      </span>
                 </div>
                 <div class="form-floating mt-2 " *ngIf="(role === 'admin' && actual_user) || this.user.role === 'normal_user'">
                     <select id="role" name="role" [formControlName]="'role'" class="form-select" aria-label="select filter">
-                        <option value="admin">Administrdor</option>
-                        <option value="normal_user">Usuario commun</option>
+                        <option value="admin">Administrador</option>
+                        <option value="normal_user">Usuario común</option>
                       </select>
                 </div>
                 <div class="d-grid mt-3">

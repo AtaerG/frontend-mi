@@ -41,14 +41,14 @@ export class LoginComponent implements OnInit {
               window.location.reload();
             });;
          },
-          error: error => alert('La contraseña o email son incorrectos!'),
+          error: error => alert('¡La contraseña o email son incorrectos!'),
       })
       });
     }
   }
   canDeactivate() {
     if(!this.login_complete){
-      return confirm("Quiere abandonar la pagina?");
+      return confirm("¿Quiere abandonar la página?");
     } else {
       return true;
     }

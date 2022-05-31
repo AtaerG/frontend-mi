@@ -34,15 +34,16 @@ export class AccessToMsgGuard implements CanActivate {
             complete: () =>{
               let date = data[0].date;
               let time = data[0].time;
-              let dia = date.slice(0, 2);
-              let mes =  date.slice(3, 5);
-              let year =  date.slice(6, 10);
-              let app_date = new Date(year, mes-1, dia);
+              let dia = Number(date.slice(0, 2));
+              let mes = Number(date.slice(3, 5));
+              let year = Number(date.slice(6, 10));
+              let mins = Number(time.slice(3, 5));
+              let hrs = Number(time.slice(0, 2));
+              let app_date = new Date(year, mes - 1, dia, hrs,  mins);
               let today = new Date();
-              console.log(app_date);
               console.log(today);
+              console.log(app_date);
               if (today <= app_date) {
-                console.log('access denied');
                 this.router.navigate(['/access_denied']);
               } else {
                 observer.next(true);

@@ -3,12 +3,12 @@
         <img class="img-fluid" src="{{ product.image_url }}" />
         <div class="card-body text-center text-light">
             <h1 class="card-title">{{ product.name }}</h1>
-            <p class="card-text">Descripcion: {{ product.description }}</p>
+            <p class="card-text">Descripción: {{ product.description }}</p>
             <p class="card-text ">Precio: {{ product.price | currency: "EUR":"symbol-narrow" }}
             </p>
-            <p class="card-text" *ngIf="role === 'admin'">Cantidad total en almacen: {{ product.amount}}</p>
+            <p class="card-text" *ngIf="role === 'admin'">Cantidad total en almacén: {{ product.amount}}</p>
             <p class="card-text text-danger" *ngIf="show_msg && role === 'normal_user'">Queda solamente: {{product.amount}}</p>
-            <p class="card-text">Valoracion mediano: {{ medianValoration() }}/5</p>
+            <p class="card-text">Valoración mediano: {{ medianValoration() }}/5</p>
             <form class="container w-100 w-lg-75 p-2" [formGroup]="amountForm" (ngSubmit)="addProdToOrder()" *ngIf="btn_active">
                 <input *ngIf="role !== 'admin'" type="number" class="form-control" placeholder="Cantidad a comprar" [formControlName]="'amount_to_buy'" min="0" max="10" />
                 <div class="text-danger mt-3 mb-3" *ngIf="!amountForm.get('amount_to_buy')?.valid && amountForm.get('amount_to_buy')?.touched">
@@ -24,19 +24,19 @@
             </div>
         </div>
     </div>
-    <h1 class="text-center text-primary mt-2">Commentarios de clientes reales</h1>
+    <h1 class="text-center text-primary mt-2">Comentarios de clientes reales</h1>
     <div class="col-12  mx-auto" *ngIf="comments.length && comments; else not">
         <div *ngFor="let comment of comments">
             <div class="card rounded shadow border-0 justify-content-center p-4 m-3">
-                <h3 class="mx-auto text-primary">Commentario de: {{ comment.name +" "+comment.surname}}</h3>
+                <h3 class="mx-auto text-primary">Comentario de: {{ comment.name +" "+comment.surname}}</h3>
                 <hr>
                 <p>
                     <span class="text-muted fs-4">{{ comment.content }}.</span>
                 </p>
-                <p>Valoracion del producto: {{ comment.valoration }}/5</p>
-                <p>Fecha de commentario: {{ comment.created_at | date }}</p>
-                <p>Valoracion del pedido: {{ comment.valoration_order}}</p>
-                <p>Pais a donde se enviado el pedido: {{ comment.country}}</p>
+                <p>Valoración del producto: {{ comment.valoration }}/5</p>
+                <p>Fecha de comentario: {{ comment.created_at | date }}</p>
+                <p>Valoración del pedido: {{ comment.valoration_order}}</p>
+                <p>Pais donde se ha enviado el pedido: {{ comment.country}}</p>
                 <button class="btn rounded-0 btn-delete" (click)="deleteComment(comment)" *ngIf="status != null && ((comment.user_id == user_id) || (role == 'admin'))">
                   Eliminar
                 </button>
@@ -50,15 +50,15 @@
                     <div class="form-floating mt-2">
                         <textarea type="text" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="content" [formControlName]="'content'" placeholder="Elon" name="content" required="required">
                         </textarea>
-                        <label for="content" class="form-label">Escribir commentario:</label>
-                        <span class="text-danger" *ngIf="!addCommentForm.get('content')?.valid && addCommentForm.get('content')?.touched">El commentario no puede ser vacio</span>
+                        <label for="content" class="form-label">Escribir comentario:</label>
+                        <span class="text-danger" *ngIf="!addCommentForm.get('content')?.valid && addCommentForm.get('content')?.touched">El comentario no puede ser vacio</span>
                     </div>
                 </div>
                 <div class="col-8">
                     <div class="form-floating mt-2">
                         <input class="form-control rounded-0 border-top-0 border-start-0 border-end-0" type="number" id="valoration" [formControlName]="'valoration'" name="valoration" min="0" max="5">
-                        <label for="valoration" class="form-label">Valoracion:</label>
-                        <span class="text-danger" *ngIf="!addCommentForm.get('valoration')?.valid && addCommentForm.get('valoration')?.touched">Valoracion es un numero entre 0 a 5 </span>
+                        <label for="valoration" class="form-label">Valoración:</label>
+                        <span class="text-danger" *ngIf="!addCommentForm.get('valoration')?.valid && addCommentForm.get('valoration')?.touched">Valoración es un numero entre 0 a 5 </span>
                     </div>
                 </div>
             </div>

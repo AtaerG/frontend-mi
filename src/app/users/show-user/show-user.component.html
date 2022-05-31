@@ -4,7 +4,7 @@
             <div class="card-body text-center">
                 <h1 class="card-title">Nombre: {{user.name}}</h1>
                 <h2 class="card-title">Apellidos: {{user.surname}}</h2>
-                <p class="card-text">Correo electronico: {{user.email}}</p>
+                <p class="card-text">Correo electrónico: {{user.email}}</p>
                 <p class="card-text ">Role: {{user.role}}</p>
                 <div class="row g-1">
                     <a *ngIf="user_id == user.id" class="btn btn-warning fs-4" [routerLink]="['/resetpswd'] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Modificar contraseña</a>
@@ -26,7 +26,7 @@
                     <a class="btn btn-success rounded-0 fs-4 mt-1" (click)="delieveredOrder(order.id)" *ngIf="order.status == 'pagado' && user_role == 'admin' && order.id">Marcar el pedido como entregado</a>
                     <a class="btn btn-info rounded-0 fs-4" [routerLink]="[ '/orders', order.id] " [queryParams]="{ ended: 1 }" [routerLinkActive]=" [ 'active'] " [routerLinkActiveOptions]="{exact:true} " *ngIf="order.status == 'ended' && user_role != 'admin'">Escribir reseña</a>
                     <a class="btn btn-delete rounded-0 fs-4 text-light" *ngIf="order.status != 'terminado' && order.id" (click)="deleteOrder(order.id)">Eliminar pedido</a>
-                    <a class="btn btn-buscar rounded-0 fs-4 text-light" [routerLink]="[ '/orders', order.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Mas Info</a>
+                    <a class="btn btn-buscar rounded-0 fs-4 text-light" [routerLink]="[ '/orders', order.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Más Info</a>
                 </div>
             </article>
         </section>

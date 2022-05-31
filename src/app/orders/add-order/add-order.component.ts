@@ -25,13 +25,9 @@ export class AddOrderComponent implements OnInit {
   constructor(private orderService:OrderService, private router: Router,private productService:ProductService) { }
 
   ngOnInit(): void {
-    //iterate through products and check if amount is 0
-    //let dates = this.route.snapshot.data['product']
     let prods = localStorage.getItem('products');
     if(prods != null){
       this.products = JSON.parse(prods);
-      console.log(this.products);
-      //iterate through products and sum up the total price
       this.products.forEach((el)=>{
         this.precio_total += el.product.price * el.amount;
       });
@@ -66,19 +62,19 @@ export class AddOrderComponent implements OnInit {
       });
     }
     } else {
-      alert('Hay que iniciar session!')
+      alert('¡Tiene que iniciar sesión!')
     }
   }
 
   removeProdFromOrder(product: Product){
     this.products.forEach((el)=>{
       if(el.product.id == product.id){
-        console.log( el.amount);//2
-        el.amount--;//1
-        console.log(el.amount)//1
-        console.log(el.product.amount);//2
+        console.log( el.amount);
+        el.amount--;
+        console.log(el.amount)
+        console.log(el.product.amount);
         el.product.amount++;
-        console.log(el.product.amount);//3
+        console.log(el.product.amount);
         if(el.amount == 0){
           this.products.splice(this.products.indexOf(el),1);
         }

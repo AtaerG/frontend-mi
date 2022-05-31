@@ -19,7 +19,7 @@ export class UserService {
         return response;
       }),
       catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error a la hora de crear producto. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
   }
 
@@ -29,7 +29,7 @@ export class UserService {
         return response;
       }),
       catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error a la hora de crear producto. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
   }
 
@@ -40,7 +40,7 @@ export class UserService {
         return response;
       }),
       catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error a la hora de crear producto. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
   }
 
@@ -53,7 +53,7 @@ export class UserService {
     }).pipe(
       map((re)=> console.log(re)),
       catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error a la hora de crear producto. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
   }
 
@@ -68,7 +68,7 @@ export class UserService {
           });
         }),
       catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error a la hora de eliminar la cuenta de usuario. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     )
   }
 
@@ -77,7 +77,7 @@ export class UserService {
       user_id: user_id
     }).pipe(
       catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error a la hora de eliminar la cuenta de usuario. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     )
   }
 
@@ -86,7 +86,7 @@ export class UserService {
       admin_id: admin_id
     }).pipe(
       catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error a la hora de eliminar la cuenta de usuario. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     )
   }
 
