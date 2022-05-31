@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AccessToMsgGuard } from '../guards/access-to-msg.guard';
 import { UserCheckIdAppointmentGuard } from '../guards/user-check-id-appointment.guard';
 import { UserTypeAuthCheckerGuard } from '../guards/user-type-auth-checker.guard';
 import { UserTypeNormalGuard } from '../guards/user-type-normal.guard';
@@ -13,7 +14,7 @@ const routes: Routes = [
   { path: 'apply', component: ApplyChatComponent, resolve: {
     admins: AllAdminsResolver
   },  canActivate: [UserTypeNormalGuard]},
-  { path: 'messages/:id', component: MessagesComponent,  canActivate: [UserCheckIdAppointmentGuard]}
+  { path: 'messages/:id', component: MessagesComponent,  canActivate: [UserCheckIdAppointmentGuard, AccessToMsgGuard]}
 ];
 
 @NgModule({

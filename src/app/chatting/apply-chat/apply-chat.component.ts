@@ -22,7 +22,7 @@ export class ApplyChatComponent implements OnInit {
     console.log(this.admins);
     this.applyMsg = new FormGroup({
       'admin_id': new FormControl(null, [Validators.required]),
-      'date': new FormControl(null, [Validators.required]),
+      'date': new FormControl(null, [Validators.required, Validators.pattern('^(([0-2][0-9])|([3][0-1]))/(([0][0-9])|([1][0-2]))/(2022)$')]),
       'time': new FormControl(null, [Validators.required, Validators.pattern('^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$')]),
     });
     if (this.status != null) {
@@ -33,26 +33,23 @@ export class ApplyChatComponent implements OnInit {
   apply() {
     if (this.admins != null && this.user_id != null) {
       let form_values = this.applyMsg.value;
+      console.log(form_values['date']);
       console.log(this.applyMsg.valid);
       if (this.applyMsg.valid) {
-        let year = form_values['date'].slice(0, 4);
-        let mes =  form_values['date'].slice(5, 7);
-        let dia =  form_values['date'].slice(8, 10);
-        let converted_date = dia + "/" + mes + "/" + year;
-        let date = new Date(year + '-' + mes + '-' + dia);
+        let dia = form_values['date'].slice(0, 2);
+        let mes =  form_values['date'].slice(3, 5);
+        let year =  form_values['date'].slice(6, 10);
+        let date = new Date(year,mes-1,dia);
         let today = new Date();
         if (date < today) {
           alert("Error! La fecha debe ser posterior a la fecha actual");
           return;
         }
-        console.log(form_values['admin_id']);
-        console.log(converted_date);
-        console.log(form_values['time']);
-        this.appointmentService.getAdminsAppointmentsWithDateTime(form_values['admin_id'], converted_date, form_values['time']).subscribe({
+        this.appointmentService.getAdminsAppointmentsWithDateTime(form_values['admin_id'], form_values['date'], form_values['time']).subscribe({
           next: (res) => {
             if (res.length == 0) {
               console.log(res);
-              this.appointmentService.createAppointment(this.user_id, form_values['admin_id'], converted_date, form_values['time'])
+              this.appointmentService.createAppointment(this.user_id, form_values['admin_id'], form_values['date'], form_values['time'])
                 .subscribe({
                   next: () => {
                     alert("Cita creada con éxito");
@@ -70,22 +67,6 @@ export class ApplyChatComponent implements OnInit {
           error: (er: any)=> console.log(er)
         })
       }
-      /*
-      this.appointmentService.createAppointment(this.user_id, this.admins[random_admin], converted_date, this.applyMsg.value.time)
-      .subscribe({
-        next: () => {
-          /*
-          this.router.navigate(['/chat']).then(() => {
-            window.location.reload();
-          });
-
-        },
-        error: (er: any)=> console.log(er)
-      });
-    } else {
-      alert("Error! No se puede asignar una cita");
-    }
-    */
     }
   }
 }

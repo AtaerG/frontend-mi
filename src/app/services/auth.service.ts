@@ -11,15 +11,16 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
 
-  register(name:string, surname:string, email: string, password:  string){
+  register(name:string, surname:string, email: string, password:  string, token_recapV3: string){
     return this.http.post('register',{
       name: name,
       surname: surname,
       email: email,
-      password: password
+      password: password,
+      token_recapV3: token_recapV3
     }).pipe(
       catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error a la hora registrar usuario. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
   }
 
@@ -30,7 +31,7 @@ export class AuthService {
       token_recapV3: token_recapV3
     }).pipe(
       catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error. Posiblemente, eres un robot. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
   }
 
@@ -50,7 +51,7 @@ export class AuthService {
       email: email
     }).pipe(
       catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error a la hora obtener token. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
   }
 
@@ -61,7 +62,7 @@ export class AuthService {
       password_confirm:password_confirm
     }).pipe(
       catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error a la hora obtener token. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
   }
 }

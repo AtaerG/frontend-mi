@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/interfaces/product';
 import { Comment } from 'src/app/interfaces/comment';
-import { OrderService } from 'src/app/services/order.service';
-import { User } from 'src/app/interfaces/user';
-import { UserService } from 'src/app/services/user.service';
 import { ProductService } from 'src/app/services/product.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CommentService } from 'src/app/services/comment.service';
@@ -42,7 +39,6 @@ export class ShowProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //remove first element from proudcts array in local storage if their values are equal to 0
     let prods_session = localStorage.getItem('products');
     if (prods_session != null) {
       this.products = JSON.parse(prods_session);
@@ -68,18 +64,17 @@ export class ShowProductComponent implements OnInit {
       this.comment_write_permission = parseInt(this.route.snapshot.queryParams['user_id']);
     }
     this.product = dates.product;
+    console.log(this.product);
     this.comments = dates.comments;
     this.amount = dates.amount;
     console.log(this.amount[0].amount);
     console.log(this.comments);
-    //if amount es menos que 10  show_msg a true
     if(this.amount[0].amount < 10){
       this.show_msg = true;
     }
     if(this.amount[0].amount == 0){
       this.btn_active = false;
     }
-    //check if user has comments in comments
     this.comments.forEach((comment) => {
       if (comment.user_id == this.user_id) {
         this.has_comments = true;
@@ -121,16 +116,12 @@ export class ShowProductComponent implements OnInit {
             let prods_session = localStorage.getItem('products');
             if (prods_session != null) {
               this.products = JSON.parse(prods_session);
-              //iterate through products to check if product is already in session)
               let is_in_session = false;
               this.products.forEach((product) => {
                 if (product.product.id == this.product.id) {
                   is_in_session = true;
-                  console.log(product.product.amount)//1
                   product.product.amount -= form_values['amount_to_buy'];
-                  console.log(product.product.amount)//0
                   product.amount += form_values['amount_to_buy'];
-                  console.log(product)//1
                 }
               });
               if (!is_in_session) {

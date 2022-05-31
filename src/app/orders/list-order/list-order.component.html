@@ -11,13 +11,13 @@
                     <h1 class="card-title text-primary">ID: {{order.id}}</h1>
                     <p class="card-text">Precio total: {{order.total_price |currency:'EUR':'symbol-narrow'}}</p>
                     <p class="card-text">Estado: {{order.status}}</p>
-                    <p class="card-text" *ngIf="order.status == 'terminado'">Valoracion del pedido: {{order.valoration}}/5</p>
+                    <p class="card-text" *ngIf="order.status == 'terminado'">Valoración del pedido: {{order.valoration}}/5</p>
                 </div>
                 <div *ngIf="order.id && order.valoration == null && order.status == 'terminado' && user_role != 'admin'">
                     <form class="m-2" [formGroup]="evaluateForm" (ngSubmit)="evaluateOrder(order.id)">
-                        <label for="valoration" class="form-label">Valoracion de la entrega:</label>
+                        <label for="valoration" class="form-label">Valoración de la entrega:</label>
                         <input class="form-control rounded-0 border-top-0 border-start-0 border-end-0" type="number" id="valoration" [formControlName]="'valoration'" name="valoration" min="0" max="5">
-                        <span class="text-danger" *ngIf="!evaluateForm.get('valoration')?.valid && evaluateForm.get('valoration')?.touched">Valoracion es un numero entre 0 a 5 </span>
+                        <span class="text-danger" *ngIf="!evaluateForm.get('valoration')?.valid && evaluateForm.get('valoration')?.touched">Valoración es un numero entre 0 a 5 </span>
                         <small class="text-danger">Valorar el pedido se puede solamente una vez.</small>
                         <button class="btn btn-info w-100 w-md-50 mx-auto rounded-0 fs-4 text-light mt-1" type="submit">Valorar</button>
                     </form>
@@ -26,7 +26,7 @@
                 <a class="btn btn-success rounded-0 fs-4 mt-1" (click)="delieveredOrder(order.id)" *ngIf="order.status == 'pagado' && user_role == 'admin' && order.id">Marcar el pedido como entregado</a>
                 <a class="btn btn-info rounded-0 fs-4" [routerLink]="[ '/orders', order.id] " [queryParams]="{ ended: 1 }" [routerLinkActive]=" [ 'active'] " [routerLinkActiveOptions]="{exact:true} " *ngIf="order.status == 'terminado' && user_role != 'admin'">Escribir reseña</a>
                 <a class="btn btn-delete rounded-0 fs-4 text-light" *ngIf="order.status != 'terminado' && order.id" (click)="deleteOrder(order.id)">Eliminar pedido</a>
-                <a class="btn btn-buscar rounded-0 fs-4 text-light" [routerLink]="[ '/orders', order.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Mas Info</a>
+                <a class="btn btn-buscar rounded-0 fs-4 text-light" [routerLink]="[ '/orders', order.id] " [routerLinkActive]="[ 'active'] " [routerLinkActiveOptions]="{exact:true} ">Más Info</a>
             </div>
         </article>
     </section>

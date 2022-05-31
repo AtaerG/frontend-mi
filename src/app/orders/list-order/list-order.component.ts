@@ -30,7 +30,7 @@ export class ListOrderComponent implements OnInit {
   deleteOrder(id:number){
     this.orderService.deleteOrder(id).subscribe({
       next: ()=>{
-        alert('Pedido eliminado. El dinero pronto volvera a la cuenta');
+        alert('Pedido eliminado. El dinero pronto volverá a la cuenta');
         window.location.reload();
      },
       error: (error:any) => console.log(error),
@@ -52,7 +52,7 @@ export class ListOrderComponent implements OnInit {
     if(this.evaluateForm.valid){
       this.orderService.updateValorationOrder(id, form_values['valoration']).subscribe({
         next: ()=>{
-          alert('Pedido se ha valorado con exito!');
+          alert('¡Pedido se ha valorado con éxito!');
           window.location.reload();
         },
         error: (error:any) => console.log(error),

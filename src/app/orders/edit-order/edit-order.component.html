@@ -7,18 +7,18 @@
                 <div>
                     <div class="form-floating">
                         <input type="text" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="direction" placeholder="Calle, numero, piso, puerta" name="direction" [formControlName]="'direction'" required="required">
-                        <label for="direction" class="form-label ">Direccion:</label>
+                        <label for="direction" class="form-label ">Dirección:</label>
                         <span class="text-danger" *ngIf="!shippingForm.get('direction')?.valid && shippingForm.get('direction')?.touched">
-                      La direccion es obligatoria!
+                          ¡La dirección es obligatoria!
                     </span>
                     </div>
                     <div class="row">
                         <div class="col-12 col-md-6">
                             <div class="form-floating mt-2">
                                 <input type="text" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="post_code" placeholder="Introduzca codigo postal " [formControlName]="'post_code'" name="post_code" required="required ">
-                                <label for="post_code" class="form-label ">Cod. Postal:</label>
+                                <label for="post_code" class="form-label ">Código postal:</label>
                                 <span class="text-danger" *ngIf="!shippingForm.get('post_code')?.valid && shippingForm.get('post_code')?.touched">
-                              El codigo postal es obligatorio!
+                                  ¡El código postal es obligatorio!
                             </span>
                             </div>
                         </div>
@@ -27,7 +27,7 @@
                                 <input type="text" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="muni " placeholder="Introduzca municipio" [formControlName]="'city'" name="city" required="required">
                                 <label for="city" class="form-label ">Municipio:</label>
                                 <span class="text-danger" *ngIf="!shippingForm.get('city')?.valid && shippingForm.get('city')?.touched">
-                              El municipio es obligatorio!
+                                  ¡El municipio es obligatorio!
                             </span>
                             </div>
                         </div>
@@ -91,7 +91,7 @@
                                 </select>
                                 <label for="state" class="form-label ">Provincia:</label>
                                 <span class="text-danger" *ngIf="!shippingForm.get('state')?.valid && shippingForm.get('state')?.touched">
-                             La Provincia es obligatoria!
+                                  ¡La provincia es obligatoria!
                             </span>
                             </div>
                         </div>
@@ -338,9 +338,9 @@
             <option value="Zambia">Zambia</option>
             <option value="Zimbabwe">Zimbabwe</option>
                                </select>
-                                <label for="country" class="form-label">Pais:</label>
+                                <label for="country" class="form-label">País:</label>
                                 <span class="text-danger" *ngIf="!shippingForm.get('country')?.valid && shippingForm.get('country')?.touched">
-                                  El pais es obligatorio!
+                                  ¡El país es obligatorio!
                              </span>
                             </div>
                         </div>

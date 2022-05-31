@@ -19,7 +19,7 @@ export class AppointmentService {
       time: time
     }).pipe(
       map(res => res),
-      catchError((resp: HttpErrorResponse) => throwError(() => new Error(`Error a la hora crear cita. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      catchError((resp: HttpErrorResponse) => throwError(() => new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
     );
   }
 
@@ -43,6 +43,17 @@ export class AppointmentService {
 
   getAppointment(id:number): Observable<Appointment> {
     return this.http.get<Appointment>('appointments/'+id).pipe(
+      map((response) => {
+        console.log(response);
+        return response;
+      }),
+      catchError((resp: HttpErrorResponse) =>
+      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+    );
+  }
+
+  getDateOfAppointment(id:number): Observable<any> {
+    return this.http.get<Appointment>('appointments/date/'+id).pipe(
       map((response) => {
         console.log(response);
         return response;

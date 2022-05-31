@@ -48,7 +48,7 @@ export class ModUserComponent implements OnInit {
       console.log(form_values['password']);
       this.userService.editUser(this.user.id,form_values['name'],form_values['surname'],form_values['email'],form_values['role']).subscribe({
         next: (re)=> {
-          alert('Datos se han modificado con exito!')
+          alert('¡Datos se han modificado con éxito!')
           this.router.navigate(['/users', this.user.id]).then(() => {
             window.location.reload();
           });
@@ -61,14 +61,14 @@ export class ModUserComponent implements OnInit {
   }
 
   deleteUser(){
-    let con = confirm("Quere eliminar la cuenta de usuario?");
+    let con = confirm("¿Quiere eliminar la cuenta de usuario?");
     let token = localStorage.getItem('token');
     console.log(this.session_user_id);
     console.log(this.user.id);
     if(con && token != null){
       this.userService.deleteUserAccount(this.user.id, token).subscribe({
         next: ()=>{
-          alert("La cuenta de usuario ha sido eliminada con exito!");
+          alert("¡La cuenta de usuario ha sido eliminada con éxito!");
           localStorage.clear();
           this.router.navigate(['/']).then(() => {
             window.location.reload();
