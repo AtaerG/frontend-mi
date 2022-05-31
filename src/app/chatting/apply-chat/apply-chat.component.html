@@ -16,15 +16,15 @@
                       </span>
                     </div>
                     <div class="form-floating mt-2 ">
-                        <input type="date" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="surname" [formControlName]="'date'" required="required">
+                        <input type="text" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="date" name="date" [formControlName]="'date'" required="required">
                         <label for="price" class="form-label ">Fecha:</label>
                         <span class="text-danger" *ngIf="!applyMsg.get('date')?.valid && applyMsg.get('date')?.touched">
-                              La fecha debe tener formato dd.mm.yyyy
+                              La fecha debe tener formato dd/mm/2022
                           </span>
                     </div>
                     <div class="form-floating mt-2 ">
-                        <input type="time" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="time" [formControlName]="'time'" required="required" step="300">
-                        <label for="price" class="form-label ">Hora:</label>
+                        <input type="time" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="time" name="time" [formControlName]="'time'" required="required" step="300">
+                        <label for="time" class="form-label ">Hora:</label>
                         <span class="text-danger" *ngIf="!applyMsg.get('time')?.valid && applyMsg.get('time')?.touched">
                           El tiempo es obligatorio!
                         </span>

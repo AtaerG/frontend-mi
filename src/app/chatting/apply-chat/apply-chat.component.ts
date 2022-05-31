@@ -22,7 +22,7 @@ export class ApplyChatComponent implements OnInit {
     console.log(this.admins);
     this.applyMsg = new FormGroup({
       'admin_id': new FormControl(null, [Validators.required]),
-      'date': new FormControl(null, [Validators.required]),
+      'date': new FormControl(null, [Validators.required, Validators.pattern('^(([0-2][0-9])|([3][0-1]))/(([0][0-9])|([1][0-2]))/(2022)$')]),
       'time': new FormControl(null, [Validators.required, Validators.pattern('^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$')]),
     });
     if (this.status != null) {
@@ -33,6 +33,7 @@ export class ApplyChatComponent implements OnInit {
   apply() {
     if (this.admins != null && this.user_id != null) {
       let form_values = this.applyMsg.value;
+      console.log(form_values['date']);
       console.log(this.applyMsg.valid);
       if (this.applyMsg.valid) {
         let year = form_values['date'].slice(0, 4);
