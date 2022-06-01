@@ -27,8 +27,9 @@ export class OrderService {
       country: country
     }).pipe(
       map(product => console.log(product)),
-      catchError((resp) =>
-      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}. ${resp}`)))
+      catchError((resp: any) =>{
+        return this.router.navigate(['/error_page']);
+      })
     );
   }
 
@@ -41,8 +42,9 @@ export class OrderService {
       country: country
     }).pipe(
       map(product => console.log(product)),
-      catchError((resp) =>
-      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}. ${resp}`)))
+      catchError((resp: any) =>{
+        return this.router.navigate(['/error_page']);
+      })
     );
   }
 
@@ -51,30 +53,33 @@ export class OrderService {
       map((response) => {
         return response;
       }),
-      catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      catchError((resp: any) =>{
+        return this.router.navigate(['/error_page']);
+      })
     );
   }
 
 
-  getOrder(id:number): Observable<Order> {
+  getOrder(id:number): Observable<any> {
     return this.http.get<Order>('orders/'+id).pipe(
       map((response) => {
         console.log(response);
         return response;
       }),
-      catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      catchError((resp: any) =>{
+        return this.router.navigate(['/error_page']);
+      })
     );
   }
 
-  getAllOrders(): Observable<Order[]> {
+  getAllOrders(): Observable<any> {
     return this.http.get<Order[]>('orders').pipe(
       map((response) => {
         return response;
       }),
-      catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      catchError((resp: any) =>{
+        return this.router.navigate(['/error_page']);
+      })
     );
   }
 
@@ -83,15 +88,17 @@ export class OrderService {
       user_id: user_id,
     }).pipe(
       map(orders=> {return orders}),
-      catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      catchError((resp: any) =>{
+        return this.router.navigate(['/error_page']);
+      })
     );
   }
 
   deleteOrder(id:number): Observable<any> {
     return this.http.delete('orders/'+id).pipe(
-      catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      catchError((resp: any) =>{
+        return this.router.navigate(['/error_page']);
+      })
     )
   }
 
@@ -100,8 +107,9 @@ export class OrderService {
       status: status,
     }).pipe(
       map(orders=> {return orders}),
-      catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      catchError((resp: any) =>{
+        return this.router.navigate(['/error_page']);
+      })
     );
   }
 
@@ -110,8 +118,9 @@ export class OrderService {
       valoration: valoration,
     }).pipe(
       map(orders=> {return orders}),
-      catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      catchError((resp: any) =>{
+        return this.router.navigate(['/error_page']);
+      })
     );
   }
 }

@@ -6,12 +6,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HoverDirective } from '../directives/hover.directive';
 import { HomepageComponent } from './homepage/homepage.component';
+import { ErPageComponent } from './er-page/er-page.component';
 
 
 
 @NgModule({
   declarations: [
     AccessDeniedComponent,
+    ErPageComponent,
     HomepageComponent,
     HoverDirective
   ],

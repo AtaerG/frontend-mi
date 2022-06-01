@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { Product } from '../interfaces/product';
 
@@ -8,7 +9,7 @@ import { Product } from '../interfaces/product';
 })
 export class ProductService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router ) { }
 
   addProduct(name:string, price:number, description: string, amount:number, image_url:string, tag:string, visible:string){
     return this.http.post('products',{
@@ -20,29 +21,32 @@ export class ProductService {
       tag:tag,
       visible: visible
     }).pipe(
-      catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      catchError((resp: any) =>{
+        return this.router.navigate(['/error_page']);
+      })
     );
   }
 
-  getProduct(id:number): Observable<Product> {
+  getProduct(id:number): Observable<any> {
     return this.http.get<Product>('products/'+id).pipe(
       map((response) => {
         console.log(response);
         return response;
       }),
-      catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      catchError((resp: any) =>{
+        return this.router.navigate(['/error_page']);
+      })
     );
   }
 
-  getAllProducts(): Observable<Product[]> {
+  getAllProducts(): Observable<any> {
     return this.http.get<Product[]>('products').pipe(
       map((response) => {
         return response;
       }),
-      catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      catchError((resp: any) =>{
+        return this.router.navigate(['/error_page']);
+      })
     );
   }
 
@@ -50,15 +54,17 @@ export class ProductService {
     return this.http.patch('products/'+id, {
       visible: visible,
     }).pipe(
-      catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      catchError((resp: any) =>{
+        return this.router.navigate(['/error_page']);
+      })
     )
   }
 
   deleteComment(id:number){
     return this.http.delete('comments/'+id).pipe(
-      catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      catchError((resp: any) =>{
+        return this.router.navigate(['/error_page']);
+      })
     )
   }
 
@@ -73,8 +79,9 @@ export class ProductService {
       visible:visible
     }).pipe(
       map((re)=> console.log(re)),
-      catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      catchError((resp: any) =>{
+        return this.router.navigate(['/error_page']);
+      })
     );
   }
 
@@ -83,8 +90,9 @@ export class ProductService {
       map((response) => {
         return response;
       }),
-      catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      catchError((resp: any) =>{
+        return this.router.navigate(['/error_page']);
+      })
     );
   }
 

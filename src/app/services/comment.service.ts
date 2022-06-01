@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { Comment } from 'src/app/interfaces/comment';
 
@@ -8,15 +9,16 @@ import { Comment } from 'src/app/interfaces/comment';
 })
 export class CommentService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router:Router) { }
 
-  getAllComments(): Observable<Comment[]> {
+  getAllComments(): Observable<any> {
     return this.http.get<Comment[]>('comments').pipe(
       map((response) => {
         return response;
       }),
-      catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      catchError((resp: any) =>{
+        return this.router.navigate(['/error_page']);
+      })
     );
   }
 
@@ -28,8 +30,9 @@ export class CommentService {
       user_id: user_id,
       product_id: product_id
     }).pipe(
-      catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      catchError((resp: any) =>{
+        return this.router.navigate(['/error_page']);
+      })
     );
   }
 
