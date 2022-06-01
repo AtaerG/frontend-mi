@@ -31,6 +31,7 @@ export class CheckOrderIsUserOrAdminGuard implements CanActivate {
       this.orderService.getOrderForCanActivate(id).subscribe({
         next: (res: any) => {
           data = res;
+          console.log(res);
         },
         error: () => {
             this.router.navigate(['/access_denied']);

@@ -19,9 +19,9 @@
             </form>
         </div>
     </div>
-    <section class="row row-cols-1 row-cols-md-3 row-cols-lg-4 mt-4 justify-content-center" *ngIf="products.length && products; else not">
+    <section class="row row-cols-1 row-cols-md-2 row-cols-lg-4 mt-4 justify-content-center g-2" *ngIf="products.length && products; else not">
         <article *ngFor="let product of products | productFind:filterSearchProduct:filterFormString">
-            <div class="col" *ngIf="product.visible == 'true' || role == 'admin'; else not">
+            <div class="col h-100" *ngIf="product.visible == 'true' || role == 'admin'; else not">
                 <div class="card rounded shsadow border-0 card-background-card text-light h-100 mb-2 mb-md-3">
                     <img src="{{product.image_url}}" class="card-img-top card-img-descubre " alt="mesa ">
                     <div class="card-body border-1 text-center">
