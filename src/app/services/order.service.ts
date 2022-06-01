@@ -54,7 +54,7 @@ export class OrderService {
         return response;
       }),
       catchError((resp: any) =>{
-        return this.router.navigate(['/error_page']);
+       return resp;
       })
     );
   }
