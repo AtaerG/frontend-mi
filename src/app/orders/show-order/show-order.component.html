@@ -1,7 +1,7 @@
 <main class="container">
     <div class="card rounded card-serv-bg-color shadow border-0  mb-2 mb-md-3 text-secondary p-3 mt-4 text-light">
         <h1 class="text-center ">Número de pedido: {{order.order_details.id}}</h1>
-        <p class="text-center">Del usuario: {{order.order_details.user_id}}</p>
+        <p class="text-center" *ngIf="user_role === 'admin'">ID del usuario: {{order.order_details.user_id}}</p>
         <p class="text-center">Precio total: {{order.order_details.total_price |currency:'EUR':'symbol-narrow'}}</p>
         <p class="text-center">Estado: {{order.order_details.status}}</p>
         <div *ngIf="order.status == 'terminado' && user_role != 'admin' && order.order_details.id && order.order_details.valoration == null">

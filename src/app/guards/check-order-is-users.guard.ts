@@ -35,7 +35,6 @@ export class CheckOrderIsUsersGuard implements CanActivate {
             this.router.navigate(['/access_denied']);
         },
         complete: () =>{
-          console.log(data);
           if (data.order_details.user_id === user_id) {
             observer.next(true);
           } else {
