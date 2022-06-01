@@ -28,8 +28,13 @@ export class AppComponent {
         localStorage.clear();
         this.router.navigate(['/']).then(() => {
           window.location.reload();
-        });;
-    },
+        });
+      },
+      error: () => {
+        this.router.navigate(['/error_page']).then(() => {
+          window.location.reload();
+        });
+      }
     });
   }
  }
