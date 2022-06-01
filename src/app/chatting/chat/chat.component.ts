@@ -42,10 +42,10 @@ export class ChatComponent implements OnInit {
             let today = new Date();
             console.log(today);
             console.log(app_date);
-            if (today <= app_date) {
-              this.disabled = true;
-            } else {
+            if (today > app_date) {
               this.disabled = false;
+            } else {
+              this.disabled = true;
             }
           }
         }
@@ -66,10 +66,10 @@ export class ChatComponent implements OnInit {
             let today = new Date();
             console.log(today);
             console.log(app_date);
-            if (today <= app_date) {
-              this.disabled = true;
-            } else {
+            if (today > app_date) {
               this.disabled = false;
+            } else {
+              this.disabled = true;
             }
           }
         }

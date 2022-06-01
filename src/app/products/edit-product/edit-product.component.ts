@@ -12,9 +12,9 @@ import { ProductService } from 'src/app/services/product.service';
 export class EditProductComponent implements OnInit {
 
   product!: any;
-  image:any;
+  image: any;
   editProdForm!: FormGroup;
-  constructor(private route: ActivatedRoute,private router:Router, private productService: ProductService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private productService: ProductService) { }
 
   ngOnInit(): void {
     this.product = this.route.snapshot.data['product'].product;
@@ -24,29 +24,29 @@ export class EditProductComponent implements OnInit {
       'price': new FormControl(this.product.price, [Validators.required, Validators.min(1)]),
       'description': new FormControl(this.product.description, [Validators.required]),
       'amount': new FormControl(this.product.amount, [Validators.required, Validators.min(0)]),
-      'tag': new FormControl(this.product.tag,[Validators.required]),
+      'tag': new FormControl(this.product.tag, [Validators.required]),
       'visible': new FormControl(this.product.visible, [Validators.required]),
     });
   }
 
-  editProduct(){
+  editProduct() {
     let form_values = this.editProdForm.value;
-    if(this.editProdForm.valid){
-      if(this.image == null){
+    if (this.editProdForm.valid) {
+      if (this.image == null) {
         alert('Seleccione una imagen');
       } else {
-      this.productService.editProduct(this.product.id,form_values['name'],form_values['price'],form_values['description'],form_values['amount'],this.image,form_values['tag'], form_values['visible']).subscribe({
-        next: (re)=> {
-          console.log(re);
-          this.router.navigate(['/products']).then(() => {
-            window.location.reload();
-          });
-        },
-        error: error => {
-          console.log(error);
-        },
-      })
-    }
+        this.productService.editProduct(this.product.id, form_values['name'], form_values['price'], form_values['description'], form_values['amount'], this.image, form_values['tag'], form_values['visible']).subscribe({
+          next: (re) => {
+            console.log(re);
+            this.router.navigate(['/products']).then(() => {
+              window.location.reload();
+            });
+          },
+          error: error => {
+            console.log(error);
+          },
+        })
+      }
     }
 
   }
@@ -55,12 +55,17 @@ export class EditProductComponent implements OnInit {
     if (!fileInput.files || fileInput.files.length === 0) { return; }
     const reader: FileReader = new FileReader();
     reader.readAsDataURL(fileInput.files[0]);
-    reader.addEventListener('loadend', e => {
-      console.log(reader.result as string);
-      this.image = reader.result as string;
-      this.editProdForm.patchValue({
-        'image_url': this.image
-      })
-  });
- }
+    const size = fileInput.files[0].size;
+    if (size > 100000) {
+      alert("El tamaño de la imagen no puede ser mayor a 100kb");
+    } else {
+      reader.addEventListener('loadend', e => {
+        console.log(reader.result as string);
+        this.image = reader.result as string;
+        this.editProdForm.patchValue({
+          'image_url': this.image
+        })
+      });
+    }
+  }
 }
