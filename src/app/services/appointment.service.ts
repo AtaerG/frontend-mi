@@ -19,14 +19,17 @@ export class AppointmentService {
       time: time
     }).pipe(
       map(res => res),
-      catchError((resp: HttpErrorResponse) => throwError(() => new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      catchError((resp: any) =>{
+        return this.router.navigate(['/error_page']);
+      })
     );
   }
 
   deleteAppointment(id:number) {
     return this.http.delete('appointments/'+id).pipe(
-      catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      catchError((resp: any) =>{
+        return this.router.navigate(['/error_page']);
+      })
     )
   }
 
@@ -37,18 +40,21 @@ export class AppointmentService {
       time: time
     }).pipe(
       map(res => res),
-      catchError((resp:any) => resp)
+      catchError((resp: any) =>{
+        return this.router.navigate(['/error_page']);
+      })
     );
   }
 
-  getAppointment(id:number): Observable<Appointment> {
+  getAppointment(id:number): Observable<any> {
     return this.http.get<Appointment>('appointments/'+id).pipe(
       map((response) => {
         console.log(response);
         return response;
       }),
-      catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      catchError((resp: any) =>{
+        return this.router.navigate(['/error_page']);
+      })
     );
   }
 
@@ -58,8 +64,9 @@ export class AppointmentService {
         console.log(response);
         return response;
       }),
-      catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      catchError((resp: any) =>{
+        return this.router.navigate(['/error_page']);
+      })
     );
   }
 }

@@ -29,7 +29,7 @@
                       ¡Correo electrónico es obligatorio y debe tener formato de correo electrónico!
                      </span>
                 </div>
-                <div class="form-floating mt-2 " *ngIf="(role === 'admin' && actual_user) || this.user.role === 'normal_user'">
+                <div class="form-floating mt-2 " *ngIf="(role === 'admin' && actual_user) || !(this.user.role === 'normal_user' && this.user.id === session_user_id)">
                     <select id="role" name="role" [formControlName]="'role'" class="form-select" aria-label="select filter">
                         <option value="admin">Administrador</option>
                         <option value="normal_user">Usuario común</option>

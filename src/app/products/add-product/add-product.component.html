@@ -29,8 +29,8 @@
                         <div class="form-floating mt-2 ">
                             <textarea type="text" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="description" placeholder="description" [formControlName]="'description'" name="description" required="required">
                 </textarea>
-                            <label for="email" class="form-label ">Descripción del producto:</label>
-                            <span class="text-danger" *ngIf="!addProdForm.get('email')?.valid && addProdForm.get('email')?.touched">
+                            <label for="description" class="form-label ">Descripción del producto:</label>
+                            <span class="text-danger" *ngIf="!addProdForm.get('description')?.valid && addProdForm.get('description')?.touched">
                               ¡Descripción del producto es obligatorio!
                    </span>
                         </div>

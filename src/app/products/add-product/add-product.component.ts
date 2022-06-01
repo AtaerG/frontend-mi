@@ -10,10 +10,10 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class AddProductComponent implements OnInit {
 
-  image:any;
+  image: any;
   addProdForm!: FormGroup;
 
-  constructor(private productService: ProductService, private router:Router) { }
+  constructor(private productService: ProductService, private router: Router) { }
 
   ngOnInit(): void {
     this.addProdForm = new FormGroup({
@@ -26,14 +26,14 @@ export class AddProductComponent implements OnInit {
     });
   }
 
-  createProduct(){
+  createProduct() {
     let form_values = this.addProdForm.value;
-    if(this.image == null){
+    if (this.image == null) {
       alert('Seleccione una imagen');
     } else {
-      if(this.addProdForm.valid){
-        this.productService.addProduct(form_values['name'],form_values['price'],form_values['description'],form_values['amount'],this.image,form_values['tag'],form_values['visible']).subscribe({
-          next: ()=> {
+      if (this.addProdForm.valid) {
+        this.productService.addProduct(form_values['name'], form_values['price'], form_values['description'], form_values['amount'], this.image, form_values['tag'], form_values['visible']).subscribe({
+          next: () => {
             this.router.navigate(['/products']).then(() => {
               window.location.reload();
             });
@@ -50,14 +50,19 @@ export class AddProductComponent implements OnInit {
     if (!fileInput.files || fileInput.files.length === 0) { return; }
     const reader: FileReader = new FileReader();
     reader.readAsDataURL(fileInput.files[0]);
-    reader.addEventListener('loadend', e => {
-      console.log(reader.result as string);
-      this.image = reader.result as string;
-      this.addProdForm.patchValue({
-        'image_url': this.image
-      })
-    });
+    const size = fileInput.files[0].size;
+    if (size > 100000) {
+      alert("El tamaño de la imagen no puede ser mayor a 100kb");
+    } else {
+      reader.addEventListener('loadend', e => {
+        console.log(reader.result as string);
+        this.image = reader.result as string;
+        this.addProdForm.patchValue({
+          'image_url': this.image
+        })
+      });
     }
+  }
 
 
 }

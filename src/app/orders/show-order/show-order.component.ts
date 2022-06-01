@@ -21,6 +21,7 @@ export class ShowOrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.order  = this.route.snapshot.data['order'];
+    console.log(this.order);
     this.ended = this.route.snapshot.queryParams['ended'];
     if (this.status != null) {
       this.user_role = JSON.parse(this.status).user_role;

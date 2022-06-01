@@ -35,13 +35,15 @@ export class LoginComponent implements OnInit {
         this.authService.login(form_values['email'],form_values['password'], token_recapV3)
         .subscribe({
           next: token => {
+            if(token === true){
+              return this.router.navigate(['/error_page']);
+            }
             localStorage.setItem('token',JSON.stringify(token));
             this.login_complete = true;
-            this.router.navigate(['/products']).then(() => {
+            this.router.navigate(['/']).then(() => {
               window.location.reload();
-            });;
-         },
-          error: error => alert('¡La contraseña o email son incorrectos!'),
+        });
+         }
       })
       });
     }

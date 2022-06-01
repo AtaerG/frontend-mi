@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router:Router) { }
 
 
   register(name:string, surname:string, email: string, password:  string, token_recapV3: string){
@@ -19,8 +19,15 @@ export class AuthService {
       password: password,
       token_recapV3: token_recapV3
     }).pipe(
-      catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      map(()=>{
+        alert('La cuenta se ha creado con éxito');
+        this.router.navigate(['/login']).then(() => {
+          window.location.reload();
+        });
+      }),
+      catchError((resp: any) =>{
+        return this.router.navigate(['/error_page']);
+      })
     );
   }
 
@@ -30,8 +37,13 @@ export class AuthService {
       password: password,
       token_recapV3: token_recapV3
     }).pipe(
-      catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      map((token:any)=>{
+      console.log(token);
+       return token;
+      }),
+      catchError((resp: any) => {
+        return this.router.navigate(['/error_page']);
+      })
     );
   }
 
@@ -40,7 +52,6 @@ export class AuthService {
     let headers = new HttpHeaders({
       Authorization: `Bearer ${JSON.parse(token)['token'].accessToken}`
     });
-    console.log(headers.get('Authorization'));
     return this.http.get('logout',{
       headers:headers
     })
@@ -50,8 +61,9 @@ export class AuthService {
     return this.http.post('password/forgot', {
       email: email
     }).pipe(
-      catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      catchError((resp: any) =>{
+        return this.router.navigate(['/error_page']);
+      })
     );
   }
 
@@ -61,8 +73,9 @@ export class AuthService {
       password:password,
       password_confirm:password_confirm
     }).pipe(
-      catchError((resp: HttpErrorResponse) =>
-      throwError(()=> new Error(`Error. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`)))
+      catchError((resp: any) =>{
+        return this.router.navigate(['/error_page']);
+      })
     );
   }
 }
