@@ -19,6 +19,12 @@ export class AuthService {
       password: password,
       token_recapV3: token_recapV3
     }).pipe(
+      map(()=>{
+        alert('La cuenta se ha creado con éxito');
+        this.router.navigate(['/login']).then(() => {
+          window.location.reload();
+        });
+      }),
       catchError((resp: any) =>{
         return this.router.navigate(['/error_page']);
       })
@@ -31,7 +37,11 @@ export class AuthService {
       password: password,
       token_recapV3: token_recapV3
     }).pipe(
-      catchError((resp: any) =>{
+      map((token:any)=>{
+      console.log(token);
+       return token;
+      }),
+      catchError((resp: any) => {
         return this.router.navigate(['/error_page']);
       })
     );
@@ -42,7 +52,6 @@ export class AuthService {
     let headers = new HttpHeaders({
       Authorization: `Bearer ${JSON.parse(token)['token'].accessToken}`
     });
-    console.log(headers.get('Authorization'));
     return this.http.get('logout',{
       headers:headers
     })
