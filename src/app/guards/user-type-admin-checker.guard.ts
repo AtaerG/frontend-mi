@@ -12,14 +12,11 @@ export class UserTypeAdminCheckerGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       let checker = false;
       const token = localStorage.getItem('token');
-      console.log(token);
       if(token === null) {
         checker = false;
       } else {
         let obj_token = JSON.parse(token);
         let user_role = obj_token['user_role'];
-        console.log(user_role);
-        console.log(obj_token);
         if (user_role === 'normal_user') {
           checker = false;
         } else {
