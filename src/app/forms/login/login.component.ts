@@ -40,7 +40,9 @@ export class LoginComponent implements OnInit {
             }
             localStorage.setItem('token',JSON.stringify(token));
             this.login_complete = true;
-            console.log(this.login_complete);
+            this.router.navigate(['/']).then(() => {
+              window.location.reload();
+        });
          }
       })
       });
