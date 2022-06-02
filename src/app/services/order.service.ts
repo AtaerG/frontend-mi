@@ -119,7 +119,9 @@ export class OrderService {
     }).pipe(
       map(orders=> {return orders}),
       catchError((resp: any) =>{
-        return this.router.navigate(['/error_page']);
+        console.log(resp);
+        return resp;
+        //return this.router.navigate(['/error_page']);
       })
     );
   }

@@ -23,7 +23,7 @@ export class ListOrderComponent implements OnInit {
     }
     this.orders = this.route.snapshot.data['orders'];
     this.evaluateForm = new FormGroup({
-      'valoration': new FormControl(0, [Validators.required]),
+      'valoration': new FormControl(0, [Validators.required, Validators.min(1), Validators.max(5)]),
     });
   }
 
