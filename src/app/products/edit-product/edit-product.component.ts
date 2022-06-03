@@ -23,7 +23,7 @@ export class EditProductComponent implements OnInit {
       'name': new FormControl(this.product.name, [Validators.required]),
       'price': new FormControl(this.product.price, [Validators.required, Validators.min(1)]),
       'description': new FormControl(this.product.description, [Validators.required]),
-      'amount': new FormControl(this.product.amount, [Validators.required, Validators.min(0), Validators.pattern('/^-?(0|[1-9]\d*)?$/')]),
+      'amount': new FormControl(this.product.amount, [Validators.required, Validators.min(0), Validators.pattern("[0-9]+")]),
       'tag': new FormControl(this.product.tag, [Validators.required]),
       'visible': new FormControl(this.product.visible, [Validators.required]),
     });

@@ -5,6 +5,7 @@ import { User } from 'src/app/interfaces/user';
 import { AuthService } from '../../services/auth.service';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { Subscription } from 'rxjs';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
   login_complete = false;
   recaptchaAvailable = false;
 
-  constructor(private authService: AuthService, private router: Router, private recaptchaV3Service: ReCaptchaV3Service) { }
+  constructor(private authService: AuthService, private router: Router, private recaptchaV3Service: ReCaptchaV3Service, private productService: ProductService) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -39,6 +40,19 @@ export class LoginComponent implements OnInit {
               return this.router.navigate(['/error_page']);
             }
             localStorage.setItem('token',JSON.stringify(token));
+            if(token.user_role =='admin'){
+              let prods_session = localStorage.getItem('products');
+              if(prods_session != null){
+                let products = JSON.parse(prods_session);
+                products.forEach((el:any)=>{
+                this.productService.editProduct(el.product.id, el.product.name, el.product.price,el.product.description, (el.product.amount +  el.amount), el.product.image_url, el.product.tag, el.product.visible)
+                .subscribe({
+                  error: error=>console.log(error),
+                })
+                });
+              }
+            }
+            localStorage.removeItem('products');
             this.login_complete = true;
             this.router.navigate(['/']).then(() => {
               window.location.reload();
