@@ -40,7 +40,7 @@
                             <input type="number" class="form-control rounded-0 border-top-0 border-start-0 border-end-0" id="amount" [formControlName]="'amount'" placeholder="Elon" name="amount" required="required">
                             <label for="amount" class="form-label ">Cantidad:</label>
                             <span class="text-danger" *ngIf="!addProdForm.get('amount')?.valid && addProdForm.get('amount')?.touched">
-                              ¡La cantidad del producto es obligatoria y debe ser mayor o igual que 0!
+                              ¡La cantidad del producto es obligatoria y debe ser mayor o igual que 0 y entero!
                         </span>
                         </div>
                     </div>
