@@ -49,9 +49,10 @@ export class ModUserComponent implements OnInit {
       this.userService.editUser(this.user.id,form_values['name'],form_values['surname'],form_values['email'],form_values['role']).subscribe({
         next: (re)=> {
           alert('¡Datos se han modificado con éxito!')
-          this.router.navigate(['/', this.user.id]).then(() => {
+          localStorage.clear();
+          this.router.navigate(['/']).then(() => {
             window.location.reload();
-          });
+          });;
         },
         error: error => {
           console.log(error);

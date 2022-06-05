@@ -82,7 +82,7 @@ export class ShowProductComponent implements OnInit {
     });
     this.addCommentForm = new FormGroup({
       'content': new FormControl(null, [Validators.required]),
-      'valoration': new FormControl(0, [Validators.required, Validators.min(0), Validators.max(5)]),
+      'valoration': new FormControl(0, [Validators.required, Validators.min(1), Validators.max(5)]),
     });
     this.product_id = this.product.id;
     console.log(this.product_id);

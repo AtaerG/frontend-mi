@@ -20,7 +20,7 @@ export class AddProductComponent implements OnInit {
       'name': new FormControl(null, [Validators.required]),
       'price': new FormControl(null, [Validators.required, Validators.min(1)]),
       'description': new FormControl(null, [Validators.required]),
-      'amount': new FormControl(null, [Validators.required, Validators.min(0)]),
+      'amount': new FormControl(null, [Validators.required, Validators.min(0),   Validators.pattern("[0-9]+")]),
       'tag': new FormControl('salon', [Validators.required]),
       'visible': new FormControl('true', [Validators.required]),
     });
